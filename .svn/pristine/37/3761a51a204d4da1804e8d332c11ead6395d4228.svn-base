@@ -1,0 +1,102 @@
+package com.geopractic.administracion.dao;
+
+import com.geopractic.administracion.modelo.Cliente;
+import com.geopractic.administracion.modelo.Telefono;
+import com.geopractic.administracion.modelo.mapeo.TelefonoMapeo;
+import com.geopractic.db.Dao;
+import com.geopractic.db.ExcepcionDao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Clase que realiza todas las consultas de base de datos relacionadas con
+ * los telefonos.
+ * @author Cristhian
+ *
+ */
+public class TelefonoDao extends Dao<Telefono> {
+
+  /**
+   * Constructor que principal que crea el mapeo a utilizar y
+   * inicializa las variables de consulta.
+   */
+  public TelefonoDao() {
+    queryBuscar = "SELECT * FROM \"Telefonos\" WHERE \"Numero\" = :numero ;";
+
+    queryBuscarId = "SELECT * FROM \"Telefonos\" WHERE \"Id\" = :id";
+
+    queryListarTodos = "SELECT * FROM \"Telefonos\" ORDER BY \"Id\" ASC ";
+
+    queryGuardar = "INSERT INTO \"Telefonos\"( \"Numero\", \"TipoTelefono\")"
+       + " VALUES ( :numero , :tipoTelefono.id );";
+
+    queryModificar = "UPDATE \"Telefonos\" SET \"Numero\" = :numero" 
+       + " WHERE \"Id\" = :id ;";
+
+    queryEliminar = "DELETE FROM \"Telefonos\" WHERE \"Id\" = :id ;";
+  } //Fin del constructor sin argumento
+
+  @Override
+  public void iniciarMapeos() {
+    mapeoBean = new TelefonoMapeo(this.conexion,this.log);
+  } //Fin del metodo iniciarMapeos
+
+  @Override
+  public void obtenerClavePrimaria(Telefono telefono, Telefono telefonoNuevo) {
+    telefono.setId(telefonoNuevo.getId());
+  } //Fin del metodo obtenerClavePrimaria
+  
+  /**
+   * Devuelve el listado de telefonos asociados un cliente.
+   * @param cliente el cliente a buscar.
+   * @return el listado de telefonos del cliente
+   * @throws ExcepcionDao excepcion lanzada en la capa dao.
+   */
+  public List<Telefono> listarTelefonosCliente(Cliente cliente) throws ExcepcionDao  {
+    List<Telefono> listaTelefono = new ArrayList<Telefono>();
+    listaTelefono = conexion.createQuery("SELECT \"Telefonos\".* FROM \"Telefonos\"" 
+        + "JOIN \"TelefonoCliente\" ON \"Telefonos\".\"Id\" = \"TelefonoCliente\".\"Telefono\"" 
+        + "WHERE \"TelefonoCliente\".\"Cliente\" = :cliente ;")
+        .bind("cliente", cliente.getId())
+        .map(mapeoBean)
+        .list();
+    return listaTelefono;
+  } //Fin del metodo listarTelefonosCliente
+
+  /**
+   * Asocia un numero de telefono con un cliente.
+   * @param cliente el cliente al cual asociar el telefono.
+   * @param telefono el telefono al cual asocial el cliente.
+   * @return si guardo o no el telefono.
+   * @throws ExcepcionDao excepcion lanzada en la capa dao.
+   */
+  public boolean asociarTelefonoCliente(Cliente cliente, Telefono telefono) throws ExcepcionDao  {
+    int respuesta = 0;
+    respuesta = conexion.createUpdate("INSERT INTO \"TelefonoCliente\"(" 
+          + " \"Telefono\", \"Cliente\") VALUES ( :telefono , :cliente );")
+          .bind("cliente", cliente.getId())
+          .bind("telefono", telefono.getId())
+          .execute();
+
+    return (respuesta == 1) ? true : false;
+  } //Fin del metodo asociarTelefonoCliente
+
+  /**
+  * Elimina un numero de telefono con un cliente.
+  * @param cliente el cliente asociado el telefono.
+  * @param telefono el telefono asociado al cliente.
+  * @return si elimino o no el telefono.
+  * @throws ExcepcionDao excepcion lanzada en la capa dao.
+  */
+  public boolean eliminarTelefonoCliente(Cliente cliente, Telefono telefono) throws ExcepcionDao {
+    int respuesta = 0;
+    respuesta = conexion.createUpdate("DELETE FROM \"TelefonoCliente\" "
+        + "WHERE \"Telefono\" = :telefono AND \"Cliente\" = :cliente ;")
+       .bind("cliente", cliente.getId())
+       .bind("telefono", telefono.getId())
+       .execute();
+    return (respuesta == 1) ? true : false;
+  } //Fin del metodo eliminarTelefonoCliente
+
+} //Fin de la clase TelefonoDao

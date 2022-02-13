@@ -1,0 +1,11 @@
+@startuml
+abstract class com.geopractic.util.Iconos
+class com.geopractic.util.Columna
+class com.geopractic.util.Encriptador
+class com.geopractic.util.ExcepcionUtilidades
+class com.geopractic.util.FechaUtilidad
+class com.geopractic.util.GenerarReporte
+class com.geopractic.util.PdfServlet
+class com.geopractic.util.QueryMaker
+class com.geopractic.util.UsuarioFiltro
+@enduml

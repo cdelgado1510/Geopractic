@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+	<h:head>
+	</h:head> 
+	<h:body>
+		<h:form>
+		    <p:growl id="mensajes" showDetail="true" severity="info, fatal, warn">
+		      <p:autoUpdate />
+		    </p:growl>
+            <p:tooltip />
+
+            <nav class="navbar navbar-light" style="background-color: #ffffff;">
+                <p:graphicImage style="d-inline-block align-top" styleClass="navbar-brand"
+                name="logo_nombre.png" library="images" width="238px" height="49px" />
+                
+                <div class="navbar-right">
+	                <p:menuButton icon="fa fa-fw fa-wrench" iconPos="right" style="white-space: pre;text-align: center;"
+	                value="#{sesion.usuario.nombre} #{sesion.usuario.apellido} &#10; #{sesion.usuario.rol.descripcion}">
+	                    <p:menuitem id="btnCambiarSenha" value="Cambiar Contraseña" icon="fa fa-fw fa-key" action="/app/cambioSenha.xhtml?faces-redirect=true" />
+	                    <p:menuitem id="btnRefrescarSesion" value="Refrescar Sesion" icon="fa fa-fw fa-refresh"
+	                    actionListener="#{sesion.refrescarSesion}" onsuccess="location.reload();">
+	                        <p:confirm header="Confirmación" message="Esta accion recargara la pagina actual. Está seguro?" icon="fa fa-fw fa-warning" />
+	                    </p:menuitem>
+	                    <p:separator />
+	                    <p:menuitem id="btnCerrarSesion" value="Cerrar Sesion" icon="fa fa-fw fa-sign-out" actionListener="#{sesion.cerrarSesion}">
+	                        <p:confirm header="Confirmación" message="Está seguro de cerrar la sesión?" icon="ui-icon-alert" />
+	                    </p:menuitem>
+	                </p:menuButton>
+                </div>
+            </nav>
+
+            <p:menubar autoDisplay="false" model="#{accesos.modelo}" styleClass="menuhorizontal"/>
+            <p:panelMenu autoDisplay="false" model="#{accesos.modelo}" styleClass="menuvertical" />
+
+		    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+		        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+		        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+		    </p:confirmDialog>
+		</h:form>
+	</h:body> 
+</html>

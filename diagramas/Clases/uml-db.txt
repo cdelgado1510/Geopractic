@@ -1,0 +1,13 @@
+@startuml
+abstract class com.geopractic.db.Dao
+class com.geopractic.db.AdministradorConexion
+class com.geopractic.db.ExcepcionConexion
+class com.geopractic.db.ExcepcionDao
+class com.geopractic.db.FabricaDataSource
+class com.geopractic.db.SqlLoggerImp
+enum com.geopractic.db.Bases
+interface com.geopractic.db.IDao
+interface com.geopractic.db.IDaoCrud
+com.geopractic.db.Dao --|> com.geopractic.db.IDao
+com.geopractic.db.IDao --|> com.geopractic.db.IDaoCrud
+@enduml

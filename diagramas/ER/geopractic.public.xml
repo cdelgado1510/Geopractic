@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="geopractic" schema="public" type="PostgreSQL - 9.6.10">
+   <tables>
+      <table name="Cargo" numRows="7" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;Cargo_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="Cargo" foreignKey="fk_Empleado_CargoId" implied="false" onDeleteCascade="false" schema="public" table="Empleado"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="Descripcion" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_Cargo_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="Cliente" numRows="10" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;Cliente_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="Cliente" foreignKey="fk_Cobranza_ClienteId" implied="false" onDeleteCascade="false" schema="public" table="Cobranza"/>
+            <child column="Cliente" foreignKey="fk_CuentaPorCobrar_ClienteId" implied="false" onDeleteCascade="false" schema="public" table="CuentaPorCobrar"/>
+            <child column="Cliente" foreignKey="fk_Georreferencia_ClienteId" implied="false" onDeleteCascade="false" schema="public" table="Georreferencia"/>
+            <child column="Cliente" foreignKey="fk_SaldoCliente_ClienteId" implied="false" onDeleteCascade="false" schema="public" table="Saldo"/>
+            <child column="ClienteAsignado" foreignKey="fk_TelefonoClienteAsignado_ClienteId" implied="false" onDeleteCascade="false" schema="public" table="Telefonos"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="PrimerNombre" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="SegundoNombre" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="PrimerApellido" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="SegundoApellido" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="ApellidoCasada" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="6" name="NroDocumento" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="7" name="RUC" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="8" name="FechaNacimiento" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="9" name="VencimientoDocumento" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="10" name="FechaCreacion" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="11" name="Bloqueado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="12" name="TipoDocumento" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_ClienteTipoDocumento_TipoDocumentoId" implied="false" onDeleteCascade="false" schema="public" table="TiposDocumentos"/>
+         </column>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_Cliente_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="Cobranza" numRows="1" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;Cobranza_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial"/>
+         <column autoUpdated="false" digits="0" id="1" name="Fecha" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="2" name="Recibo" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="Factura" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="17" id="4" name="Monto" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="17" id="5" name="Interes" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="0" id="6" name="Cliente" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_Cobranza_ClienteId" implied="false" onDeleteCascade="false" schema="public" table="Cliente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="Cobrador" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_Cobranza_EmpleadoId" implied="false" onDeleteCascade="false" schema="public" table="Empleado"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="8" name="Saldo" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_Cobranza_SaldoId" implied="false" onDeleteCascade="false" schema="public" table="Saldo"/>
+         </column>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_Cobranza_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="CuentaPorCobrar" numRows="7" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;CuentaPorCobrar_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="10" type="serial">
+            <child column="Cuenta" foreignKey="fk_SaldoCuenta_CuentaId" implied="false" onDeleteCascade="false" schema="public" table="Saldo"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="Cliente" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_CuentaPorCobrar_ClienteId" implied="false" onDeleteCascade="false" schema="public" table="Cliente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="MontoTotal" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="3" name="Cuotas" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="4" name="Vencimiento" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="5" name="Fecha" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="6" name="EmpleadoAsignado" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_CuentaPorCobrar_EmpleadoId" implied="false" onDeleteCascade="false" schema="public" table="Empleado"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="Factura" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_CuentaPorCobrar_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="Empleado" numRows="11" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;Empleado_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="Cobrador" foreignKey="fk_Cobranza_EmpleadoId" implied="false" onDeleteCascade="false" schema="public" table="Cobranza"/>
+            <child column="EmpleadoAsignado" foreignKey="fk_CuentaPorCobrar_EmpleadoId" implied="false" onDeleteCascade="false" schema="public" table="CuentaPorCobrar"/>
+            <child column="EmpleadoCarga" foreignKey="fk_GestionVisitaEmpCarga_EmpleadoId" implied="false" onDeleteCascade="false" schema="public" table="GestionVisita"/>
+            <child column="EmpleadoVisita" foreignKey="fk_GestionVisitaEmpVisita_EmpleadoId" implied="false" onDeleteCascade="false" schema="public" table="GestionVisita"/>
+            <child column="EmpleadoCreador" foreignKey="fk_PanelVisualizacion_EmpleadoId" implied="false" onDeleteCascade="false" schema="public" table="PanelVisualizacion"/>
+            <child column="Empleado" foreignKey="fk_RastreadorGPS_Empleado" implied="false" onDeleteCascade="false" schema="public" table="RastreadorGPS"/>
+            <child column="EmpleadoAsignado" foreignKey="fk_SaldoEmpAsig_EmpleadoId" implied="false" onDeleteCascade="false" schema="public" table="Saldo"/>
+            <child column="EmpleadoAsignado" foreignKey="fk_TelefonoEmpleadoAsignado_EmpleadoId" implied="false" onDeleteCascade="false" schema="public" table="Telefonos"/>
+            <child column="Empleado" foreignKey="fk_Empleado_EmpleadoId" implied="false" onDeleteCascade="false" schema="public" table="Usuario"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="Nombre" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="Apellido" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="Cedula" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="FechaNacimiento" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="5" name="Estado" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="6" name="Cargo" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_Empleado_CargoId" implied="false" onDeleteCascade="false" schema="public" table="Cargo"/>
+         </column>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_Empleado_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="EstadosRastreadores" numRows="4" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;EstadosRastreadores_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="Estado" foreignKey="fk_EstadoRastreadorGPS_RastreadorEstado" implied="false" onDeleteCascade="false" schema="public" table="RastreadorGPS"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="Descripcion" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_EstadosRastreadoresId" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="FormaDePago" numRows="4" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;FormaDePago_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="FormaDePago" foreignKey="fk_GestionVisita_FormaPagoId" implied="false" onDeleteCascade="false" schema="public" table="GestionVisita"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="Descripcion" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_FormaDePago_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="geography_columns" numRows="0" remarks="" schema="public" type="VIEW" viewSql=" SELECT current_database() AS f_table_catalog,&#10;    n.nspname AS f_table_schema,&#10;    c.relname AS f_table_name,&#10;    a.attname AS f_geography_column,&#10;    postgis_typmod_dims(a.atttypmod) AS coord_dimension,&#10;    postgis_typmod_srid(a.atttypmod) AS srid,&#10;    postgis_typmod_type(a.atttypmod) AS type&#10;   FROM pg_class c,&#10;    pg_attribute a,&#10;    pg_type t,&#10;    pg_namespace n&#10;  WHERE ((t.typname = 'geography'::name) AND (a.attisdropped = false) AND (a.atttypid = t.oid) AND (a.attrelid = c.oid) AND (c.relnamespace = n.oid) AND (c.relkind = ANY (ARRAY['r'::&quot;char&quot;, 'v'::&quot;char&quot;, 'm'::&quot;char&quot;, 'f'::&quot;char&quot;, 'p'::&quot;char&quot;])) AND (NOT pg_is_other_temp_schema(c.relnamespace)) AND has_table_privilege(c.oid, 'SELECT'::text));">
+         <column autoUpdated="false" digits="0" id="0" name="f_table_catalog" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="1" name="f_table_schema" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="2" name="f_table_name" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="3" name="f_geography_column" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="4" name="coord_dimension" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="5" name="srid" nullable="true" remarks="" size="10" type="int4">
+            <parent column="srid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="spatial_ref_sys"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="type" nullable="true" remarks="" size="2147483647" type="text"/>
+      </table>
+      <table name="geometry_columns" numRows="0" remarks="" schema="public" type="VIEW" viewSql=" SELECT (current_database())::character varying(256) AS f_table_catalog,&#10;    n.nspname AS f_table_schema,&#10;    c.relname AS f_table_name,&#10;    a.attname AS f_geometry_column,&#10;    COALESCE(postgis_typmod_dims(a.atttypmod), sn.ndims, 2) AS coord_dimension,&#10;    COALESCE(NULLIF(postgis_typmod_srid(a.atttypmod), 0), sr.srid, 0) AS srid,&#10;    (replace(replace(COALESCE(NULLIF(upper(postgis_typmod_type(a.atttypmod)), 'GEOMETRY'::text), st.type, 'GEOMETRY'::text), 'ZM'::text, ''::text), 'Z'::text, ''::text))::character varying(30) AS type&#10;   FROM ((((((pg_class c&#10;     JOIN pg_attribute a ON (((a.attrelid = c.oid) AND (NOT a.attisdropped))))&#10;     JOIN pg_namespace n ON ((c.relnamespace = n.oid)))&#10;     JOIN pg_type t ON ((a.atttypid = t.oid)))&#10;     LEFT JOIN ( SELECT s.connamespace,&#10;            s.conrelid,&#10;            s.conkey,&#10;            replace(split_part(s.consrc, ''''::text, 2), ')'::text, ''::text) AS type&#10;           FROM pg_constraint s&#10;          WHERE (s.consrc ~~* '%geometrytype(% = %'::text)) st ON (((st.connamespace = n.oid) AND (st.conrelid = c.oid) AND (a.attnum = ANY (st.conkey)))))&#10;     LEFT JOIN ( SELECT s.connamespace,&#10;            s.conrelid,&#10;            s.conkey,&#10;            (replace(split_part(s.consrc, ' = '::text, 2), ')'::text, ''::text))::integer AS ndims&#10;           FROM pg_constraint s&#10;          WHERE (s.consrc ~~* '%ndims(% = %'::text)) sn ON (((sn.connamespace = n.oid) AND (sn.conrelid = c.oid) AND (a.attnum = ANY (sn.conkey)))))&#10;     LEFT JOIN ( SELECT s.connamespace,&#10;            s.conrelid,&#10;            s.conkey,&#10;            (replace(replace(split_part(s.consrc, ' = '::text, 2), ')'::text, ''::text), '('::text, ''::text))::integer AS srid&#10;           FROM pg_constraint s&#10;          WHERE (s.consrc ~~* '%srid(% = %'::text)) sr ON (((sr.connamespace = n.oid) AND (sr.conrelid = c.oid) AND (a.attnum = ANY (sr.conkey)))))&#10;  WHERE ((c.relkind = ANY (ARRAY['r'::&quot;char&quot;, 'v'::&quot;char&quot;, 'm'::&quot;char&quot;, 'f'::&quot;char&quot;, 'p'::&quot;char&quot;])) AND (NOT (c.relname = 'raster_columns'::name)) AND (t.typname = 'geometry'::name) AND (NOT pg_is_other_temp_schema(c.relnamespace)) AND has_table_privilege(c.oid, 'SELECT'::text));">
+         <column autoUpdated="false" digits="0" id="0" name="f_table_catalog" nullable="true" remarks="" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="1" name="f_table_schema" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="2" name="f_table_name" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="3" name="f_geometry_column" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="4" name="coord_dimension" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="5" name="srid" nullable="true" remarks="" size="10" type="int4">
+            <parent column="srid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="spatial_ref_sys"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="type" nullable="true" remarks="" size="30" type="varchar"/>
+      </table>
+      <table name="Georreferencia" numRows="10" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;Georreferencia_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="LugarVisita" foreignKey="fk_GestionVisita_GeorreferenciaId" implied="false" onDeleteCascade="false" schema="public" table="GestionVisita"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="Descripcion" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="Punto" nullable="true" remarks="" size="2147483647" type="geometry"/>
+         <column autoUpdated="false" digits="0" id="3" name="Zona" nullable="true" remarks="" size="2147483647" type="geometry"/>
+         <column autoUpdated="false" digits="0" id="4" name="Tipo" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_Georreferencia_TipoId" implied="false" onDeleteCascade="false" schema="public" table="TipoGeorreferencia"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="5" name="Cliente" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_Georreferencia_ClienteId" implied="false" onDeleteCascade="false" schema="public" table="Cliente"/>
+         </column>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_Georreferencia_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="gestion_ruteo" numRows="0" remarks="" schema="public" type="VIEW" viewSql=" SELECT &quot;GestionVisita&quot;.&quot;Id&quot;,&#10;    &quot;GestionVisita&quot;.&quot;FechaVisita&quot;,&#10;    &quot;GestionVisita&quot;.&quot;Monto&quot;,&#10;    &quot;GestionVisita&quot;.&quot;EmpleadoVisita&quot;,&#10;    &quot;GestionVisita&quot;.&quot;FormaDePago&quot;,&#10;    &quot;RuteoCobrador&quot;.&quot;Visitado&quot;,&#10;    &quot;RuteoCobrador&quot;.&quot;Cumplido&quot;,&#10;    &quot;GestionVisita&quot;.&quot;LugarVisita&quot;&#10;   FROM (&quot;GestionVisita&quot;&#10;     JOIN &quot;RuteoCobrador&quot; ON ((&quot;RuteoCobrador&quot;.&quot;Gestion&quot; = &quot;GestionVisita&quot;.&quot;Id&quot;)));">
+         <column autoUpdated="false" digits="0" id="0" name="Id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="1" name="FechaVisita" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="17" id="2" name="Monto" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="0" id="3" name="EmpleadoVisita" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="4" name="FormaDePago" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="5" name="Visitado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="6" name="Cumplido" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="7" name="LugarVisita" nullable="true" remarks="" size="19" type="int8"/>
+      </table>
+      <table name="GestionMotivo" numRows="5" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;GestionMotivo_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="Motivo" foreignKey="fk_GestionVisita_GestionMotivoId" implied="false" onDeleteCascade="false" schema="public" table="GestionVisita"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="Descripcion" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="Activo" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="3" name="Ruteo" nullable="true" remarks="" size="1" type="bool"/>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_GestionMotivo_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="GestionVisita" numRows="1" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;GestionVisita_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="Gestion" foreignKey="fk_RuteoCobrador_GestionId" implied="false" onDeleteCascade="false" schema="public" table="RuteoCobrador"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="Fecha" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="2" name="FechaVisita" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="17" id="3" name="Monto" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="0" id="4" name="EmpleadoCarga" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_GestionVisitaEmpCarga_EmpleadoId" implied="false" onDeleteCascade="false" schema="public" table="Empleado"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="5" name="EmpleadoVisita" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_GestionVisitaEmpVisita_EmpleadoId" implied="false" onDeleteCascade="false" schema="public" table="Empleado"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="FormaDePago" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_GestionVisita_FormaPagoId" implied="false" onDeleteCascade="false" schema="public" table="FormaDePago"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="LugarVisita" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_GestionVisita_GeorreferenciaId" implied="false" onDeleteCascade="false" schema="public" table="Georreferencia"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="8" name="Saldo" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_GestionVisita_Saldo" implied="false" onDeleteCascade="false" schema="public" table="Saldo"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="9" name="Comentario" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="10" name="Motivo" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_GestionVisita_GestionMotivoId" implied="false" onDeleteCascade="false" schema="public" table="GestionMotivo"/>
+         </column>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_GestionVisita_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="Menu" numRows="34" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;Menu_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="MenuPadre" foreignKey="fk_MenuId_MenuPadre" implied="false" onDeleteCascade="false" schema="public" table="Menu"/>
+            <child column="Menu" foreignKey="fk_RolMenu_MenuId" implied="false" onDeleteCascade="false" schema="public" table="RolMenu"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="Nombre" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="Tipo" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="Icono" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="Ventana" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="Activo" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="6" name="Orden" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="7" name="MenuPadre" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_MenuId_MenuPadre" implied="false" onDeleteCascade="false" schema="public" table="Menu"/>
+         </column>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_Menu_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="menus_de_rol" numRows="0" remarks="" schema="public" type="VIEW" viewSql=" SELECT &quot;Menu&quot;.&quot;Id&quot;,&#10;    &quot;Menu&quot;.&quot;Nombre&quot;,&#10;    &quot;Menu&quot;.&quot;Tipo&quot;,&#10;    &quot;Menu&quot;.&quot;Icono&quot;,&#10;    &quot;Menu&quot;.&quot;Ventana&quot;,&#10;    &quot;Menu&quot;.&quot;Activo&quot;,&#10;    &quot;Menu&quot;.&quot;Orden&quot;,&#10;    &quot;Menu&quot;.&quot;MenuPadre&quot;,&#10;    &quot;RolMenu&quot;.&quot;Rol&quot;&#10;   FROM (&quot;Menu&quot;&#10;     JOIN &quot;RolMenu&quot; ON ((&quot;RolMenu&quot;.&quot;Menu&quot; = &quot;Menu&quot;.&quot;Id&quot;)));">
+         <column autoUpdated="false" digits="0" id="0" name="Id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="1" name="Nombre" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="Tipo" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="Icono" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="Ventana" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="Activo" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="6" name="Orden" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="7" name="MenuPadre" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="8" name="Rol" nullable="true" remarks="" size="10" type="int4"/>
+      </table>
+      <table name="PanelVisualizacion" numRows="2" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;PanelVisualizacion_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="PanelVisualizacion" foreignKey="fk_PanelVisualizacionMapas_PanelVisualizacionId" implied="false" onDeleteCascade="false" schema="public" table="PanelVisualizacionMapas"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="Descripcion" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="IntervaloRefresco" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="3" name="EmpleadoCreador" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_PanelVisualizacion_EmpleadoId" implied="false" onDeleteCascade="false" schema="public" table="Empleado"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="Turno" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_Turno_TurnosId" implied="false" onDeleteCascade="false" schema="public" table="Turnos"/>
+         </column>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_PanelVisualizacion_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="PanelVisualizacionMapas" numRows="5" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;PanelVisualizacionMapas_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial"/>
+         <column autoUpdated="false" digits="0" id="1" name="VerZonas" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="2" name="PanelVisualizacion" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_PanelVisualizacionMapas_PanelVisualizacionId" implied="false" onDeleteCascade="false" schema="public" table="PanelVisualizacion"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="Rastreador" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_PanelVisualizacionMapas_RastreadorId" implied="false" onDeleteCascade="false" schema="public" table="RastreadorGPS"/>
+         </column>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_PanelVisualizacionMapas_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="raster_columns" numRows="0" remarks="" schema="public" type="VIEW" viewSql=" SELECT current_database() AS r_table_catalog,&#10;    n.nspname AS r_table_schema,&#10;    c.relname AS r_table_name,&#10;    a.attname AS r_raster_column,&#10;    COALESCE(_raster_constraint_info_srid(n.nspname, c.relname, a.attname), ( SELECT st_srid('010100000000000000000000000000000000000000'::geometry) AS st_srid)) AS srid,&#10;    _raster_constraint_info_scale(n.nspname, c.relname, a.attname, 'x'::bpchar) AS scale_x,&#10;    _raster_constraint_info_scale(n.nspname, c.relname, a.attname, 'y'::bpchar) AS scale_y,&#10;    _raster_constraint_info_blocksize(n.nspname, c.relname, a.attname, 'width'::text) AS blocksize_x,&#10;    _raster_constraint_info_blocksize(n.nspname, c.relname, a.attname, 'height'::text) AS blocksize_y,&#10;    COALESCE(_raster_constraint_info_alignment(n.nspname, c.relname, a.attname), false) AS same_alignment,&#10;    COALESCE(_raster_constraint_info_regular_blocking(n.nspname, c.relname, a.attname), false) AS regular_blocking,&#10;    _raster_constraint_info_num_bands(n.nspname, c.relname, a.attname) AS num_bands,&#10;    _raster_constraint_info_pixel_types(n.nspname, c.relname, a.attname) AS pixel_types,&#10;    _raster_constraint_info_nodata_values(n.nspname, c.relname, a.attname) AS nodata_values,&#10;    _raster_constraint_info_out_db(n.nspname, c.relname, a.attname) AS out_db,&#10;    _raster_constraint_info_extent(n.nspname, c.relname, a.attname) AS extent,&#10;    COALESCE(_raster_constraint_info_index(n.nspname, c.relname, a.attname), false) AS spatial_index&#10;   FROM pg_class c,&#10;    pg_attribute a,&#10;    pg_type t,&#10;    pg_namespace n&#10;  WHERE ((t.typname = 'raster'::name) AND (a.attisdropped = false) AND (a.atttypid = t.oid) AND (a.attrelid = c.oid) AND (c.relnamespace = n.oid) AND (c.relkind = ANY (ARRAY['r'::&quot;char&quot;, 'v'::&quot;char&quot;, 'm'::&quot;char&quot;, 'f'::&quot;char&quot;, 'p'::&quot;char&quot;])) AND (NOT pg_is_other_temp_schema(c.relnamespace)) AND has_table_privilege(c.oid, 'SELECT'::text));">
+         <column autoUpdated="false" digits="0" id="0" name="r_table_catalog" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="1" name="r_table_schema" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="2" name="r_table_name" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="3" name="r_raster_column" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="4" name="srid" nullable="true" remarks="" size="10" type="int4">
+            <parent column="srid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="spatial_ref_sys"/>
+         </column>
+         <column autoUpdated="false" digits="17" id="5" name="scale_x" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="17" id="6" name="scale_y" nullable="true" remarks="" size="17" type="float8"/>
+         <column autoUpdated="false" digits="0" id="7" name="blocksize_x" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="8" name="blocksize_y" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="9" name="same_alignment" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="10" name="regular_blocking" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="11" name="num_bands" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="12" name="pixel_types" nullable="true" remarks="" size="2147483647" type="_text"/>
+         <column autoUpdated="false" digits="17" id="13" name="nodata_values" nullable="true" remarks="" size="17" type="_float8"/>
+         <column autoUpdated="false" digits="0" id="14" name="out_db" nullable="true" remarks="" size="1" type="_bool"/>
+         <column autoUpdated="false" digits="0" id="15" name="extent" nullable="true" remarks="" size="2147483647" type="geometry"/>
+         <column autoUpdated="false" digits="0" id="16" name="spatial_index" nullable="true" remarks="" size="1" type="bool"/>
+      </table>
+      <table name="raster_overviews" numRows="0" remarks="" schema="public" type="VIEW" viewSql=" SELECT current_database() AS o_table_catalog,&#10;    n.nspname AS o_table_schema,&#10;    c.relname AS o_table_name,&#10;    a.attname AS o_raster_column,&#10;    current_database() AS r_table_catalog,&#10;    (split_part(split_part(s.consrc, '''::name'::text, 1), ''''::text, 2))::name AS r_table_schema,&#10;    (split_part(split_part(s.consrc, '''::name'::text, 2), ''''::text, 2))::name AS r_table_name,&#10;    (split_part(split_part(s.consrc, '''::name'::text, 3), ''''::text, 2))::name AS r_raster_column,&#10;    (btrim(split_part(s.consrc, ','::text, 2)))::integer AS overview_factor&#10;   FROM pg_class c,&#10;    pg_attribute a,&#10;    pg_type t,&#10;    pg_namespace n,&#10;    pg_constraint s&#10;  WHERE ((t.typname = 'raster'::name) AND (a.attisdropped = false) AND (a.atttypid = t.oid) AND (a.attrelid = c.oid) AND (c.relnamespace = n.oid) AND ((c.relkind)::text = ANY ((ARRAY['r'::character(1), 'v'::character(1), 'm'::character(1), 'f'::character(1)])::text[])) AND (s.connamespace = n.oid) AND (s.conrelid = c.oid) AND (s.consrc ~~ '%_overview_constraint(%'::text) AND (NOT pg_is_other_temp_schema(c.relnamespace)) AND has_table_privilege(c.oid, 'SELECT'::text));">
+         <column autoUpdated="false" digits="0" id="0" name="o_table_catalog" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="1" name="o_table_schema" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="2" name="o_table_name" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="3" name="o_raster_column" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="4" name="r_table_catalog" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="5" name="r_table_schema" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="6" name="r_table_name" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="7" name="r_raster_column" nullable="true" remarks="" size="2147483647" type="name"/>
+         <column autoUpdated="false" digits="0" id="8" name="overview_factor" nullable="true" remarks="" size="10" type="int4"/>
+      </table>
+      <table name="RastreadorGPS" numRows="3" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;RastreadorGPS_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="Rastreador" foreignKey="fk_PanelVisualizacionMapas_RastreadorId" implied="false" onDeleteCascade="false" schema="public" table="PanelVisualizacionMapas"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="IMEI" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="Descripcion" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="Empleado" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_RastreadorGPS_Empleado" implied="false" onDeleteCascade="false" schema="public" table="Empleado"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="Estado" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_EstadoRastreadorGPS_RastreadorEstado" implied="false" onDeleteCascade="false" schema="public" table="EstadosRastreadores"/>
+         </column>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_RastreadorGPS_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="Rol" numRows="8" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;Rol_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="Rol" foreignKey="fk_RolMenu_RolId" implied="false" onDeleteCascade="false" schema="public" table="RolMenu"/>
+            <child column="Rol" foreignKey="fk_RolVentana_RolId" implied="false" onDeleteCascade="false" schema="public" table="RolVentana"/>
+            <child column="Rol" foreignKey="fk_Rol_RolId" implied="false" onDeleteCascade="false" schema="public" table="Usuario"/>
+            <child column="rolid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="ventanas_de_rol"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="Descripcion" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_Rol_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="RolMenu" numRows="108" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;RolMenu_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial"/>
+         <column autoUpdated="false" digits="0" id="1" name="Rol" nullable="false" remarks="" size="10" type="int4">
+            <parent column="Id" foreignKey="fk_RolMenu_RolId" implied="false" onDeleteCascade="false" schema="public" table="Rol"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="2" name="Menu" nullable="false" remarks="" size="10" type="int4">
+            <parent column="Id" foreignKey="fk_RolMenu_MenuId" implied="false" onDeleteCascade="false" schema="public" table="Menu"/>
+         </column>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_RolMenu_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="RolVentana" numRows="74" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;RolVentana_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial"/>
+         <column autoUpdated="false" digits="0" id="1" name="Leer" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="2" name="Crear" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="3" name="Actualizar" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="4" name="Eliminar" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="5" name="Rol" nullable="false" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_RolVentana_RolId" implied="false" onDeleteCascade="false" schema="public" table="Rol"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="Ventana" nullable="false" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_RolVentana_VentanaId" implied="false" onDeleteCascade="false" schema="public" table="Ventana"/>
+         </column>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_IdRolVentana" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="RuteoCobrador" numRows="1" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;RuteoCobrador_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial"/>
+         <column autoUpdated="false" digits="0" id="1" name="FechaVisita" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="2" name="Visitado" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="3" name="Cumplido" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="4" name="Gestion" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_RuteoCobrador_GestionId" implied="false" onDeleteCascade="false" schema="public" table="GestionVisita"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="5" name="FechaCreacion" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="6" name="FechaCumplido" nullable="true" remarks="" size="13" type="date"/>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_RuteoCobrador_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="Saldo" numRows="65" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;Saldo_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="Saldo" foreignKey="fk_Cobranza_SaldoId" implied="false" onDeleteCascade="false" schema="public" table="Cobranza"/>
+            <child column="Saldo" foreignKey="fk_GestionVisita_Saldo" implied="false" onDeleteCascade="false" schema="public" table="GestionVisita"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="Saldo" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="2" name="Vencimiento" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="3" name="Cuota" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="4" name="TotalCuota" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="5" name="Cuenta" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_SaldoCuenta_CuentaId" implied="false" onDeleteCascade="false" schema="public" table="CuentaPorCobrar"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="6" name="Cliente" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_SaldoCliente_ClienteId" implied="false" onDeleteCascade="false" schema="public" table="Cliente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="FechaGestion" nullable="true" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="8" name="EmpleadoAsignado" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_SaldoEmpAsig_EmpleadoId" implied="false" onDeleteCascade="false" schema="public" table="Empleado"/>
+         </column>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_Saldo_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="spatial_ref_sys" numRows="5757" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="srid" nullable="false" remarks="" size="10" type="int4">
+            <child column="srid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="geography_columns"/>
+            <child column="srid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="geometry_columns"/>
+            <child column="srid" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="raster_columns"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="auth_name" nullable="true" remarks="" size="256" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="auth_srid" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="3" name="srtext" nullable="true" remarks="" size="2048" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="4" name="proj4text" nullable="true" remarks="" size="2048" type="varchar"/>
+         <primaryKey column="srid" sequenceNumberInPK="1"/>
+         <index name="spatial_ref_sys_pkey" unique="true">
+            <column ascending="true" name="srid"/>
+         </index>
+      </table>
+      <table name="Telefonos" numRows="28" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;Telefonos_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial"/>
+         <column autoUpdated="false" digits="0" id="1" name="Numero" nullable="false" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="TipoTelefono" nullable="false" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_TelefonoTipoTelefono_TipoTelefonoId" implied="false" onDeleteCascade="false" schema="public" table="TipoTelefono"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="3" name="EmpleadoAsignado" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_TelefonoEmpleadoAsignado_EmpleadoId" implied="false" onDeleteCascade="false" schema="public" table="Empleado"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="4" name="ClienteAsignado" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_TelefonoClienteAsignado_ClienteId" implied="false" onDeleteCascade="false" schema="public" table="Cliente"/>
+         </column>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_TelefonoId" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="TipoGeorreferencia" numRows="6" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;TipoGeorreferencia_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="Tipo" foreignKey="fk_Georreferencia_TipoId" implied="false" onDeleteCascade="false" schema="public" table="Georreferencia"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="Descripcion" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="Clase" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="Icono" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="ColorContorno" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="ColorRelleno" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="6" name="Activo" nullable="true" remarks="" size="1" type="bool"/>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_TipoGeorreferencia_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="TiposDocumentos" numRows="4" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;TiposDocumentos_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="TipoDocumento" foreignKey="fk_ClienteTipoDocumento_TipoDocumentoId" implied="false" onDeleteCascade="false" schema="public" table="Cliente"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="Descripcion" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_TipoDocumentoId" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="TipoTelefono" numRows="2" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;TipoTelefono_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="TipoTelefono" foreignKey="fk_TelefonoTipoTelefono_TipoTelefonoId" implied="false" onDeleteCascade="false" schema="public" table="Telefonos"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="Nombre" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="Patron" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_TipoTelefonoId" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="Turnos" numRows="1" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;Turnos_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="Turno" foreignKey="fk_Turno_TurnosId" implied="false" onDeleteCascade="false" schema="public" table="PanelVisualizacion"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="Descripcion" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="6" id="2" name="HoraInicio" nullable="true" remarks="" size="15" type="time"/>
+         <column autoUpdated="false" digits="6" id="3" name="HoraFin" nullable="true" remarks="" size="15" type="time"/>
+         <column autoUpdated="false" digits="0" id="4" name="Domingo" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="5" name="Lunes" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="6" name="Martes" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="7" name="Miercoles" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="8" name="Jueves" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="9" name="Viernes" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="10" name="Sabado" nullable="true" remarks="" size="1" type="bool"/>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_Turnos_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="Usuario" numRows="12" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;Usuario_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="10" type="serial"/>
+         <column autoUpdated="false" digits="0" id="1" name="Nombre" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="Apellido" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="Usuario" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="4" name="Contrasenha" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="5" name="Activo" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="6" name="Rol" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_Rol_RolId" implied="false" onDeleteCascade="false" schema="public" table="Rol"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="7" name="Empleado" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="fk_Empleado_EmpleadoId" implied="false" onDeleteCascade="false" schema="public" table="Empleado"/>
+         </column>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_Usuario_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="Ventana" numRows="27" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;Gui_Id_seq&quot;'::regclass)" digits="0" id="0" name="Id" nullable="false" remarks="" size="19" type="bigserial">
+            <child column="Ventana" foreignKey="fk_RolVentana_VentanaId" implied="false" onDeleteCascade="false" schema="public" table="RolVentana"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="Nombre" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="Ubicacion" nullable="true" remarks="" size="2147483647" type="text"/>
+         <primaryKey column="Id" sequenceNumberInPK="1"/>
+         <index name="pk_Ventana_Id" unique="true">
+            <column ascending="true" name="Id"/>
+         </index>
+      </table>
+      <table name="ventanas_de_rol" numRows="0" remarks="" schema="public" type="VIEW" viewSql=" SELECT &quot;Ventana&quot;.&quot;Id&quot;,&#10;    &quot;Ventana&quot;.&quot;Nombre&quot;,&#10;    &quot;Ventana&quot;.&quot;Ubicacion&quot;,&#10;    &quot;RolVentana&quot;.&quot;Leer&quot;,&#10;    &quot;RolVentana&quot;.&quot;Crear&quot;,&#10;    &quot;RolVentana&quot;.&quot;Actualizar&quot;,&#10;    &quot;RolVentana&quot;.&quot;Eliminar&quot;,&#10;    &quot;RolVentana&quot;.&quot;Id&quot; AS rolid&#10;   FROM (&quot;Ventana&quot;&#10;     JOIN &quot;RolVentana&quot; ON ((&quot;RolVentana&quot;.&quot;Ventana&quot; = &quot;Ventana&quot;.&quot;Id&quot;)));">
+         <column autoUpdated="false" digits="0" id="0" name="Id" nullable="true" remarks="" size="19" type="int8"/>
+         <column autoUpdated="false" digits="0" id="1" name="Nombre" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="2" name="Ubicacion" nullable="true" remarks="" size="2147483647" type="text"/>
+         <column autoUpdated="false" digits="0" id="3" name="Leer" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="4" name="Crear" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="5" name="Actualizar" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="6" name="Eliminar" nullable="true" remarks="" size="1" type="bool"/>
+         <column autoUpdated="false" digits="0" id="7" name="rolid" nullable="true" remarks="" size="19" type="int8">
+            <parent column="Id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="Rol"/>
+         </column>
+      </table>
+   </tables>
+</database>

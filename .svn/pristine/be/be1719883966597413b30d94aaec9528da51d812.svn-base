@@ -1,0 +1,71 @@
+package com.geopractic.georrefencia.modelo;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+/**
+ * Clase de utilidad para generacion de GeoJson.
+ * @author Cristhian
+ *
+ */
+public class GeneradorJson {
+
+  /**
+   * Convierte un punto en un objeto GeoJson.
+   * @param georreferencia la georreferencia a convertir.
+   * @return el string en formato GeoJson.
+   * @throws JsonProcessingException error al generar el Json. 
+   */
+  public static String generarGeoJson(Georreferencia georreferencia) 
+      throws JsonProcessingException {
+    ObjectMapper mapeador = new ObjectMapper();
+
+    ObjectNode nodoPadre = mapeador.createObjectNode();
+
+    nodoPadre.put("type", "Feature");
+
+    ObjectNode nodoPropiedades = mapeador.createObjectNode();
+    nodoPropiedades.put("Id", georreferencia.getId());
+    nodoPropiedades.put("Descripcion", georreferencia.getDescripcion());
+    nodoPropiedades.put("Tipo", georreferencia.getTipo().getDescripcion());
+    nodoPropiedades.put("Geometria", georreferencia.getTipo().getClase());
+
+    //Verifica si el cliente no es nulo
+    if (georreferencia.getCliente() != null) {
+      nodoPropiedades.put("Cliente", georreferencia.getCliente().getNombreCompleto());
+    } //Fin de if
+
+    ObjectNode nodoGeometria = mapeador.createObjectNode();
+    if (georreferencia.getTipo().getClase().equals("Punto")) {
+      nodoPropiedades.put("icono", georreferencia.getTipo().getIcono());
+      nodoGeometria.put("type", "Point");
+      ArrayNode coordenadas = mapeador.createArrayNode();
+      coordenadas.add(georreferencia.getPunto().getLongitud());
+      coordenadas.add(georreferencia.getPunto().getLatitud());
+      nodoGeometria.set("coordinates", coordenadas);
+    } else {
+      nodoPropiedades.put("relleno", georreferencia.getTipo().getColorRelleno());
+      nodoPropiedades.put("contorno", georreferencia.getTipo().getColorContorno());
+      nodoGeometria.put("type", "Polygon");      
+      ArrayNode array = mapeador.createArrayNode();
+      ArrayNode coordenadas = mapeador.createArrayNode();
+      //Recorre todos los puntos de la zona
+      for (Punto punto : georreferencia.getZona().getPuntos()) {
+        ArrayNode puntos = mapeador.createArrayNode();
+        puntos.add(punto.getLongitud());
+        puntos.add(punto.getLatitud());
+        coordenadas.add(puntos);
+      } //Fin de for
+      array.add(coordenadas);
+      nodoGeometria.set("coordinates", array);
+    } //Fin de if
+
+    nodoPadre.set("properties", nodoPropiedades);
+    nodoPadre.set("geometry", nodoGeometria);
+
+    return mapeador.writeValueAsString(nodoPadre);
+  } //Fin del metodo generarGeoJson
+
+} //Fin de la clase GeneradorJson

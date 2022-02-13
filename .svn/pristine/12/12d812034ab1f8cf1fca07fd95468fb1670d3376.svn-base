@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+	<h:head>
+		<title>Inicio de sesion</title>
+		<link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<h:outputStylesheet name="css/bootstrap.min.css" />
+        <h:outputScript name="js/bootstrap.min.js" />
+        <h:outputStylesheet name="css/main.css" />
+	</h:head> 
+	<h:body>
+	   <div class="ui-g ui-fluid">
+		   <h:form id="formularioLogin" >
+
+		      <p:growl id="mensajes" autoUpdate="false" showDetail="true" severity="info, fatal, warn"/>
+              <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+
+              <div class="ui-xs-12 ui-sm-10 ui-md-8 ui-lg-8" style="display: inline-block;">
+                    <p:graphicImage name="images/logo_nombre.png"  style="width:100%" />
+                    <p:separator />
+                    <div class="ui-inputgroup form-group">
+                        <span class="ui-inputgroup-addon input-group-prepend"><i class="fa fa-fw fa-user"></i></span>
+                        <p:inputText id="usuario" value="#{login.usuario.usuario}" required="true" placeholder="Usuario"
+                        requiredMessage="Debe ingresar un usuario." />
+                    </div>		            
+                    <p:message for="usuario" display="tooltip" />
+
+                    <div class="ui-inputgroup form-group">
+                        <span class="ui-inputgroup-addon input-group-prepend"><i class="fa fa-fw fa-key"></i></span>
+                        <p:password id="contrasenha" value="#{login.usuario.contrasenha}" required="true"
+                        placeholder="Contraseña" requiredMessage="Debe ingresar una contrasenha." />
+                    </div>
+                    <p:message for="contrasenha" display="tooltip" />
+
+                    <p:commandButton id="ingresarBtn" action="#{login.validarUsuario}" 
+                    value="Ingresar" update="@form" />
+		            <p:blockUI block="formularioLogin" trigger="ingresarBtn">
+		              <p>Autenticando... </p>
+		              <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+		            </p:blockUI>
+	          </div>
+	       </h:form>
+	   </div>
+	</h:body> 
+</html>

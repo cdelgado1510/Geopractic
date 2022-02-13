@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+	<h:head>
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Administracion de Menus
+            </ui:define>
+
+            <ui:define name="contenido">
+		        <h:form id="formlista" rendered="#{accesos.esValido('leer')}">
+		            <p:panel header="Administracion de Menus">
+                        <f:facet name="actions">
+                            <p:commandButton icon="fa fa-fw fa-plus" value="Agregar Menu" rendered="#{accesos.esValido('crear')}"
+                            actionListener="#{manejarMenu.setFuncion('agregar')}" update=":formAbm :diaCabecera"
+                            onclick="PF('diaAbm').show();" styleClass="boton-verde"/>
+                        </f:facet>
+
+		                <p:dataTable id="lista" widgetVar="tablalista" var="menu" value="#{manejarMenu.lista}" rows="10" paginator="true" reflow="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} Menus." rowStyleClass="text-center"
+                         rowsPerPageTemplate="10,50,100" emptyMessage="No hay resultados a mostrar." filteredValue="#{manejarMenu.listaFiltro}">
+						    <p:column headerText="Código" sortBy="#{menu.id}" filterBy="#{menu.id}" filterMatchMode="contains">
+						        <h:outputText value="#{menu.id}" />
+						    </p:column>
+
+						    <p:column headerText="Nombre" sortBy="#{menu.nombre}" filterBy="#{menu.nombre}" filterMatchMode="contains">
+						        <h:outputText value="#{menu.nombre}" />
+						    </p:column>
+
+						    <p:column headerText="Tipo" sortBy="#{menu.tipo}" filterBy="#{menu.tipo}" filterMatchMode="equals" >
+                                <f:facet name="filter">
+					                <p:selectOneMenu onchange="PF('tablalista').filter()" >
+					                   <f:selectItem itemLabel="Seleccione uno..." itemValue="" />
+					                   <f:selectItem itemLabel="Sub Menu" itemValue="submenu" />
+                                       <f:selectItem itemLabel="Menu" itemValue="menuItem" />
+					                </p:selectOneMenu>
+					            </f:facet>
+						        <h:outputText value="#{menu.tipo == 'menuItem' ? 'Menu': 'Sub Menu'}" />
+						    </p:column>
+
+						    <p:column headerText="Icono">
+						        <h:outputText styleClass="ui-icon #{menu.icono}" style="float:left"  />
+						        <h:outputText value="#{menu.icono}" />
+						    </p:column>
+
+                            <p:column headerText="Menu Padre" sortBy="#{menu.menuPadre}" filterBy="#{menu.menuPadre}" filterMatchMode="equals">
+                                <f:facet name="filter">
+                                    <p:selectOneMenu onchange="PF('tablalista').filter()" converter="omnifaces.SelectItemsConverter"
+                                    filter="true" filterMatchMode="contains">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione uno..." />
+                                        <f:selectItems value="#{manejarMenu.lista}" var="menus" itemValue="#{menus.id}"
+                                        itemLabel="#{menus.nombre}" />
+                                    </p:selectOneMenu>
+                                </f:facet>
+
+                                <p:selectOneMenu value="#{menu.menuPadre}" converter="omnifaces.SelectItemsConverter" disabled="true"
+                                style="opacity:1.00 !important;filter:Alpha(Opacity=100);">
+                                    <f:selectItem noSelectionOption="true" itemLabel="" />
+						            <f:selectItems value="#{manejarMenu.lista}" var="menus" itemValue="#{menus.id}"
+						            itemLabel="#{menus.nombre}" />
+						        </p:selectOneMenu>
+                            </p:column>
+
+                            <p:column headerText="Ventana" sortBy="#{menu.ventana}" filterBy="#{menu.ventana}" filterMatchMode="contains">
+							    <h:outputText value="#{menu.ventana}" />
+							</p:column>
+
+							<p:column headerText="Orden">
+							    <h:outputText value="#{menu.orden}" />
+							</p:column>
+
+							<p:column headerText="Activo" sortBy="#{menu.activo}" filterBy="#{menu.activo}" filterMatchMode="equals">
+							    <f:facet name="filter">
+                                    <p:selectOneButton onchange="PF('tablalista').filter()">
+                                        <f:converter converterId="javax.faces.Boolean" />
+                                        <f:selectItem itemLabel="Todos" itemValue="" />
+                                        <f:selectItem itemLabel="Activos" itemValue="true" />
+                                        <f:selectItem itemLabel="Inactivos" itemValue="false" />
+                                    </p:selectOneButton>
+                                </f:facet>
+							    <h:outputText value="#{menu.activo ? 'Activo': 'Inactivo'}" />
+							</p:column>
+
+                            <p:column headerText="Acciones" style="width: 120px">
+                                <p:commandButton id="btnEditar" icon="ui-icon-pencil" title="Editar" rendered="#{accesos.esValido('actualizar')}"
+                                actionListener="#{manejarMenu.seleccionar(menu)}" update="diaAbm" oncomplete="PF('diaAbm').show();" styleClass="boton-amarillo"/>
+                                <p:commandButton id="btnEliminar" icon="ui-icon-trash" title="Eliminar" rendered="#{accesos.esValido('borrar')}" 
+                                actionListener="#{manejarMenu.eliminar(menu)}" update="@form" styleClass="boton-rojo">
+                                    <p:confirm header="Confirmación" message="Está seguro de eliminar este menu?" icon="fa fa-fw fa-exclamation-triangle" />
+                                </p:commandButton>
+                            </p:column>
+                            <p:blockUI block="lista" trigger="btnEliminar">
+                                <p>Eliminando... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+						</p:dataTable>
+		            </p:panel>
+		        </h:form>
+		        
+		        <!-- Ventana de administracion -->
+		        <p:dialog id="diaAbm" widgetVar="diaAbm"  modal="true" responsive="true"
+                resizable="false" draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true">
+                        <f:facet name="header">
+						    <h:outputText id="diaCabecera" value="#{manejarMenu.funcion == 'modificar' ? 'Modificar Menu' : 'Agregar nuevo Menu'}"/>
+						</f:facet>
+                        <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+                        <h:form id="formAbm">
+                            <p:message for="txtNombre" display="tooltip" />
+                            <p:message for="txtTipo" display="tooltip" />
+                            <p:message for="txtOrden" display="tooltip" />
+                            <p:contextMenu for="txtMenuPadre" >
+                                 <p:menuitem value="Actualizar listado" action="#{manejarMenu.generarLista()}" icon="fa fa-fw fa-refresh"
+                                 iconPos="left" update="txtMenuPadre" /> 
+                            </p:contextMenu>
+                            <div class="ui-fluid">
+	                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank ui-fluid" columnClasses="ui-grid-col-6,ui-grid-col-6">
+	                                <p:outputLabel id="lblNombre" for="txtNombre" value="Nombre:" />
+	                                <p:inputText id="txtNombre" value="#{manejarMenu.entidad.nombre}" required="true"
+	                                requiredMessage="Debe ingresar el contenido del menu.">
+	                                   <f:validateLength minimum = "5"/>
+	                                </p:inputText>
+	
+									<p:outputLabel id="lblTipo" for="txtTipo" value="Tipo:" />
+									<p:selectOneMenu id="txtTipo" value="#{manejarMenu.entidad.tipo}" required="true"
+									requiredMessage="Debe seleccionar el tipo de menu.">
+	                                    <f:selectItem itemLabel="Seleccione uno..." itemValue="" />
+	                                    <f:selectItem itemLabel="Sub Menu" itemValue="submenu" />
+	                                    <f:selectItem itemLabel="Menu" itemValue="menuItem" />
+	                                </p:selectOneMenu>
+	
+									<p:outputLabel id="lblIcono" for="txtIcono" value="Icono:" />
+									<p:selectOneMenu id="txtIcono" value="#{manejarMenu.entidad.icono}" var="icono" converter="omnifaces.SelectItemsConverter"
+									filter="true" filterMatchMode="contains">
+	                                    <f:selectItem noSelectionOption="true" itemLabel="Sin icono" />
+	                                    <f:selectItems value="#{manejarMenu.iconos}" var="iconos" itemValue="#{iconos}"
+	                                    itemLabel="#{iconos}" />
+	                                    <p:column>
+	                                        <h:outputText styleClass="ui-icon #{icono}"/>
+	                                    </p:column>
+	                                    <p:column>
+	                                        <h:outputText value="#{icono}"/>
+	                                    </p:column>
+	                                </p:selectOneMenu>
+
+									<p:outputLabel id="lblMenuPadre" for="txtMenuPadre" value="Menu Padre:" />
+									<p:selectOneMenu id="txtMenuPadre" value="#{manejarMenu.entidad.menuPadre}" converter="omnifaces.SelectItemsConverter"
+									filter="true" filterMatchMode="contains">
+	                                    <f:selectItem noSelectionOption="true" itemLabel="Sin padre" />
+	                                    <f:selectItems value="#{manejarMenu.lista}" var="menus" itemValue="#{menus.id}"
+	                                    itemLabel="#{menus.nombre}" />
+	                                </p:selectOneMenu>
+
+									<p:outputLabel id="lblVentana" for="txtVentana" value="Ventana:" />
+									<p:inputText id="txtVentana" value="#{manejarMenu.entidad.ventana}"/>
+
+									<p:outputLabel id="lblOrden" for="txtOrden" value="Orden:" />
+									<p:inputText id="txtOrden" value="#{manejarMenu.entidad.orden}" required="true"
+									requiredMessage="Debe ingresar el orden que pertenece al menu."/>
+
+	                                <p:outputLabel id="lblActivo" for="chkActivo" value="Estado:" />
+	                                <p:selectBooleanButton id="chkActivo" value="#{manejarMenu.entidad.activo}"
+	                                onLabel="Activo" offLabel="Inactivo"/>
+	                                <p:commandButton id="btnCrear"  value="Crear" actionListener="#{manejarMenu.guardar}" rendered="#{manejarMenu.funcion == 'agregar'}"
+	                                icon="ui-icon-check" update=":formlista @form" styleClass="boton-verde"/>
+	                                <p:commandButton id="btnModificar"  value="Modificar" update=":formlista @form" actionListener="#{manejarMenu.modificar}" rendered="#{manejarMenu.funcion == 'modificar'}"
+	                                icon="ui-icon-check" styleClass="boton-amarillo"/>
+	                                <p:commandButton id="btnCancelar" value="Cancelar" styleClass="boton-rojo"
+	                                icon="ui-icon-cancel" immediate="true" onclick="PF('diaAbm').hide();"/>
+	                            </p:panelGrid>
+                            </div>
+                            <p:blockUI block="formAbm" trigger="btnCrear,btnModificar,btnCancelar">
+                                <p>Procesando cambio... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+                        </h:form>
+                </p:dialog>
+                
+                <!-- Ventana de confirmacion -->
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes boton-verde" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no boton-rojo" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

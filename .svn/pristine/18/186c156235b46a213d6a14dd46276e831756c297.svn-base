@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug">
+    <Properties>
+        <Property name="produccion">${log4j:configParentLocation}/../..</Property>
+        <Property name="desarrollo">M:/My Developments/Java/workspace/Geopractic</Property>
+        <Property name="basePath">${desarrollo}/logs</Property>
+    </Properties>
+ 
+    <Appenders>
+        <RollingFile name="fileLogger" fileName="${basePath}/${web:contextPath}.log" filePattern="${basePath}/${web:contextPath}-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>%d %p %c - %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+ 
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout   pattern="%d %p %c - %m%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.geopractic" level="debug" additivity="true">
+            <appender-ref ref="fileLogger" level="debug" />
+        </Logger>
+        <Root level="debug" additivity="false">
+            <appender-ref ref="console" />
+        </Root>
+    </Loggers>
+</Configuration>

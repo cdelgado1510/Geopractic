@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+	<h:head>
+
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Administracion de Tipos de Georreferencia
+            </ui:define>
+            <ui:define name="codigo">
+                <h:outputStylesheet name="css/leaflet.css" />
+                <h:outputScript name="js/leaflet.js" />
+                <h:outputScript name="js/scripts-mapas-control.js" />
+                <h:outputScript name="js/leaflet-ant-path.js" />
+                <h:outputScript name="js/SliderControl.js" />
+                <h:outputScript name="js/easyprint.js" />
+                <style>
+				    .datetimeControl p {
+				        margin: 0;
+				        font-size: 16px;
+				    }
+    			</style>
+            </ui:define>
+            <ui:define name="contenido">
+                <h:outputScript name="js/spanishLocales.js" />
+		        <h:form id="formControl">
+		            <p:panel header="Control de recorrido de vehiculos">
+                        <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+
+                        <p:message for="txtRastreador" display="tooltip" />
+                        <p:message for="txtFechaInicio" display="tooltip" />
+                        <p:message for="txtFechaFin" display="tooltip" />
+
+                        <p:panelGrid columns="8" styleClass="ui-panelgrid-blank" >
+
+                             <p:outputLabel id="lblFechaInicio" for="txtFechaInicio" value="Desde:" />
+                             <p:calendar id="txtFechaInicio" value="#{controlRecorridos.fechaInicio}"
+                             required="true" locale="es" pattern="dd-MM-yyyy HH:mm" navigator="true"
+                             requiredMessage="Debe seleccionar la fecha y hora de inicio de busqueda."/>
+
+                             <p:outputLabel id="lblFechaFin" for="txtFechaFin" value="Hasta:" />
+                             <p:calendar id="txtFechaFin" value="#{controlRecorridos.fechaFin}"
+                             required="true" locale="es" pattern="dd-MM-yyyy HH:mm" navigator="true"
+                             requiredMessage="Debe seleccionar la fecha y hora tope de busqueda."/>
+
+                             <p:outputLabel id="lblRastreador" for="txtRastreador" value="Dispositivo:" />
+                             <p:selectOneMenu  id="txtRastreador" value="#{controlRecorridos.rastreador}" converter="omnifaces.SelectItemsConverter"
+                              filter="true" filterMatchMode="contains" dynamic="true">
+                                    <f:selectItems value="#{manejarRastreador.lista}" var="rastreador" itemValue="#{rastreador}"
+                                    itemLabel="#{rastreador.imei} - #{rastreador.empleadoAsignado.nombre} #{rastreador.empleadoAsignado.apellido} - #{rastreador.descripcion}" />
+                             </p:selectOneMenu>
+
+                             <p:commandButton id="btnBuscar" icon="fa fa-fw fa-search" value="Buscar"
+                             actionListener="#{controlRecorridos.buscarRecorrido}" />
+                             <p:selectBooleanCheckbox id="chkSoloMarcador" widgetVar="chkSoloMarcador" itemLabel="Solo un marcador"/>
+                        </p:panelGrid>
+		            </p:panel>
+
+                    <p:blockUI block="formControl" trigger="btnBuscar" >
+                        <p>Cargando recorrido... </p>
+                        <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                    </p:blockUI>
+
+                     <div id="Visor" style="width: 100%; height: 600px;">
+	                 </div>
+
+	                 <script>
+						if (mapaVisor != null) {
+							mapaVisor.off();
+						}
+							
+						//Carga el mapa
+						mapaVisor = L.map('Visor').setView([-25.3, -57.64], 16);
+					
+						//Crea la capa de OpenStreetMap
+						var capaMapa = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+							attribution: osmLink,
+							maxZoom: 16,
+						}).addTo(mapaVisor);
+
+						var impresion = L.easyPrint({
+                            tileLayer: capaMapa,
+                            title: 'Exportar mapa',
+                            sizeModes: ['Current', 'A4Landscape'],
+                            defaultSizeTitles: {Current: 'Mapa Completo', A4Landscape: 'Tamaño A4'},
+                            filename: 'recorrido',
+                            exportOnly: true,
+                            hideControlContainer: true
+                        }).addTo(mapaVisor);
+					</script>
+		        </h:form>
+
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

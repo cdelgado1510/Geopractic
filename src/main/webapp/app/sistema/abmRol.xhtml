@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+	<h:head>
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Administracion de Roles
+            </ui:define>
+
+            <ui:define name="contenido">
+		        <h:form id="formLista" rendered="#{accesos.esValido('leer')}">
+		            <p:panel header="Administracion de Roles">
+
+                        <f:facet name="actions">
+                            <p:commandButton icon="fa fa-fw fa-plus" value="Agregar Rol" rendered="#{accesos.esValido('crear')}"
+                            actionListener="#{manejarRol.setFuncion('agregar')}" update=":formAbm :diaCabecera"
+                            onclick="PF('diaAbm').show();" styleClass="boton-verde"/>            
+                        </f:facet>
+
+		                <p:dataTable id="lista" widgetVar="tablalista" var="rol" value="#{manejarRol.lista}" rows="10" paginator="true" reflow="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} Roles."
+                         rowsPerPageTemplate="10,50,100" emptyMessage="No hay resultados a mostrar."
+                         rowStyleClass="text-center" filteredValue="#{manejarRol.listaFiltro}">
+						    <p:column headerText="Código" sortBy="#{rol.id}" filterBy="#{rol.id}" filterMatchMode="contains">
+						        <h:outputText value="#{rol.id}" />
+						    </p:column>
+						 
+						    <p:column headerText="Descripcion" sortBy="#{rol.descripcion}" filterBy="#{rol.descripcion}" filterMatchMode="contains">
+						        <div align="left">
+						          <h:outputText value="#{rol.descripcion}" />
+						        </div>
+						    </p:column>
+						 
+                            <p:column headerText="Acciones" style="width: 160px">
+                                <p:commandButton id="btnEditar" icon="ui-icon-pencil" title="Editar" rendered="#{accesos.esValido('actualizar')}"
+                                actionListener="#{manejarRol.seleccionar(rol)}" update="diaAbm" styleClass="boton-amarillo" oncomplete="PF('diaAbm').show();" />
+
+                                <p:commandButton id="btnVentanas" icon="ui-icon-calculator" title="Asignar Ventanas" rendered="#{accesos.esValido('actualizar')}"
+                                actionListener="#{manejarRol.seleccionar(rol)}" update="diaPermisosVentana" oncomplete="PF('diaPermisosVentana').show();" />
+
+                                <p:commandButton id="btnMenus" icon="ui-icon-newwin" title="Asignar Menus" rendered="#{accesos.esValido('actualizar')}"
+                                actionListener="#{manejarRol.seleccionar(rol)}" update="diaPermisosMenus" oncomplete="PF('diaPermisosMenus').show();" />
+
+                                <p:commandButton id="btnEliminar" icon="ui-icon-trash" title="Eliminar" rendered="#{accesos.esValido('borrar')}" 
+                                actionListener="#{manejarRol.eliminar(rol)}" update="@form" styleClass="boton-rojo">
+                                    <p:confirm header="Confirmación" message="Está seguro de eliminar este rol?" icon="fa fa-fw fa-exclamation-triangle" />
+                                </p:commandButton>
+                            </p:column>
+                            <p:blockUI block="lista" trigger="btnEliminar">
+                                <p>Eliminando... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+						</p:dataTable>
+		            </p:panel>
+		        </h:form>
+		        
+		        <!-- Ventana de administracion -->
+                <p:dialog id="diaAbm" widgetVar="diaAbm" modal="true" responsive="true"
+                resizable="false" draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true">
+                        <f:facet name="header">
+                            <h:outputText id="diaCabecera" value="#{manejarRol.funcion == 'modificar' ? 'Modificar Rol' : 'Agregar nuevo Rol'}"/>
+                        </f:facet>
+                        <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+                        <h:form id="formAbm">
+                            <p:message for="txtDescripcion" display="tooltip" />
+                            <div class="ui-fluid">
+	                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-8,ui-grid-col-8">
+	                                <p:outputLabel id="lblDescripcion" for="txtDescripcion" value="Descripcion:" />
+	                                <p:inputText id="txtDescripcion" value="#{manejarRol.entidad.descripcion}" required="true"
+	                                requiredMessage="Debe ingresar una descripcion.">
+	                                    <f:validateLength minimum = "5"/>
+	                                </p:inputText>
+	
+	                                <p:commandButton id="btnCrear"  value="Crear" actionListener="#{manejarRol.guardar}" rendered="#{manejarRol.funcion == 'agregar'}"
+	                                icon="ui-icon-check" update=":formLista @form" styleClass="boton-verde" />
+	                                <p:commandButton id="btnModificar"  value="Modificar" update=":formLista @form" actionListener="#{manejarRol.modificar}" rendered="#{manejarRol.funcion == 'modificar'}"
+	                                icon="ui-icon-check" styleClass="boton-amarillo" />
+	                                <p:commandButton id="btnCancelar" value="Cancelar" styleClass="boton-rojo"
+	                                icon="ui-icon-cancel" immediate="true" onclick="PF('diaAbm').hide();"/>
+	                            </p:panelGrid>
+                            </div>
+                            <p:blockUI block="formAbm" trigger="btnCrear,btnModificar,btnCancelar">
+                                <p>Procesando cambio... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+                        </h:form>
+                </p:dialog>
+                
+                <!-- Ventana de administracion de permisos de ventana -->
+                <p:dialog id="diaPermisosVentana" widgetVar="diaPermisosVentana" modal="true" responsive="true"
+                resizable="false" draggable="false" header="Asignacion de ventanas" style="text-align: center;width: 30%;height: 30%;" >
+                    <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+                    <p:ajax event="close" listener="#{manejarRol.limpiarListasSeleccion}"/>
+                    <h:form id="formAsignarVentanas">
+                      <p:messages id="mensajeVentanas" showDetail="false" closable="true" severity="error,fatal" >
+                        <p:autoUpdate />
+                      </p:messages>
+                      <p:pickList id="pckListPermVentana" widgetVar="pckListPermVentana" value="#{manejarRol.modeloListaDobleVentanas}"
+                      var="ventana" itemValue="#{ventana}" itemLabel="#{ventana.nombre}"  responsive="true" showSourceFilter="true"
+                      showTargetFilter="true" filterMatchMode="contains"  converter="ConversorPckVentana"
+                      addAllLabel="Asignar todos" addLabel="Asignar" removeLabel="Quitar" removeAllLabel="Quitar todos">
+                        <f:facet name="sourceCaption">Ventanas Disponibles</f:facet>
+                        <f:facet name="targetCaption">Ventanas Asignadas</f:facet>
+                        <p:ajax event="transfer" listener="#{manejarRol.transferirVentana}" update="@form,formPermisosVentana:listaVentanas"/>
+                        <p:autoUpdate />
+                      </p:pickList>
+                    </h:form>
+                    <p:separator />
+                    
+                    <h:form id="formPermisosVentana" >
+	                    <p:dataTable id="listaVentanas" widgetVar="tablalistaVentanas" var="ventana" value="#{manejarRol.entidad.ventanas}" rows="10" paginator="true"
+	                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                         currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords}." rowsPerPageTemplate="10,50,100" emptyMessage="No hay ventanas asignadas." 
+	                         editable="true" rowStyleClass="text-center" reflow="true">
+
+                             <f:facet name="header">
+                                Permisos de ventana
+                             </f:facet>
+
+                            <p:ajax event="rowEdit" listener="#{manejarRol.editarPermisosVentana}" update="listaVentanas" />
+
+                            <p:column headerText="Nombre" sortBy="#{ventana.nombre}" filterBy="#{ventana.nombre}" filterMatchMode="contains">
+	                          <h:outputText value="#{ventana.nombre}" />
+	                        </p:column>
+
+	                         <p:column headerText="Lectura">
+	                           <p:cellEditor>
+	                                <f:facet name="output"><h:outputText value="#{ventana.leer ? 'Si': 'No'}" /></f:facet>
+                                    <f:facet name="input">
+                                        <p:selectBooleanButton value="#{ventana.leer}" onLabel="Si" offLabel="No" style="width:50px" />
+                                    </f:facet>
+                               </p:cellEditor>
+                             </p:column>
+                             
+                             <p:column headerText="Crear">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{ventana.crear ? 'Si': 'No'}" /></f:facet>
+                                    <f:facet name="input">
+                                        <p:selectBooleanButton value="#{ventana.crear}" onLabel="Si" offLabel="No" style="width:50px" />
+                                    </f:facet>
+                                </p:cellEditor>
+                             </p:column>
+                             
+                             <p:column headerText="Actualizar">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{ventana.actualizar ? 'Si': 'No'}" /></f:facet>
+                                    <f:facet name="input">
+                                        <p:selectBooleanButton value="#{ventana.actualizar}" onLabel="Si" offLabel="No" style="width:50px" />
+                                    </f:facet>
+                                </p:cellEditor>
+                             </p:column>
+                             
+                             <p:column headerText="Borrar">
+                                <p:cellEditor>
+                                    <f:facet name="output"><h:outputText value="#{ventana.eliminar ? 'Si': 'No'}" /></f:facet>
+                                    <f:facet name="input">
+                                        <p:selectBooleanButton value="#{ventana.eliminar}" onLabel="Si" offLabel="No" style="width:50px" />
+                                    </f:facet>
+                                </p:cellEditor>
+                             </p:column>
+                             
+                             <p:column>
+                                <p:rowEditor editTitle="Modificar" saveTitle="Guardar" cancelTitle="Cancelar" />
+                             </p:column>
+	                    </p:dataTable>
+	                </h:form>
+                </p:dialog>
+                
+                <!-- Ventana de administracion de permisos de menu -->
+                <p:dialog id="diaPermisosMenus" widgetVar="diaPermisosMenus"  modal="true" responsive="true"
+                resizable="false" draggable="false" showEffect="fade" hideEffect="fade"
+                header="Asignacion de menus" style="text-align: center;width: 30%;height: 30%;" >
+                    <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+                    <p:ajax event="close" listener="#{manejarRol.limpiarListasSeleccion}"/>
+                    <h:form id="formPermisosMenus">
+                      <p:messages id="mensajeMenus" showDetail="false" closable="true" severity="error,fatal" >
+                        <p:autoUpdate />
+                      </p:messages>
+                      <p:pickList id="pckListPermMenus" widgetVar="pckListPermMenus" value="#{manejarRol.modeloListaDobleMenu}"
+                      var="menu" itemValue="#{menu}" itemLabel="#{menu.nombre}"  responsive="true" showSourceFilter="true"
+                      showTargetFilter="true" filterMatchMode="contains"  converter="ConversorPckMenu"
+                      addAllLabel="Asignar todos" addLabel="Asignar" removeLabel="Quitar" removeAllLabel="Quitar todos">
+                        <f:facet name="sourceCaption">Menus Disponibles</f:facet>
+                        <f:facet name="targetCaption">Menus Asignados</f:facet>
+                        <p:ajax event="transfer" listener="#{manejarRol.transferirMenu}" update="@form" />
+                        <p:autoUpdate />
+                      </p:pickList>
+                    </h:form>
+                </p:dialog>
+
+                <!-- Ventana de confirmacion -->
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes boton-verde" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no boton-rojo" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

@@ -1,0 +1,8 @@
+@startuml
+abstract class com.geopractic.propiedades.Propiedades
+class com.geopractic.propiedades.ExcepcionPropiedad
+class com.geopractic.propiedades.PropiedadesPostgres
+class com.geopractic.propiedades.PropiedadesRastreo
+com.geopractic.propiedades.PropiedadesPostgres --|> com.geopractic.propiedades.Propiedades
+com.geopractic.propiedades.PropiedadesRastreo --|> com.geopractic.propiedades.Propiedades
+@enduml

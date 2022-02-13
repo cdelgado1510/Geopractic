@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+	<h:head>
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Administracion de Usuarios
+            </ui:define>
+        
+            <ui:define name="contenido">
+		        <h:form id="formLista" rendered="#{accesos.esValido('leer')}" >
+		            <p:panel header="Administracion de usuarios">
+                        <f:facet name="actions">
+
+                            <p:commandButton id="btnReporte" widgetVar="btnReporte" 
+                            icon="fa fa-fw fa-print" value="Reporte de Usuarios"
+                            actionListener="#{manejarUsuario.generarReportesListaCompletaUsuarios()}" update="reporte" />
+
+                            <p:commandButton id="btnAgregar" widgetVar="btnAgregar" 
+                            icon="fa fa-fw fa-plus" value="Agregar Usuario" rendered="#{accesos.esValido('crear')}"
+                            actionListener="#{manejarUsuario.setFuncion('agregar')}" update=":formAbm :diaCabecera"
+                            onclick="PF('diaAbm').show();" styleClass="boton-verde"/>
+
+                        </f:facet>
+                        
+		                <p:dataTable id="lista" widgetVar="tablalista" var="usuario" value="#{manejarUsuario.lista}" rows="10" paginator="true" reflow="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} Usuarios." filteredValue="#{manejarUsuario.listaFiltro}"
+                         rowsPerPageTemplate="10,50,100" emptyMessage="No hay resultados a mostrar." rowStyleClass="text-center">
+						    <p:column headerText="Código" sortBy="#{usuario.id}" filterBy="#{usuario.id}" filterMatchMode="contains">
+						        <h:outputText value="#{usuario.id}" />
+						    </p:column>
+						 
+						    <p:column headerText="Nombre" sortBy="#{usuario.nombre}" filterBy="#{usuario.nombre}" filterMatchMode="contains">
+						        <h:outputText value="#{usuario.nombre}" />
+						    </p:column>
+						 
+						    <p:column headerText="Apellido" sortBy="#{usuario.apellido}" filterBy="#{usuario.apellido}" filterMatchMode="contains">
+						        <h:outputText value="#{usuario.apellido}" />
+						    </p:column>
+						 
+						    <p:column headerText="Usuario" sortBy="#{usuario.usuario}" filterBy="#{usuario.usuario}" filterMatchMode="contains">
+						        <h:outputText value="#{usuario.usuario}" />
+						    </p:column>
+						    
+						    <p:column headerText="Rol" sortBy="#{usuario.rol.descripcion}" filterBy="#{usuario.rol.descripcion}" filterMatchMode="contains">
+                                <h:outputText value="#{usuario.rol.descripcion}" />
+                            </p:column>
+
+                            <p:column headerText="Cód. Empleado" sortBy="#{usuario.empleado.id}" filterBy="#{usuario.empleado.id}" filterMatchMode="contains">
+                                <h:outputText value="#{usuario.empleado.id}" />
+                            </p:column>
+
+						    <p:column headerText="Activo" sortBy="#{usuario.activo}" filterBy="#{usuario.activo}" filterMatchMode="equals">
+                                <f:facet name="filter">
+                                    <p:selectOneButton onchange="PF('tablalista').filter()">
+                                        <f:converter converterId="javax.faces.Boolean" />
+                                        <f:selectItem itemLabel="Todos" itemValue="" />
+                                        <f:selectItem itemLabel="Activos" itemValue="true" />
+                                        <f:selectItem itemLabel="Inactivos" itemValue="false" />
+                                    </p:selectOneButton>
+                                </f:facet>
+                                 <h:outputText value="#{usuario.activo ? 'Activo': 'Inactivo'}" />
+                            </p:column>
+                            
+                            <p:column headerText="Acciones" style="width: 120px">
+                                <p:commandButton id="btnEditar" icon="ui-icon-pencil" title="Editar" rendered="#{accesos.esValido('actualizar')}"
+                                actionListener="#{manejarUsuario.seleccionar(usuario)}" update="diaAbm" styleClass="boton-amarillo" oncomplete="PF('diaAbm').show();" />
+                                <p:commandButton id="btnEliminar" icon="ui-icon-trash" title="Eliminar" rendered="#{accesos.esValido('borrar')}" 
+                                actionListener="#{manejarUsuario.eliminar(usuario)}" update="@form" styleClass="boton-rojo">
+                                    <p:confirm header="Confirmación" message="Está seguro de eliminar este usuario?" icon="fa fa-fw fa-exclamation-triangle" />
+                                </p:commandButton>
+                            </p:column>
+                            <p:blockUI block="lista" trigger="btnEliminar">
+		                        <p>Eliminando... </p>
+		                        <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+		                    </p:blockUI>
+						</p:dataTable>
+						
+                        <p:blockUI block="lista" trigger="btnReporte">
+                            <p>Generando reporte... </p>
+                            <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                        </p:blockUI>
+		            </p:panel>
+		        </h:form>
+
+		        <!-- Ventana de administracion -->
+		        <p:dialog id="diaAbm" widgetVar="diaAbm" modal="true" responsive="true"
+                resizable="false" draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true">
+                        <f:facet name="header">
+                            <h:outputText id="diaCabecera" value="#{manejarUsuario.funcion == 'modificar' ? 'Modificar Usuario' : 'Agregar nuevo Usuario'}"/>
+                        </f:facet>
+                        <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+                        <h:form id="formAbm">
+                            <p:message for="txtNombre" display="tooltip" />
+                            <p:message for="txtApellido" display="tooltip" />
+                            <p:message for="txtUsuario" display="tooltip" />
+                            <p:message for="txtContrasenha" display="tooltip" />
+                            <div class="ui-fluid">
+	                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-8,ui-grid-col-8">
+	                                <p:outputLabel id="lblNombre" for="txtNombre" value="Nombre:" />
+	                                <p:inputText id="txtNombre" value="#{manejarUsuario.entidad.nombre}" required="true"
+	                                requiredMessage="Debe ingresar un nombre.">
+	                                    <f:validateLength minimum = "4"/>
+	                                </p:inputText>
+	
+	                                <p:outputLabel id="lblApellido" for="txtApellido" value="Apellido:" />
+	                                <p:inputText id="txtApellido" value="#{manejarUsuario.entidad.apellido}" required="true"
+	                                requiredMessage="Debe ingresar un apellido.">
+	                                    <f:validateLength minimum = "4"/>
+	                                </p:inputText>
+	
+	                                <p:outputLabel id="lblUsuario" for="txtUsuario" value="Usuario:" />
+	                                <p:inputText id="txtUsuario" value="#{manejarUsuario.entidad.usuario}" required="true"
+	                                requiredMessage="Debe ingresar un usuario." disabled="#{manejarUsuario.funcion == 'modificar'}">
+	                                   <f:validateLength minimum = "4"/>
+	                                </p:inputText>
+	
+	                                <p:outputLabel id="lblContrasenha" for="txtContrasenha" value="Contraseña:" />
+	                                <p:password id="txtContrasenha" value="#{manejarUsuario.entidad.contrasenha}" required="true"
+	                                valueChangeListener="#{manejarUsuario.cambioContrasenha}" redisplay="true"
+	                                requiredMessage="Debe ingresar una contraseña.">
+	                                  <f:validateLength minimum = "4"/>
+	                                </p:password>
+	
+	                                <p:outputLabel id="lblRol" for="txtRol" value="Rol:" />
+	                                <p:selectOneMenu id="txtRol" value="#{manejarUsuario.entidad.rol}" converter="omnifaces.SelectItemsConverter"
+		                            filter="true" filterMatchMode="contains" dynamic="true">
+		                                <f:selectItem noSelectionOption="true" itemLabel="Sin rol" />
+		                                <f:selectItems value="#{manejarRol.lista}" var="rol" itemValue="#{rol}"
+		                                itemLabel="#{rol.descripcion}" />
+		                            </p:selectOneMenu>
+	
+	                               <p:outputLabel id="lblEmpleado" for="txtEmpleado" value="Empleado:" />
+                                    <p:selectOneMenu id="txtEmpleado" value="#{manejarUsuario.entidad.empleado}" converter="omnifaces.SelectItemsConverter"
+                                    filter="true" filterMatchMode="contains" dynamic="true">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Sin empleado" />
+                                        <f:selectItems value="#{manejarEmpleado.lista}" var="empleado" itemValue="#{empleado}"
+                                        itemLabel="#{empleado.nombre} #{empleado.apellido}" itemDisabled="#{!empleado.estado}" />
+                                    </p:selectOneMenu>
+
+	                                <p:outputLabel id="lblActivo" for="chkActivo" value="Estado:" />
+	                                <p:selectBooleanButton id="chkActivo" value="#{manejarUsuario.entidad.activo}"
+	                                onLabel="Activo" offLabel="Inactivo" />
+	
+	                                <p:commandButton id="btnCrear"  value="Crear" actionListener="#{manejarUsuario.guardar}" rendered="#{manejarUsuario.funcion == 'agregar'}"
+	                                icon="ui-icon-check" update=":formLista @form" styleClass="boton-verde"/>
+	                                <p:commandButton id="btnModificar"  value="Modificar" update=":formLista @form" actionListener="#{manejarUsuario.modificar}" rendered="#{manejarUsuario.funcion == 'modificar'}"
+	                                icon="ui-icon-check"  styleClass="boton-amarillo"/>
+	                                <p:commandButton id="btnCancelar" value="Cancelar"  styleClass="boton-rojo"
+	                                icon="ui-icon-cancel" immediate="true" onclick="PF('diaAbm').hide();"/>
+	                            </p:panelGrid>
+                            </div>
+                            <p:contextMenu for="txtRol" >
+                                 <p:menuitem value="Actualizar listado" action="#{manejarRol.generarLista()}" icon="fa fa-fw fa-refresh"
+                                 iconPos="left" update="txtRol" /> 
+                            </p:contextMenu>
+                            <p:contextMenu for="txtEmpleado" >
+                                 <p:menuitem value="Actualizar listado" action="#{manejarRol.generarLista()}" icon="fa fa-fw fa-refresh"
+                                 iconPos="left" update="txtEmpleado" /> 
+                            </p:contextMenu>
+                            <p:blockUI block="formAbm" trigger="btnCrear,btnModificar,btnCancelar">
+                                <p>Procesando cambio... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+                        </h:form>
+                </p:dialog>
+
+                <!-- Ventana de reporte -->
+                <p:dialog id="diaReporte" widgetVar="diaReporte" modal="true" resizable="false" draggable="false" closeOnEscape="true" responsive="true"
+                height="750px" style="width: auto !important;top: 20px !important; left: 20px !important; right: 20px !important;" >
+                     <h:form id="reporte" style="width:100% !important; height:100% !important;" >
+                        <p:media value="/reporte.pdf" player="pdf" cache="false" style="width:100% !important; height:100% !important;">
+                        Su navegador no puede vizualizar el PDF, presione el boton para descargarlo en su lugar.
+                            <p:commandButton value="Descarga" ajax="false" icon="fa fa-fw fa-download">
+                                <p:fileDownload value="#{manejarUsuario.multimedia}" />
+                            </p:commandButton>    
+                        </p:media>
+                     </h:form>
+                </p:dialog>
+
+                <!-- Ventana de confirmacion -->
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes boton-verde" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no boton-rojo" icon="ui-icon-close" />
+                </p:confirmDialog>
+
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

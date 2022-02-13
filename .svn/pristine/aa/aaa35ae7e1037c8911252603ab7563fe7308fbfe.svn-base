@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+	<h:head>
+
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Administracion de Tipos de Georreferencia
+            </ui:define>
+            <ui:define name="codigo">
+                <h:outputStylesheet name="css/leaflet.css" />
+                <h:outputScript name="js/leaflet.js" />
+                <h:outputScript name="js/scripts-mapas.js" />
+
+                <h:outputScript name="js/Leaflet.draw.js"/>
+		        <h:outputScript name="js/Leaflet.Draw.Event.js"/>
+		        <h:outputStylesheet name="css/leaflet.draw.css" />
+
+		        <h:outputScript name="js/Toolbar.js"/>     
+		        <h:outputScript name="js/Tooltip.js"/>
+
+		        <h:outputScript name="js/ext/GeometryUtil.js"/>
+		        <h:outputScript name="js/ext/LatLngUtil.js"/>
+		        <h:outputScript name="js/ext/LineUtil.Intersect.js"/>
+		        <h:outputScript name="js/ext/Polygon.Intersect.js"/>
+		        <h:outputScript name="js/ext/Polyline.Intersect.js"/>
+		        <h:outputScript name="js/ext/TouchEvents.js"/>
+		                     
+		        <h:outputScript name="js/draw/DrawToolbar.js"/>
+		        <h:outputScript name="js/draw/handler/Draw.Feature.js"/>
+		        <h:outputScript name="js/draw/handler/Draw.SimpleShape.js"/>
+		        <h:outputScript name="js/draw/handler/Draw.Polyline.js"/>
+		        <h:outputScript name="js/draw/handler/Draw.Marker.js"/>
+		        <h:outputScript name="js/draw/handler/Draw.Circle.js"/>
+		        <h:outputScript name="js/draw/handler/Draw.CircleMarker.js"/>
+		        <h:outputScript name="js/draw/handler/Draw.Polygon.js"/>
+		        <h:outputScript name="js/draw/handler/Draw.Rectangle.js"/>
+		                     
+		        <h:outputScript name="js/edit/EditToolbar.js"/>
+		        <h:outputScript name="js/edit/handler/EditToolbar.Edit.js"/>
+		        <h:outputScript name="js/edit/handler/EditToolbar.Delete.js"/>
+		
+		        <h:outputScript name="js/Control.Draw.js"/>
+		        
+		        <h:outputScript name="js/edit/handler/Edit.Poly.js"/>
+		        <h:outputScript name="js/edit/handler/Edit.SimpleShape.js"/>
+		        <h:outputScript name="js/edit/handler/Edit.Rectangle.js"/>
+		        <h:outputScript name="js/edit/handler/Edit.Marker.js"/>
+		        <h:outputScript name="js/edit/handler/Edit.CircleMarker.js"/>
+		        <h:outputScript name="js/edit/handler/Edit.Circle.js"/>
+
+            </ui:define>
+            <ui:define name="contenido">
+		        <h:form id="formLista" rendered="#{accesos.esValido('leer')}">
+		            <p:panel header="Administracion de Georreferencias">
+
+                        <f:facet name="actions">
+                            <p:commandButton icon="fa fa-fw fa-plus" value="Agregar Georreferenciacion" rendered="#{accesos.esValido('crear')}"
+                            actionListener="#{manejarGeorreferencia.setFuncion('agregar')}" update=":formAbm :diaCabecera"
+                            onclick="PF('diaAbm').show();" styleClass="boton-verde"/>            
+                        </f:facet>
+
+		                <p:dataTable id="lista" widgetVar="tablalista" var="georreferencia" value="#{manejarGeorreferencia.lista}" rows="10" paginator="true" reflow="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} de Georreferencias."
+                         rowsPerPageTemplate="10,50,100" emptyMessage="No hay resultados a mostrar."
+                         rowStyleClass="text-center" filteredValue="#{manejarGeorreferencia.listaFiltro}">
+						    <p:column headerText="Código" sortBy="#{georreferencia.id}" filterBy="#{georreferencia.id}" filterMatchMode="contains">
+						        <h:outputText value="#{georreferencia.id}" />
+						    </p:column>
+						 
+						    <p:column headerText="Descripcion" sortBy="#{georreferencia.descripcion}" filterBy="#{georreferencia.descripcion}" filterMatchMode="contains">
+						        <div align="left">
+						          <h:outputText value="#{georreferencia.descripcion}" />
+						        </div>
+						    </p:column>
+						 
+						    <p:column headerText="Clase" sortBy="#{georreferencia.tipo.clase}" filterBy="#{georreferencia.tipo.clase}" filterMatchMode="contains">
+						        <f:facet name="filter">
+                                    <p:selectOneButton onchange="PF('tablalista').filter()">
+                                        <f:selectItem itemLabel="Todos" itemValue="" />
+                                        <f:selectItem itemLabel="Punto" itemValue="Punto" />
+                                        <f:selectItem itemLabel="Zona" itemValue="Zona" />
+                                    </p:selectOneButton>
+                                </f:facet>
+                              <p:column rendered="#{georreferencia.tipo.clase == 'Punto'}">
+	                              <p:graphicImage name="css/images/#{georreferencia.tipo.icono}" />
+	                          </p:column>
+	                          <p:column rendered="#{georreferencia.tipo.clase == 'Zona'}">
+	                              <div id="popupCP2" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
+	                                   <span class="ui-button-text" >
+	                                      <span id="previewRelleno" style="overflow:hidden;width:1em;height:1em;display:block;border:solid 1px ##{georreferencia.tipo.colorContorno};text-indent:1em;white-space:nowrap;background-color:##{georreferencia.tipo.colorRelleno}"> </span>
+	                                   </span>
+	                              </div>
+                              </p:column>
+                              <h:outputText value="- #{georreferencia.tipo.clase}"/>
+                            </p:column>
+
+                            <p:column headerText="Acciones" style="width: 120px">
+                                <p:commandButton id="btnVisualizar" icon="fa fa-fw fa-search" title="Visualizar georreferencia" 
+                                actionListener="#{manejarGeorreferencia.obtenerGeoJson(georreferencia)}" update="ventanaMapa" oncomplete="PF('ventanaMapa').show();" />
+
+                                <p:commandButton id="btnEditar" icon="ui-icon-pencil" title="Editar" rendered="#{accesos.esValido('actualizar')}"
+                                actionListener="#{manejarGeorreferencia.seleccionar(georreferencia)}" update="diaAbm" styleClass="boton-amarillo" oncomplete="PF('diaAbm').show();" />
+
+                                <p:commandButton id="btnEliminar" icon="ui-icon-trash" title="Eliminar" rendered="#{accesos.esValido('borrar')}" 
+                                actionListener="#{manejarGeorreferencia.eliminar(georreferencia)}" update="@form" styleClass="boton-rojo">
+                                    <p:confirm header="Confirmación" message="Está seguro de eliminar esta georreferencia?" icon="fa fa-fw fa-exclamation-triangle" />
+                                </p:commandButton>
+                            </p:column>
+                            <p:blockUI block="lista" trigger="btnEliminar">
+                                <p>Eliminando... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+						</p:dataTable>
+		            </p:panel>
+		        </h:form>
+
+		        <!-- Ventana de administracion -->
+                <p:dialog id="diaAbm" widgetVar="diaAbm" modal="true" responsive="true"
+                resizable="false" draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true" 
+                onShow="cargarAbm('abmMapa')" >
+                        <f:facet name="header">
+                            <h:outputText id="diaCabecera" value="#{manejarGeorreferencia.funcion == 'modificar' ? 'Modificar georreferencia' : 'Agregar georreferencia'}"/>
+                        </f:facet>
+
+                        <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank">
+                            <p:column>
+		                        <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+		                        <h:form id="formAbm" enctype="multipart/form-data">
+		                            <p:message for="txtTipo" display="tooltip" />
+		                            <p:message for="txtDescripcion" display="tooltip" />
+		                            <p:message for="txtCliente" display="tooltip" />
+		                            <p:message for="txtLatitud" display="tooltip" />
+		                            <p:message for="txtLongitud" display="tooltip" />
+                                	<p:message for="zonaLatitud" display="tooltip" />
+                                    <p:message for="zonaLongitud" display="tooltip" />
+
+		                            <div class="ui-fluid">
+			                            <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4">
+		                                    <p:outputLabel id="lblTipo" for="txtTipo" value="Tipo:" />
+		                                    <p:selectOneMenu  id="txtTipo" widgetVar="txtTipo" value="#{manejarGeorreferencia.entidad.tipo}" var="tipo" converter="omnifaces.SelectItemsConverter"
+		                                    required="true" requiredMessage="Debe seleccionar un tipo." disabled="#{manejarGeorreferencia.funcion == 'modificar'}">
+		                                        <f:selectItem noSelectionOption="true" itemLabel="Sin tipo" />
+		                                        <f:selectItems value="#{manejarTipoGeo.lista}" var="icono" itemValue="#{icono}"
+		                                        itemLabel="#{icono.descripcion}" />
+
+		                                        <p:column style="width:10%" rendered="#{manejarGeorreferencia.entidad.tipo.clase == 'Punto'}">
+                                                   <p:graphicImage name="css/images/#{tipo.icono}" />
+                                                   <p:inputText id="iconoTipo" widgetVar="iconoTipo" value="#{manejarGeorreferencia.iconoAbm}" type="hidden" />
+                                                </p:column>
+                                                <p:column style="width:10%" rendered="#{manejarGeorreferencia.entidad.tipo.clase == 'Zona'}">
+                                                    <div id="popupCP2" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
+                                                       <span class="ui-button-text" >
+                                                          <span id="previewRelleno" style="overflow:hidden;width:1em;height:1em;display:block;border:solid 1px ##{tipo.colorContorno};text-indent:1em;white-space:nowrap;background-color:##{tipo.colorRelleno}"> </span>
+                                                       </span>
+                                                    </div>
+                                                    <p:inputText id="contornoZona" widgetVar="contornoZona" value="#{manejarGeorreferencia.contornoZona}" type="hidden" />
+                                                    <p:inputText id="rellenoZona" widgetVar="rellenoZona" value="#{manejarGeorreferencia.rellenoZona}" type="hidden" />
+                                                </p:column>
+                                                <p:column >
+                                                    <h:outputText value="#{tipo.descripcion}"/>
+                                                </p:column>
+		                                        <p:ajax event="itemSelect" listener="#{manejarGeorreferencia.cambiarTipo}" update="formAbm" />
+		                                        <p:ajax event="change" listener="#{manejarGeorreferencia.cambiarTipo}" update="formAbm" />
+		                                    </p:selectOneMenu>
+		
+			                                <p:outputLabel id="lblDescripcion" for="txtDescripcion" value="Descripcion:" />
+			                                <p:inputText id="txtDescripcion" value="#{manejarGeorreferencia.entidad.descripcion}" required="true"
+			                                requiredMessage="Debe ingresar una descripcion.">
+			                                    <f:validateLength minimum = "5"/>
+			                                </p:inputText>
+		
+		                                    <p:outputLabel id="lblCliente" for="txtCliente" value="Cliente:" />
+		                                    <p:selectOneMenu  id="txtCliente" value="#{manejarGeorreferencia.entidad.cliente}" converter="omnifaces.SelectItemsConverter"
+		                                    filter="true" filterMatchMode="contains" dynamic="true">
+		                                        <f:selectItem noSelectionOption="true" itemLabel="Sin cliente" />
+		                                        <f:selectItems value="#{manejarCliente.lista}" var="cliente" itemValue="#{cliente}"
+		                                        itemLabel="#{cliente.primerNombre} #{cliente.primerApellido} #{cliente.segundoApellido}" />
+		                                    </p:selectOneMenu>
+		
+		                                    <p:column />
+		                                    <p:column rendered="#{manejarGeorreferencia.entidad.tipo.clase == null}" />
+		                                    <p:commandButton id="mostrarPunto" icon="fa fa-fw fa-globe" rendered="#{manejarGeorreferencia.entidad.tipo.clase == 'Punto'}"
+		                                    title="Marcar en mapa" oncomplete="marcarPunto()" />
+		                                    <p:column rendered="#{manejarGeorreferencia.entidad.tipo.clase == 'Zona'}" />
+
+		                                    <p:outputLabel id="lblLatitud" for="txtLatitud" value="Latitud:" rendered="#{manejarGeorreferencia.entidad.tipo.clase == 'Punto'}"/>
+		                                    <p:inputNumber id="txtLatitud" widgetVar="txtLatitud" value="#{manejarGeorreferencia.entidad.punto.latitud}" decimalPlaces="6"
+		                                    rendered="#{manejarGeorreferencia.entidad.tipo.clase == 'Punto'}"
+		                                    required="#{manejarGeorreferencia.entidad.tipo.clase == 'Punto'}"
+		                                    requiredMessage="Debe ingresar una coordenada de latitud." />
+
+		                                    <p:outputLabel id="lblLongitud" for="txtLongitud" value="Longitud:" rendered="#{manejarGeorreferencia.entidad.tipo.clase == 'Punto'}" />
+		                                    <p:inputNumber id="txtLongitud" widgetVar="txtLongitud" value="#{manejarGeorreferencia.entidad.punto.longitud}" decimalPlaces="6"
+		                                    rendered="#{manejarGeorreferencia.entidad.tipo.clase == 'Punto'}"
+		                                    required="#{manejarGeorreferencia.entidad.tipo.clase == 'Punto'}"
+		                                    requiredMessage="Debe ingresar una coordenada de longitud." />
+
+                                            <p:inputText id="txtZonaMarcada" widgetVar="txtZonaMarcada" value="#{manejarGeorreferencia.geoJson}" type="hidden" />
+			                            </p:panelGrid>
+                                        		
+		                                <p:panel header="Zona" rendered="#{manejarGeorreferencia.entidad.tipo.clase == 'Zona'}" >
+		                                    <f:facet name="actions">
+		
+		                                   <p:inputNumber id="zonaLatitud" value="#{manejarGeorreferencia.latitud}" decimalPlaces="6" placeholder="Latitud"
+		                                        required="#{manejarGeorreferencia.entidad.tipo.clase == 'Zona'}"
+		                                        requiredMessage="Debe ingresar una coordenada de latitud.">
+		                                   </p:inputNumber>
+		
+		                                   <p:inputNumber id="zonaLongitud" value="#{manejarGeorreferencia.longitud}" decimalPlaces="6" placeholder="Longitud"
+		                                       required="#{manejarGeorreferencia.entidad.tipo.clase == 'Zona'}"
+		                                       requiredMessage="Debe ingresar una coordenada de longitud.">
+		                                    </p:inputNumber>
+		
+		                                    <p:commandButton value="Agregar punto" actionListener="#{manejarGeorreferencia.agregarPunto}" process="@this zonaLatitud zonaLongitud" update="poligono" />
+		
+											</f:facet>
+			                                <p:dataTable id="poligono" widgetVar="poligono" value="#{manejarGeorreferencia.listaPuntos}" rows="3" paginator="true" var="punto"
+			                                rowsPerPageTemplate="10,50,100" emptyMessage="No hay resultados a mostrar." rowStyleClass="text-center"
+			                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			                                currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} de Puntos." reflow="true" editable="true">
+			
+			                                    <p:ajax event="rowEditCancel" listener="#{manejarGeorreferencia.eliminarPunto}" />
+			
+			                                    <p:column headerText="Latitud">
+			                                        <p:outputLabel value="#{punto.latitud}" />
+			                                    </p:column>
+			    
+			                                    <p:column headerText="Longitud">
+			                                        <p:outputLabel value="#{punto.longitud}" />
+			                                    </p:column>
+			
+			                                    <p:column style="width: 80px">
+			                                        <p:rowEditor cancelTitle="Eliminar" />
+			                                    </p:column>
+			                                </p:dataTable>
+		                                </p:panel>
+
+		                                <p:remoteCommand name="cargarPuntoZona" action="#{manejarGeorreferencia.cargarPuntosZona}"
+		                                immediate="true" update="poligono" />
+		                                <p:remoteCommand name="limpiarPuntosZona" action="#{manejarGeorreferencia.limpiarPuntosZona}"
+                                        immediate="true" update="poligono" />
+
+			                            <p:contextMenu for="txtTipo" >
+			                                 <p:menuitem value="Actualizar listado" action="#{manejarTipoGeo.generarLista()}" icon="fa fa-fw fa-refresh"
+			                                 iconPos="left" update="txtTipo" /> 
+			                            </p:contextMenu>
+			
+			                            <p:contextMenu for="txtCliente" >
+			                                 <p:menuitem value="Actualizar listado" action="#{manejarCliente.generarLista()}" icon="fa fa-fw fa-refresh"
+			                                 iconPos="left" update="txtCliente" /> 
+			                            </p:contextMenu>
+		
+		                                <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-8,ui-grid-col-8">
+		                                    <p:commandButton id="btnCrear"  value="Crear" actionListener="#{manejarGeorreferencia.guardar}" rendered="#{manejarGeorreferencia.funcion == 'agregar'}"
+		                                    icon="ui-icon-check" update=":formLista @form" styleClass="boton-verde" />
+		                                    <p:commandButton id="btnModificar"  value="Modificar" update=":formLista @form" actionListener="#{manejarGeorreferencia.modificar}" rendered="#{manejarGeorreferencia.funcion == 'modificar'}"
+		                                    icon="ui-icon-check" styleClass="boton-amarillo" />
+		                                    <p:commandButton id="btnCancelar" value="Cancelar" styleClass="boton-rojo"
+		                                    icon="ui-icon-cancel" immediate="true" onclick="PF('diaAbm').hide();"/>
+		                                 </p:panelGrid>
+		                            </div>
+		                            <p:blockUI block="formAbm" trigger="btnCrear,btnModificar,btnCancelar">
+		                                <p>Procesando cambio... </p>
+		                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+		                            </p:blockUI>
+		                        </h:form>
+                            </p:column>
+                            <p:column>
+						       <div id="abmMapa" style="width: 450px; height: 400px;">
+	                           </div>
+	                         </p:column>
+	                    </p:panelGrid>
+                </p:dialog>
+
+                <!-- Ventana de visualizacion de mapa -->
+                <p:dialog id="ventanaMapa" widgetVar="ventanaMapa" modal="true" closable="true"
+                draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true" onShow="cargarVisor('visorMapa',#{manejarGeorreferencia.geoJson})">
+                  	<div id="visorMapa" style="width: 600px; height: 400px;">
+                    </div>
+                </p:dialog>
+
+                <!-- Ventana de confirmacion -->
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes boton-verde" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no boton-rojo" icon="ui-icon-close" />
+                </p:confirmDialog>
+
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

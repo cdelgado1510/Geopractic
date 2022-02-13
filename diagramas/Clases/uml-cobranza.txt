@@ -1,0 +1,117 @@
+@startuml
+class com.geopractic.cobranza.ControladorCobranza
+class com.geopractic.cobranza.ControladorCuentaPorCobrar
+class com.geopractic.cobranza.ControladorFormaDePago
+class com.geopractic.cobranza.ControladorGestionVisita
+class com.geopractic.cobranza.ControladorMotivo
+class com.geopractic.cobranza.ControladorRuteoCobrador
+class com.geopractic.cobranza.ControladorSaldo
+class com.geopractic.cobranza.bean.AdministradorCobranza
+class com.geopractic.cobranza.bean.AdministradorCuentaPorCobrar
+class com.geopractic.cobranza.bean.AdministradorFormaDePago
+class com.geopractic.cobranza.bean.AdministradorGestionVisita
+class com.geopractic.cobranza.bean.AdministradorMotivo
+class com.geopractic.cobranza.bean.AdministradorRuteoCobrador
+class com.geopractic.cobranza.bean.AdministradorSaldo
+class com.geopractic.cobranza.bean.ReporteListGestionEmp
+class com.geopractic.cobranza.bean.ReporteRendicionCobranza
+class com.geopractic.cobranza.bean.ReporteRendicionCobranzaCob
+class com.geopractic.cobranza.bean.ReporteRuteoCobrador
+class com.geopractic.cobranza.bean.ReporteRuteoGeneral
+class com.geopractic.cobranza.dao.CobranzaDao
+class com.geopractic.cobranza.dao.CuentaPorCobrarDao
+class com.geopractic.cobranza.dao.FormaDePagoDao
+class com.geopractic.cobranza.dao.GestionVisitaDao
+class com.geopractic.cobranza.dao.MotivoDao
+class com.geopractic.cobranza.dao.RuteoCobradorDao
+class com.geopractic.cobranza.dao.SaldoDao
+class com.geopractic.cobranza.mapeos.CobranzaMapeo
+class com.geopractic.cobranza.mapeos.CuentaPorCobrarMapeo
+class com.geopractic.cobranza.mapeos.FormaDePagoMapeo
+class com.geopractic.cobranza.mapeos.GestionVisitaMapeo
+class com.geopractic.cobranza.mapeos.MotivoMapeo
+class com.geopractic.cobranza.mapeos.RuteoCobradorMapeo
+class com.geopractic.cobranza.mapeos.SaldoMapeo
+class com.geopractic.cobranza.modelo.Cobranza
+class com.geopractic.cobranza.modelo.CuentaPorCobrar
+class com.geopractic.cobranza.modelo.FormaDePago
+class com.geopractic.cobranza.modelo.GestionVisita
+class com.geopractic.cobranza.modelo.Motivo
+class com.geopractic.cobranza.modelo.RuteoCobrador
+class com.geopractic.cobranza.modelo.Saldo
+com.geopractic.cobranza.ControladorCobranza ..> com.geopractic.cobranza.dao.CobranzaDao
+com.geopractic.cobranza.ControladorCobranza ..> com.geopractic.cobranza.modelo.Cobranza
+com.geopractic.cobranza.ControladorCuentaPorCobrar ..> com.geopractic.cobranza.dao.CuentaPorCobrarDao
+com.geopractic.cobranza.ControladorCuentaPorCobrar ..> com.geopractic.cobranza.dao.SaldoDao
+com.geopractic.cobranza.ControladorCuentaPorCobrar ..> com.geopractic.cobranza.modelo.CuentaPorCobrar
+com.geopractic.cobranza.ControladorCuentaPorCobrar ..> com.geopractic.cobranza.modelo.Saldo
+com.geopractic.cobranza.ControladorFormaDePago ..> com.geopractic.cobranza.dao.FormaDePagoDao
+com.geopractic.cobranza.ControladorFormaDePago ..> com.geopractic.cobranza.modelo.FormaDePago
+com.geopractic.cobranza.ControladorGestionVisita ..> com.geopractic.cobranza.dao.GestionVisitaDao
+com.geopractic.cobranza.ControladorGestionVisita ..> com.geopractic.cobranza.dao.SaldoDao
+com.geopractic.cobranza.ControladorGestionVisita ..> com.geopractic.cobranza.modelo.GestionVisita
+com.geopractic.cobranza.ControladorGestionVisita ..> com.geopractic.cobranza.modelo.Saldo
+com.geopractic.cobranza.ControladorMotivo ..> com.geopractic.cobranza.dao.MotivoDao
+com.geopractic.cobranza.ControladorMotivo ..> com.geopractic.cobranza.modelo.Motivo
+com.geopractic.cobranza.ControladorRuteoCobrador ..> com.geopractic.cobranza.dao.RuteoCobradorDao
+com.geopractic.cobranza.ControladorRuteoCobrador ..> com.geopractic.cobranza.modelo.RuteoCobrador
+com.geopractic.cobranza.ControladorRuteoCobrador ..> com.geopractic.cobranza.modelo.Saldo
+com.geopractic.cobranza.ControladorSaldo ..> com.geopractic.cobranza.dao.SaldoDao
+com.geopractic.cobranza.ControladorSaldo ..> com.geopractic.cobranza.modelo.CuentaPorCobrar
+com.geopractic.cobranza.ControladorSaldo ..> com.geopractic.cobranza.modelo.Saldo
+com.geopractic.cobranza.bean.AdministradorCobranza ..> com.geopractic.cobranza.ControladorCobranza
+com.geopractic.cobranza.bean.AdministradorCobranza ..> com.geopractic.cobranza.ControladorRuteoCobrador
+com.geopractic.cobranza.bean.AdministradorCobranza ..> com.geopractic.cobranza.ControladorSaldo
+com.geopractic.cobranza.bean.AdministradorCobranza ..> com.geopractic.cobranza.modelo.Cobranza
+com.geopractic.cobranza.bean.AdministradorCobranza ..> com.geopractic.cobranza.modelo.RuteoCobrador
+com.geopractic.cobranza.bean.AdministradorCobranza ..> com.geopractic.cobranza.modelo.Saldo
+com.geopractic.cobranza.bean.AdministradorCuentaPorCobrar ..> com.geopractic.cobranza.ControladorCuentaPorCobrar
+com.geopractic.cobranza.bean.AdministradorCuentaPorCobrar ..> com.geopractic.cobranza.ControladorSaldo
+com.geopractic.cobranza.bean.AdministradorCuentaPorCobrar ..> com.geopractic.cobranza.modelo.CuentaPorCobrar
+com.geopractic.cobranza.bean.AdministradorFormaDePago ..> com.geopractic.cobranza.ControladorFormaDePago
+com.geopractic.cobranza.bean.AdministradorFormaDePago ..> com.geopractic.cobranza.modelo.FormaDePago
+com.geopractic.cobranza.bean.AdministradorGestionVisita ..> com.geopractic.cobranza.ControladorGestionVisita
+com.geopractic.cobranza.bean.AdministradorGestionVisita ..> com.geopractic.cobranza.ControladorRuteoCobrador
+com.geopractic.cobranza.bean.AdministradorGestionVisita ..> com.geopractic.cobranza.ControladorSaldo
+com.geopractic.cobranza.bean.AdministradorGestionVisita ..> com.geopractic.cobranza.modelo.GestionVisita
+com.geopractic.cobranza.bean.AdministradorGestionVisita ..> com.geopractic.cobranza.modelo.RuteoCobrador
+com.geopractic.cobranza.bean.AdministradorGestionVisita ..> com.geopractic.cobranza.modelo.Saldo
+com.geopractic.cobranza.bean.AdministradorMotivo ..> com.geopractic.cobranza.ControladorMotivo
+com.geopractic.cobranza.bean.AdministradorMotivo ..> com.geopractic.cobranza.modelo.Motivo
+com.geopractic.cobranza.bean.AdministradorRuteoCobrador ..> com.geopractic.cobranza.ControladorRuteoCobrador
+com.geopractic.cobranza.bean.AdministradorRuteoCobrador ..> com.geopractic.cobranza.modelo.RuteoCobrador
+com.geopractic.cobranza.bean.AdministradorSaldo ..> com.geopractic.cobranza.ControladorSaldo
+com.geopractic.cobranza.bean.AdministradorSaldo ..> com.geopractic.cobranza.modelo.Saldo
+com.geopractic.cobranza.bean.ReporteRuteoCobrador ..> com.geopractic.cobranza.ControladorRuteoCobrador
+com.geopractic.cobranza.bean.ReporteRuteoGeneral ..> com.geopractic.cobranza.ControladorRuteoCobrador
+com.geopractic.cobranza.dao.CobranzaDao ..> com.geopractic.cobranza.mapeos.CobranzaMapeo
+com.geopractic.cobranza.dao.CobranzaDao ..> com.geopractic.cobranza.modelo.Cobranza
+com.geopractic.cobranza.dao.CuentaPorCobrarDao ..> com.geopractic.cobranza.mapeos.CuentaPorCobrarMapeo
+com.geopractic.cobranza.dao.CuentaPorCobrarDao ..> com.geopractic.cobranza.modelo.CuentaPorCobrar
+com.geopractic.cobranza.dao.FormaDePagoDao ..> com.geopractic.cobranza.mapeos.FormaDePagoMapeo
+com.geopractic.cobranza.dao.FormaDePagoDao ..> com.geopractic.cobranza.modelo.FormaDePago
+com.geopractic.cobranza.dao.GestionVisitaDao ..> com.geopractic.cobranza.mapeos.GestionVisitaMapeo
+com.geopractic.cobranza.dao.GestionVisitaDao ..> com.geopractic.cobranza.modelo.GestionVisita
+com.geopractic.cobranza.dao.MotivoDao ..> com.geopractic.cobranza.mapeos.MotivoMapeo
+com.geopractic.cobranza.dao.MotivoDao ..> com.geopractic.cobranza.modelo.Motivo
+com.geopractic.cobranza.dao.RuteoCobradorDao ..> com.geopractic.cobranza.mapeos.RuteoCobradorMapeo
+com.geopractic.cobranza.dao.RuteoCobradorDao ..> com.geopractic.cobranza.modelo.RuteoCobrador
+com.geopractic.cobranza.dao.RuteoCobradorDao ..> com.geopractic.cobranza.modelo.Saldo
+com.geopractic.cobranza.dao.SaldoDao ..> com.geopractic.cobranza.mapeos.SaldoMapeo
+com.geopractic.cobranza.dao.SaldoDao ..> com.geopractic.cobranza.modelo.CuentaPorCobrar
+com.geopractic.cobranza.dao.SaldoDao ..> com.geopractic.cobranza.modelo.GestionVisita
+com.geopractic.cobranza.dao.SaldoDao ..> com.geopractic.cobranza.modelo.Saldo
+com.geopractic.cobranza.mapeos.CobranzaMapeo ..> com.geopractic.cobranza.dao.SaldoDao
+com.geopractic.cobranza.mapeos.CobranzaMapeo ..> com.geopractic.cobranza.modelo.Cobranza
+com.geopractic.cobranza.mapeos.CuentaPorCobrarMapeo ..> com.geopractic.cobranza.dao.SaldoDao
+com.geopractic.cobranza.mapeos.CuentaPorCobrarMapeo ..> com.geopractic.cobranza.modelo.CuentaPorCobrar
+com.geopractic.cobranza.mapeos.FormaDePagoMapeo ..> com.geopractic.cobranza.modelo.FormaDePago
+com.geopractic.cobranza.mapeos.GestionVisitaMapeo ..> com.geopractic.cobranza.dao.FormaDePagoDao
+com.geopractic.cobranza.mapeos.GestionVisitaMapeo ..> com.geopractic.cobranza.dao.MotivoDao
+com.geopractic.cobranza.mapeos.GestionVisitaMapeo ..> com.geopractic.cobranza.dao.SaldoDao
+com.geopractic.cobranza.mapeos.GestionVisitaMapeo ..> com.geopractic.cobranza.modelo.GestionVisita
+com.geopractic.cobranza.mapeos.MotivoMapeo ..> com.geopractic.cobranza.modelo.Motivo
+com.geopractic.cobranza.mapeos.RuteoCobradorMapeo ..> com.geopractic.cobranza.dao.GestionVisitaDao
+com.geopractic.cobranza.mapeos.RuteoCobradorMapeo ..> com.geopractic.cobranza.modelo.RuteoCobrador
+com.geopractic.cobranza.mapeos.SaldoMapeo ..> com.geopractic.cobranza.modelo.Saldo
+@enduml

@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+	<h:head>
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Manejo de cobranzas
+            </ui:define>
+
+            <ui:define name="contenido">
+                <h:outputScript name="js/spanishLocales.js" />
+                <p:panel header="Carga de Cobranza" rendered="#{accesos.esValido('leer')}" >
+                        <f:facet name="actions">
+                            <p:commandButton id="btnBusq" icon="fa fa-fw fa-search" title="Muestra todas las cobranzas cargadas" 
+                            value="Busq. Cobranzas" update="lista"
+                            oncomplete="PF('busquedaCobranzas').show();" />
+                        </f:facet>
+
+                        <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+
+                        <h:form id="formAbm">
+                            <div class="ui-fluid">
+                                <p:panelGrid columns="8" layout="grid" style="margin-top:0px;margin-bottom:0px;" styleClass="ui-panelgrid-blank"
+                                columnClasses="ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2">
+
+                                    <p:outputLabel id="lblCodigo" for="txtCodigo" value="Código:" style="text-align:right;" />
+                                    <h:outputText id="txtCodigo" value="#{manejarCobranza.entidad.id}" />
+
+                                    <p:outputLabel id="lblSaldo" for="txtSaldo" value="Id. Saldo:" style="text-align:right;" />
+                                    <h:outputText id="txtSaldo" value="#{manejarCobranza.entidad.saldo.id}" />
+
+                                    <p:outputLabel id="lblCliente" for="txtCliente" value="Cliente:" style="text-align:right;" />
+                                    <p:selectOneMenu id="txtCliente" value="#{manejarCobranza.entidad.cliente}" converter="omnifaces.SelectItemsConverter"
+                                    filter="true" filterMatchMode="contains" dynamic="true" title="Seleccione el cliente asignado a la cuenta."
+                                    required="true" requiredMessage="Debe seleccionar el cliente asignado a la cuenta." disabled="true"
+                                    style="opacity:1.00 !important;filter:Alpha(Opacity=100);">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Sin cliente" />
+                                        <f:selectItems value="#{manejarCliente.lista}" var="cliente" itemValue="#{cliente}"
+                                        itemLabel="#{cliente.primerNombre} #{cliente.segundoNombre} #{cliente.primerApellido} #{cliente.segundoApellido}" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel id="lblFecha" for="txtFecha" value="Fecha:" style="text-align:right;" />
+                                    <p:calendar id="txtFecha" value="#{manejarCobranza.entidad.fecha}"
+                                    pattern="dd-MM-yyyy" mask="true" required="true" locale="es" navigator="true"
+                                    requiredMessage="Debe ingresar la fecha de la cobranza."/>
+
+                                    <p:outputLabel id="lblRecibo" for="txtRecibo" value="Nro. Recibo:" />
+                                    <p:inputMask id="txtRecibo" value="#{manejarCobranza.entidad.recibo}" mask="999-999-9999999"
+                                    required="true" requiredMessage="Debe ingresar un numero de recibo." />
+
+                                    <p:outputLabel id="lblFactura" for="txtFactura" value="Nro. Factura:" />
+                                    <p:inputMask id="txtFactura" value="#{manejarCobranza.entidad.factura}" mask="999-999-9999999"
+                                    required="true" requiredMessage="Debe ingresar un numero de factura." />
+
+                                    <p:outputLabel id="lblMonto" for="txtMonto" value="Monto a cobrar:" style="text-align:right;" />
+                                    <p:inputNumber id="txtMonto" value="#{manejarCobranza.entidad.monto}"
+                                    thousandSeparator="." decimalSeparator="," decimalPlaces="0" converter="javax.faces.Integer"
+                                    required="true" requiredMessage="Debe ingresar el monto a cobrar."/>
+
+                                    <p:outputLabel id="lblInteres" for="txtInteres" value="Monto interes:" style="text-align:right;" />
+                                    <p:inputNumber id="txtInteres" value="#{manejarCobranza.entidad.interes}"
+                                    thousandSeparator="." decimalSeparator="," decimalPlaces="0" converter="javax.faces.Integer" />
+
+                                    <p:outputLabel id="lblCobrador" for="txtCobrador" value="Cobrador:" style="text-align:right;" />
+                                    <p:selectOneMenu id="txtCobrador" value="#{manejarCobranza.entidad.cobrador}" converter="omnifaces.SelectItemsConverter"
+                                    filter="true" filterMatchMode="contains" dynamic="true" title="Seleccione el empleado que realizo el cobro"
+                                    required="true" requiredMessage="Debe seleccionar el empleado que realizo el cobro." >
+                                        <f:selectItems value="#{manejarEmpleado.lista}" var="empleado" itemValue="#{empleado}"
+                                        itemLabel="#{empleado.nombre} #{empleado.apellido}" itemDisabled="#{empleado.estado == 'Inactivo'}" />
+                                    </p:selectOneMenu>
+
+                                    <p:column />
+                                    <p:column />
+                                    <p:column />
+                                    <p:column />
+                                    <p:column />
+                                    <p:column />
+                                    <p:column />
+                                    <p:column />
+
+                                    <p:commandButton id="btnCrear"  value="Guardar" actionListener="#{manejarCobranza.guardar}"
+                                    icon="ui-icon-check" update="formAbm listaSaldos" styleClass="boton-verde" />
+                                    <p:commandButton id="btnCancelar" value="Cancelar" styleClass="boton-rojo"
+                                    icon="ui-icon-cancel" update="formAbm" />
+                                    <p:column />
+                                </p:panelGrid>
+                            </div>
+
+                            <p:message for="txtFecha" display="tooltip" />
+                            <p:message for="txtRecibo" display="tooltip" />
+                            <p:message for="txtFactura" display="tooltip" />
+                            <p:message for="txtMonto" display="tooltip" />
+                            <p:message for="txtInteres" display="tooltip" />
+                            <p:message for="txtCobrador" display="tooltip" />
+
+                            <p:contextMenu for="txtCobrador" >
+                              <p:menuitem value="Actualizar listado" action="#{manejarEmpleado.generarLista()}" icon="fa fa-fw fa-refresh"
+                              iconPos="left" update="txtCobrador" /> 
+                            </p:contextMenu>
+
+
+                            <p:blockUI block="formAbm" trigger="btnCrear,btnCancelar">
+                                <p>Procesando cambio... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+                        </h:form>
+                </p:panel >
+
+                <!-- Buscador de cobranzas -->
+                <p:dialog id="busquedaCobranzas" widgetVar="busquedaCobranzas" modal="true" responsive="true"
+                resizable="false" draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true" header="Listado de cobranzas">
+                   <p:dataTable id="lista" widgetVar="tablalista" var="cobranza" value="#{manejarCobranza.lista}" rows="10" paginator="true" reflow="true"
+                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                   currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} Cobranzas"
+                   rowsPerPageTemplate="10,50,100" emptyMessage="No hay resultados a mostrar."
+                   rowStyleClass="text-center" filteredValue="#{manejarCobranza.listaFiltro}">
+
+                        <p:column headerText="Id" sortBy="#{cobranza.id}" filterBy="#{cobranza.id}" filterMatchMode="equals">
+                            <h:outputText value="#{cobranza.id}" />
+                        </p:column>
+
+                        <p:column headerText="Saldo" sortBy="#{cobranza.saldo.id}" filterBy="#{cobranza.saldo.id}" filterMatchMode="equals">
+                            <h:outputText value="#{cobranza.saldo.id}" />
+                        </p:column>
+
+                        <p:column headerText="Fecha" sortBy="#{cobranza.fecha}" filterBy="#{cobranza.fecha}" filterMatchMode="equals">
+                            <h:outputText value="#{cobranza.fecha}" >
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Cuota" sortBy="#{cobranza.saldo.cuota}" filterBy="#{cobranza.saldo.cuota}" filterMatchMode="equals">
+                            <h:outputText value="#{cobranza.saldo.cuota}" />
+                        </p:column>
+                        
+                        <p:column headerText="De" sortBy="#{cobranza.saldo.totalCuota}" filterBy="#{cobranza.saldo.totalCuota}" filterMatchMode="equals">
+                            <h:outputText value="#{cobranza.saldo.totalCuota}" />
+                        </p:column>
+
+                        <p:column headerText="Cliente" sortBy="#{cobranza.cliente.nombreCompleto}" filterBy="#{cobranza.cliente.nombreCompleto}" filterMatchMode="contains">
+                            <h:outputText value="#{cobranza.cliente.nombreCompleto}" />
+                        </p:column>
+    
+                        <p:column headerText="Monto" sortBy="#{cobranza.monto}" filterBy="#{cobranza.monto}" filterMatchMode="equals">
+                            <h:outputText value="#{cobranza.monto}" />
+                        </p:column>
+
+                        <p:column style="width:16px">
+                            <p:rowToggler />
+                        </p:column>
+
+                        <p:column headerText="Acciones" style="width: 120px">
+                            <p:commandButton id="btnEliminar" icon="ui-icon-trash" title="Eliminar" rendered="#{accesos.esValido('borrar')}" 
+                            actionListener="#{manejarCobranza.eliminar(cobranza)}" update="formAbm listaSaldos lista" styleClass="boton-rojo">
+                                <p:confirm header="Confirmación" message="Está seguro de eliminar esta cobranza?" icon="ui-icon-alert" />
+                            </p:commandButton>
+
+                            <p:blockUI block="lista" trigger="btnEliminar">
+                                <p>Eliminando... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+                        </p:column>
+                        
+                        <p:rowExpansion>
+                            <p:panelGrid  columns="4" columnClasses="label,value">
+	                            <h:outputText value="Id:" />
+								<h:outputText value="#{cobranza.id}" />
+								
+								<h:outputText value="Saldo:" />
+								<h:outputText value="#{cobranza.saldo.id}" />
+								
+								<h:outputText value="Fecha Pago:" />
+								<h:outputText value="#{cobranza.fecha}" >
+								    <f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputText>
+								
+								<h:outputText value="Cuota:" />
+								<h:outputText value="#{cobranza.saldo.cuota}" />
+								
+								<h:outputText value="De:" />
+								<h:outputText value="#{cobranza.saldo.totalCuota}" />
+								
+								<h:outputText value="Cliente:" />
+								<h:outputText value="#{cobranza.cliente.nombreCompleto}" />
+								
+								<h:outputText value="Monto:" />
+								<h:outputText value="#{cobranza.monto}" />
+								
+                                <h:outputText value="Interes:" />
+                                <h:outputText value="#{cobranza.interes}" />
+                                
+                                <h:outputText value="Recibo:" />
+                                <h:outputText value="#{cobranza.recibo}" />
+
+                                <h:outputText value="Factura:" />
+                                <h:outputText value="#{cobranza.factura}" />
+
+                                <h:outputText value="Cobrador:" />
+                                <h:outputText value="#{cobranza.cobrador.nombre} #{cobranza.cobrador.apellido}" />
+                            </p:panelGrid>
+                        </p:rowExpansion>
+
+                    </p:dataTable>
+                </p:dialog>
+
+                <!-- Lista de saldos -->
+                <p:panel>
+		            <p:dataTable id="listaSaldos" widgetVar="listaSaldos" rows="10" paginator="true" reflow="true"
+		            var="saldos" value="#{manejarCobranza.listaSaldos}" filteredValue="#{manejarCobranza.listaSaldosFiltro}"
+		            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		            currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} Saldos."
+		            rowsPerPageTemplate="10,50,100" emptyMessage="El cliente no posee saldos pendientes." rowStyleClass="text-center" 
+		            selectionMode="single" rowKey="#{saldos.id}">
+		                 <f:facet name="header">
+		                   Saldos de clientes
+
+		                   <p:commandButton id="btnBuscarCliente" icon="fa fa-fw fa-search" title="Buscar clientes"  value="Buscar cliente"
+	                       actionListener="#{manejarCobranza.listarClientes}" update="listaClientes" oncomplete="PF('listaClientes').show();" />
+	                
+		                 </f:facet>
+		
+	                     <p:ajax event="rowSelect" listener="#{manejarCobranza.seleccionarSaldo}" update="formAbm" />
+		
+		                 <p:column headerText="Código" sortBy="#{saldos.id}" filterBy="#{saldos.id}" filterMatchMode="contains">
+		                   <h:outputText value="#{saldos.id}" />
+		                 </p:column>
+		
+		                 <p:column headerText="Saldo" sortBy="#{saldos.saldo}" filterBy="#{saldos.saldo}" filterMatchMode="contains">
+		                   <h:outputText value="#{saldos.saldo}" />
+		                 </p:column>
+		
+		                 <p:column headerText="Cuota" sortBy="#{saldos.cuota}" filterBy="#{saldos.cuota}" filterMatchMode="equals">
+		                   <h:outputText value="#{saldos.cuota}" />
+		                 </p:column>
+		
+		                 <p:column headerText="De" sortBy="#{saldos.totalCuota}" filterBy="#{saldos.totalCuota}" filterMatchMode="equals">
+		                   <h:outputText value="#{saldos.totalCuota}" />
+		                 </p:column>
+		
+		                 <p:column headerText="Vencimiento" sortBy="#{saldos.vencimiento}" filterBy="#{saldos.vencimiento}" filterMatchMode="equals">
+		                   <h:outputText value="#{saldos.vencimiento}" >
+		                       <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+		                   </h:outputText>
+		                 </p:column>
+		
+		            </p:dataTable>
+		        </p:panel>
+	            
+	            <!-- Ventana de lista de clientes -->
+                <p:dialog id="listaClientes" widgetVar="listaClientes" modal="true" responsive="true"
+                resizable="false" draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true" header="Listado de clientes">
+                    <p:dataTable id="listaCompletoClientes" widgetVar="listaCompletoClientes" rows="10" paginator="true" reflow="true"
+	                var="cliente" value="#{manejarCobranza.listaClientes}" filteredValue="#{manejarCobranza.listaClientesFiltro}"
+	                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+	                currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} Clientes."
+	                rowsPerPageTemplate="10,50,100" emptyMessage="No hay resultados a mostrar." rowStyleClass="text-center" 
+	                selectionMode="single" selection="#{manejarCobranza.cliente}" rowKey="#{cliente.id}">
+
+                        <p:ajax event="rowSelect" listener="#{manejarCobranza.seleccionarCliente}" update="listaSaldos"
+                        oncomplete="PF('listaClientes').hide();" />
+
+                        <p:column headerText="Id" sortBy="#{cliente.id}" filterBy="#{cliente.id}" filterMatchMode="equals">
+                            <h:outputText value="#{cliente.id}" />
+                        </p:column>
+
+                        <p:column headerText="Nombre" sortBy="#{cliente.primerNombre} #{cliente.segundoApellido}" filterBy="#{cliente.primerNombre} #{cliente.segundoApellido}" filterMatchMode="contains">
+                            <h:outputText value="#{cliente.primerNombre} #{cliente.segundoApellido}" />
+                        </p:column>
+    
+                        <p:column headerText="Apellido" sortBy="#{cliente.primerApellido} #{cliente.segundoApellido}" filterBy="#{cliente.primerApellido} #{cliente.segundoApellido}" filterMatchMode="contains">
+                            <h:outputText value="#{cliente.primerApellido} #{cliente.segundoApellido}" />
+                        </p:column>
+    
+                        <p:column headerText="Nro. Documento" sortBy="#{cliente.nroDocumento}" filterBy="#{cliente.nroDocumento}" filterMatchMode="equals">
+                            <h:outputText value="#{cliente.nroDocumento}" />
+                        </p:column>
+                    </p:dataTable>
+                </p:dialog>
+
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

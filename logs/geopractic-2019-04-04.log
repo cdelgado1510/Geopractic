@@ -1,0 +1,559 @@
+2019-12-11 19:45:55.056   DEBUG [Clase:logging Metodo:logProvider linea:158] - Logging Provider: org.jboss.logging.Log4j2LoggerProvider
+2019-12-11 19:45:55.085   INFO  [Clase:servletWeldServlet Metodo:onStartup linea:58] - WELD-ENV-001008: Initialize Weld using ServletContainerInitializer
+2019-12-11 19:45:55.119   INFO  [Clase:Version Metodo:<clinit> linea:148] - WELD-000900: 3.0.5 (Final)
+2019-12-11 19:45:55.256   DEBUG [Clase:Bootstrap Metodo:classForName linea:129] - WELD-ENV-000030: Cannot load class using the ResourceLoader: org.jboss.jandex.Index
+2019-12-11 19:45:55.261   DEBUG [Clase:Bootstrap Metodo:classForName linea:129] - WELD-ENV-000030: Cannot load class using the ResourceLoader: org.jboss.jandex.Index
+2019-12-11 19:45:55.312   DEBUG [Clase:DefaultBeanArchiveScanner Metodo:getBeanArchiveReference linea:119] - Resolved bean archive reference: /M:/My Developments/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Geopractic/WEB-INF/lib/omnifaces-2.7.jar for URL: jar:file:/M:/My%20Developments/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Geopractic/WEB-INF/lib/omnifaces-2.7.jar!/META-INF/beans.xml
+2019-12-11 19:45:55.319   DEBUG [Clase:Bootstrap Metodo:performDiscovery linea:98] - WELD-ENV-000032: Processing bean archive reference: /M:/My Developments/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Geopractic/WEB-INF/lib/omnifaces-2.7.jar
+2019-12-11 19:45:55.321   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handle linea:69] - Handle path: /M:/My Developments/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Geopractic/WEB-INF/lib/omnifaces-2.7.jar
+2019-12-11 19:45:55.321   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleFile linea:87] - Handle archive file: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\lib\omnifaces-2.7.jar
+2019-12-11 19:45:55.325   DEBUG [Clase:Bootstrap Metodo:performDiscovery linea:104] - WELD-ENV-000039: Bean archive reference /M:/My Developments/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Geopractic/WEB-INF/lib/omnifaces-2.7.jar handled by org.jboss.weld.environment.deployment.discovery.FileSystemBeanArchiveHandler@49c703d4
+2019-12-11 19:45:55.326   DEBUG [Clase:Bootstrap Metodo:performDiscovery linea:98] - WELD-ENV-000032: Processing bean archive reference: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes
+2019-12-11 19:45:55.326   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handle linea:69] - Handle path: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes
+2019-12-11 19:45:55.328   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes
+2019-12-11 19:45:55.329   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com
+2019-12-11 19:45:55.330   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic
+2019-12-11 19:45:55.331   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\administracion
+2019-12-11 19:45:55.333   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\administracion\bean
+2019-12-11 19:45:55.334   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\administracion\dao
+2019-12-11 19:45:55.335   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\administracion\mapeos
+2019-12-11 19:45:55.336   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\administracion\modelo
+2019-12-11 19:45:55.337   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\administracion\validacion
+2019-12-11 19:45:55.338   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\bean
+2019-12-11 19:45:55.339   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\cobranza
+2019-12-11 19:45:55.340   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\cobranza\bean
+2019-12-11 19:45:55.341   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\cobranza\dao
+2019-12-11 19:45:55.342   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\cobranza\mapeos
+2019-12-11 19:45:55.343   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\cobranza\modelo
+2019-12-11 19:45:55.344   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\controladores
+2019-12-11 19:45:55.345   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\conversores
+2019-12-11 19:45:55.347   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\db
+2019-12-11 19:45:55.348   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\georrefencia
+2019-12-11 19:45:55.349   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\georrefencia\bean
+2019-12-11 19:45:55.350   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\georrefencia\dao
+2019-12-11 19:45:55.351   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\georrefencia\mapeos
+2019-12-11 19:45:55.352   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\georrefencia\modelo
+2019-12-11 19:45:55.354   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\gps
+2019-12-11 19:45:55.355   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\gps\bean
+2019-12-11 19:45:55.356   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\gps\dao
+2019-12-11 19:45:55.357   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\gps\mapeos
+2019-12-11 19:45:55.357   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\gps\modelo
+2019-12-11 19:45:55.358   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\propiedades
+2019-12-11 19:45:55.359   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\sistema
+2019-12-11 19:45:55.360   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\sistema\bean
+2019-12-11 19:45:55.362   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\sistema\dao
+2019-12-11 19:45:55.363   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\sistema\excepciones
+2019-12-11 19:45:55.363   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\sistema\mapeos
+2019-12-11 19:45:55.365   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\sistema\modelo
+2019-12-11 19:45:55.366   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\com\geopractic\util
+2019-12-11 19:45:55.367   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\reportes
+2019-12-11 19:45:55.368   DEBUG [Clase:FileSystemBeanArchiveHandler Metodo:handleDirectory linea:98] - Handle directory: M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes\reportes\img
+2019-12-11 19:45:55.369   DEBUG [Clase:Bootstrap Metodo:performDiscovery linea:104] - WELD-ENV-000039: Bean archive reference M:\My Developments\Java\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Geopractic\WEB-INF\classes handled by org.jboss.weld.environment.deployment.discovery.FileSystemBeanArchiveHandler@49c703d4
+2019-12-11 19:45:55.374   DEBUG [Clase:Bootstrap Metodo:createDeployment linea:307] - WELD-ENV-000024: Archive isolation enabled - creating multiple isolated bean archives if needed
+2019-12-11 19:45:55.387   DEBUG [Clase:BootstrapTracker Metodo:start linea:82] - START bootstrap 
+2019-12-11 19:45:55.387   DEBUG [Clase:BootstrapTracker Metodo:start linea:82] - START bootstrap > startContainer 
+2019-12-11 19:45:55.403   DEBUG [Clase:Configuration Metodo:<init> linea:129] - WELD-001902: Following configuration was detected and applied: {org.jboss.weld.serialization.beanIdentifierIndexOptimization=false}
+2019-12-11 19:45:55.408   DEBUG [Clase:BootstrapTracker Metodo:start linea:82] - START bootstrap > startContainer > initServices 
+2019-12-11 19:45:55.466   DEBUG [Clase:Bootstrap Metodo:<init> linea:63] - Using Weld modules: [weld-web]
+2019-12-11 19:45:55.501   DEBUG [Clase:Bootstrap Metodo:<init> linea:40] - WELD-000124: Using 3 threads for bootstrap
+2019-12-11 19:45:55.518   DEBUG [Clase:Bootstrap Metodo:create linea:131] - Using instantiator: org.jboss.weld.bean.proxy.DefaultProxyInstantiator
+2019-12-11 19:45:55.581   DEBUG [Clase:BootstrapTracker Metodo:logEnd linea:108] -   END bootstrap > startContainer > initServices (172 ms)
+2019-12-11 19:45:55.581   INFO  [Clase:Bootstrap Metodo:startContainer linea:225] - WELD-000101: Transactional services not available. Injection of @Inject UserTransaction not available. Transactional observers will be invoked synchronously.
+2019-12-11 19:45:55.616   DEBUG [Clase:BootstrapTracker Metodo:start linea:82] - START bootstrap > startContainer > builtinContexts 
+2019-12-11 19:45:55.731   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%deployment%ApplicationContext
+2019-12-11 19:45:55.740   DEBUG [Clase:Reflection Metodo:check linea:72] - WELD-000601: interface javax.inject.Singleton is missing @Target. Weld will use this annotation, however this may make the application unportable.
+2019-12-11 19:45:55.741   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%deployment%SingletonContext
+2019-12-11 19:45:55.746   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%deployment%BoundSessionContext
+2019-12-11 19:45:55.748   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%deployment%BoundConversationContext
+2019-12-11 19:45:55.750   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%deployment%BoundRequestContext
+2019-12-11 19:45:55.750   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%deployment%RequestContext
+2019-12-11 19:45:55.751   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%deployment%DependentContext
+2019-12-11 19:45:55.752   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%deployment%HttpSessionContext
+2019-12-11 19:45:55.754   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%deployment%HttpSessionDestructionContext
+2019-12-11 19:45:55.755   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%deployment%HttpConversationContext
+2019-12-11 19:45:55.756   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%deployment%HttpRequestContext
+2019-12-11 19:45:55.756   DEBUG [Clase:BootstrapTracker Metodo:logEnd linea:108] -   END bootstrap > startContainer > builtinContexts (140 ms)
+2019-12-11 19:45:55.760   DEBUG [Clase:BootstrapTracker Metodo:start linea:82] - START bootstrap > startContainer > readDeploymentStructure 
+2019-12-11 19:45:55.806   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Built-in Bean [javax.enterprise.inject.spi.BeanManager] with qualifiers [@Default]
+2019-12-11 19:45:55.808   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Built-in Bean [org.jboss.weld.manager.BeanManagerImpl] with qualifiers [@Default]
+2019-12-11 19:45:55.810   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Built-in Bean [javax.enterprise.inject.spi.BeanManager] with qualifiers [@Default]
+2019-12-11 19:45:55.811   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Built-in Bean [org.jboss.weld.manager.BeanManagerImpl] with qualifiers [@Default]
+2019-12-11 19:45:55.811   DEBUG [Clase:BootstrapTracker Metodo:logEnd linea:108] -   END bootstrap > startContainer > readDeploymentStructure (51 ms)
+2019-12-11 19:45:55.813   DEBUG [Clase:BootstrapTracker Metodo:logEnd linea:108] -   END bootstrap > startContainer (425 ms)
+2019-12-11 19:45:55.813   DEBUG [Clase:BootstrapTracker Metodo:start linea:82] - START bootstrap > startInitialization 
+2019-12-11 19:45:55.879   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Extension [class org.omnifaces.cdi.param.ParamExtension] with qualifiers [@Default]; jar:file:/M:/My%20Developments/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Geopractic/WEB-INF/lib/omnifaces-2.7.jar!/META-INF/services/javax.enterprise.inject.spi.Extension@3[org.omnifaces.cdi.param.ParamExtension@3d896b1f]
+2019-12-11 19:45:55.881   DEBUG [Clase:Bootstrap Metodo:deployBean linea:109] - WELD-000168: Extension bean deployed: Extension [class org.omnifaces.cdi.param.ParamExtension] with qualifiers [@Default]; jar:file:/M:/My%20Developments/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Geopractic/WEB-INF/lib/omnifaces-2.7.jar!/META-INF/services/javax.enterprise.inject.spi.Extension@3[org.omnifaces.cdi.param.ParamExtension@3d896b1f]
+2019-12-11 19:45:55.888   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Extension [class org.omnifaces.cdi.eager.EagerExtension] with qualifiers [@Default]; jar:file:/M:/My%20Developments/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Geopractic/WEB-INF/lib/omnifaces-2.7.jar!/META-INF/services/javax.enterprise.inject.spi.Extension@2[org.omnifaces.cdi.eager.EagerExtension@7c83aa4]
+2019-12-11 19:45:55.889   DEBUG [Clase:Bootstrap Metodo:deployBean linea:109] - WELD-000168: Extension bean deployed: Extension [class org.omnifaces.cdi.eager.EagerExtension] with qualifiers [@Default]; jar:file:/M:/My%20Developments/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Geopractic/WEB-INF/lib/omnifaces-2.7.jar!/META-INF/services/javax.enterprise.inject.spi.Extension@2[org.omnifaces.cdi.eager.EagerExtension@7c83aa4]
+2019-12-11 19:45:55.892   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Built-in Bean [javax.enterprise.inject.spi.BeanManager] with qualifiers [@Default]
+2019-12-11 19:45:55.892   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Built-in Bean [org.jboss.weld.manager.BeanManagerImpl] with qualifiers [@Default]
+2019-12-11 19:45:55.894   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Extension [class org.jboss.weld.bootstrap.WeldExtension] with qualifiers [@Default]; n/a
+2019-12-11 19:45:55.894   DEBUG [Clase:Bootstrap Metodo:deployBean linea:109] - WELD-000168: Extension bean deployed: Extension [class org.jboss.weld.bootstrap.WeldExtension] with qualifiers [@Default]; n/a
+2019-12-11 19:45:55.897   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Extension [class com.sun.faces.application.view.ViewScopeExtension] with qualifiers [@Default]; jar:file:/M:/My%20Developments/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Geopractic/WEB-INF/lib/jsf-impl-2.2.18.jar!/META-INF/services/javax.enterprise.inject.spi.Extension@1[com.sun.faces.application.view.ViewScopeExtension@652136ff]
+2019-12-11 19:45:55.898   DEBUG [Clase:Bootstrap Metodo:deployBean linea:109] - WELD-000168: Extension bean deployed: Extension [class com.sun.faces.application.view.ViewScopeExtension] with qualifiers [@Default]; jar:file:/M:/My%20Developments/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Geopractic/WEB-INF/lib/jsf-impl-2.2.18.jar!/META-INF/services/javax.enterprise.inject.spi.Extension@1[com.sun.faces.application.view.ViewScopeExtension@652136ff]
+2019-12-11 19:45:55.906   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Extension [class com.sun.faces.flow.FlowCDIExtension] with qualifiers [@Default]; jar:file:/M:/My%20Developments/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Geopractic/WEB-INF/lib/jsf-impl-2.2.18.jar!/META-INF/services/javax.enterprise.inject.spi.Extension@2[com.sun.faces.flow.FlowCDIExtension@2718c207]
+2019-12-11 19:45:55.907   DEBUG [Clase:Bootstrap Metodo:deployBean linea:109] - WELD-000168: Extension bean deployed: Extension [class com.sun.faces.flow.FlowCDIExtension] with qualifiers [@Default]; jar:file:/M:/My%20Developments/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Geopractic/WEB-INF/lib/jsf-impl-2.2.18.jar!/META-INF/services/javax.enterprise.inject.spi.Extension@2[com.sun.faces.flow.FlowCDIExtension@2718c207]
+2019-12-11 19:45:55.909   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Extension [class org.omnifaces.cdi.viewscope.ViewScopeExtension] with qualifiers [@Default]; jar:file:/M:/My%20Developments/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Geopractic/WEB-INF/lib/omnifaces-2.7.jar!/META-INF/services/javax.enterprise.inject.spi.Extension@1[org.omnifaces.cdi.viewscope.ViewScopeExtension@6b9cbf89]
+2019-12-11 19:45:55.912   DEBUG [Clase:Bootstrap Metodo:deployBean linea:109] - WELD-000168: Extension bean deployed: Extension [class org.omnifaces.cdi.viewscope.ViewScopeExtension] with qualifiers [@Default]; jar:file:/M:/My%20Developments/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Geopractic/WEB-INF/lib/omnifaces-2.7.jar!/META-INF/services/javax.enterprise.inject.spi.Extension@1[org.omnifaces.cdi.viewscope.ViewScopeExtension@6b9cbf89]
+2019-12-11 19:45:55.916   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Extension [class com.sun.faces.flow.FlowDiscoveryCDIExtension] with qualifiers [@Default]; jar:file:/M:/My%20Developments/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Geopractic/WEB-INF/lib/jsf-impl-2.2.18.jar!/META-INF/services/javax.enterprise.inject.spi.Extension@3[com.sun.faces.flow.FlowDiscoveryCDIExtension@734809d3]
+2019-12-11 19:45:55.917   DEBUG [Clase:Bootstrap Metodo:deployBean linea:109] - WELD-000168: Extension bean deployed: Extension [class com.sun.faces.flow.FlowDiscoveryCDIExtension] with qualifiers [@Default]; jar:file:/M:/My%20Developments/Java/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Geopractic/WEB-INF/lib/jsf-impl-2.2.18.jar!/META-INF/services/javax.enterprise.inject.spi.Extension@3[com.sun.faces.flow.FlowDiscoveryCDIExtension@734809d3]
+2019-12-11 19:45:55.917   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Built-in Bean [javax.enterprise.inject.spi.BeanManager] with qualifiers [@Default]
+2019-12-11 19:45:55.918   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Built-in Bean [org.jboss.weld.manager.BeanManagerImpl] with qualifiers [@Default]
+2019-12-11 19:45:55.918   DEBUG [Clase:BootstrapTracker Metodo:start linea:82] - START bootstrap > startInitialization > BeforeBeanDiscovery 
+2019-12-11 19:45:55.939   DEBUG [Clase:Bootstrap Metodo:addScope linea:99] - WELD-000159: BeforeBeanDiscovery.addScope() called by com.sun.faces.application.view.ViewScopeExtension@652136ff for interface javax.faces.view.ViewScoped
+2019-12-11 19:45:55.980   DEBUG [Clase:Bootstrap Metodo:addAnnotatedType linea:126] - WELD-000162: BeforeBeanDiscovery.addAnnotatedType() called by org.jboss.weld.bootstrap.WeldExtension@177fad52 for [BackedAnnotatedType] public @Vetoed @Interceptor @ActivateRequestContext @Priority class org.jboss.weld.contexts.activator.ActivateRequestContextInterceptor
+2019-12-11 19:45:55.985   DEBUG [Clase:Bootstrap Metodo:addAnnotatedType linea:126] - WELD-000162: BeforeBeanDiscovery.addAnnotatedType() called by org.jboss.weld.bootstrap.WeldExtension@177fad52 for [BackedAnnotatedType] public @Vetoed @Interceptor @ActivateRequestContext @Priority class org.jboss.weld.contexts.activator.CdiRequestContextActivatorInterceptor
+2019-12-11 19:45:55.987   DEBUG [Clase:Bootstrap Metodo:addScope linea:99] - WELD-000159: BeforeBeanDiscovery.addScope() called by com.sun.faces.flow.FlowCDIExtension@2718c207 for interface javax.faces.flow.FlowScoped
+2019-12-11 19:45:55.991   WARN  [Clase:Bootstrap Metodo:addAnnotatedType linea:118] - WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType<?>) used for class com.sun.faces.flow.FlowDiscoveryCDIHelper is deprecated from CDI 1.1!
+2019-12-11 19:45:56.012   DEBUG [Clase:Bootstrap Metodo:addAnnotatedType linea:126] - WELD-000162: BeforeBeanDiscovery.addAnnotatedType() called by com.sun.faces.flow.FlowDiscoveryCDIExtension@734809d3 for [BackedAnnotatedType] public @Named @Dependent class com.sun.faces.flow.FlowDiscoveryCDIHelper
+2019-12-11 19:45:56.013   DEBUG [Clase:BootstrapTracker Metodo:logEnd linea:108] -   END bootstrap > startInitialization > BeforeBeanDiscovery (94 ms)
+2019-12-11 19:45:56.574   DEBUG [Clase:BootstrapTracker Metodo:start linea:82] - START bootstrap > startInitialization > AfterTypeDiscovery 
+2019-12-11 19:45:56.576   DEBUG [Clase:BootstrapTracker Metodo:logEnd linea:108] -   END bootstrap > startInitialization > AfterTypeDiscovery (1 ms)
+2019-12-11 19:45:56.585   DEBUG [Clase:Bootstrap Metodo:createEnablement linea:212] - WELD-000103: Enabled alternatives for Weld BeanManager for org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses [bean count=6]: (empty collection)
+2019-12-11 19:45:56.585   DEBUG [Clase:Bootstrap Metodo:createEnablement linea:213] - WELD-000104: Enabled decorator types for Weld BeanManager for org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses [bean count=6]: (empty collection)
+2019-12-11 19:45:56.585   DEBUG [Clase:Bootstrap Metodo:createEnablement linea:214] - WELD-000105: Enabled interceptor types for Weld BeanManager for org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses [bean count=6]: 
+  - class org.jboss.weld.contexts.activator.ActivateRequestContextInterceptor,
+  - class org.jboss.weld.contexts.activator.CdiRequestContextActivatorInterceptor
+2019-12-11 19:45:56.605   DEBUG [Clase:Bootstrap Metodo:createEnablement linea:212] - WELD-000103: Enabled alternatives for Weld BeanManager for /geopractic_/WEB-INF/lib/omnifaces-2.7.jar [bean count=5]: (empty collection)
+2019-12-11 19:45:56.606   DEBUG [Clase:Bootstrap Metodo:createEnablement linea:213] - WELD-000104: Enabled decorator types for Weld BeanManager for /geopractic_/WEB-INF/lib/omnifaces-2.7.jar [bean count=5]: (empty collection)
+2019-12-11 19:45:56.606   DEBUG [Clase:Bootstrap Metodo:createEnablement linea:214] - WELD-000105: Enabled interceptor types for Weld BeanManager for /geopractic_/WEB-INF/lib/omnifaces-2.7.jar [bean count=5]: 
+  - class org.jboss.weld.contexts.activator.ActivateRequestContextInterceptor,
+  - class org.jboss.weld.contexts.activator.CdiRequestContextActivatorInterceptor
+2019-12-11 19:45:56.607   DEBUG [Clase:Bootstrap Metodo:createEnablement linea:212] - WELD-000103: Enabled alternatives for Weld BeanManager for /geopractic_/WEB-INF/classes [bean count=2]: (empty collection)
+2019-12-11 19:45:56.608   DEBUG [Clase:Bootstrap Metodo:createEnablement linea:213] - WELD-000104: Enabled decorator types for Weld BeanManager for /geopractic_/WEB-INF/classes [bean count=2]: (empty collection)
+2019-12-11 19:45:56.608   DEBUG [Clase:Bootstrap Metodo:createEnablement linea:214] - WELD-000105: Enabled interceptor types for Weld BeanManager for /geopractic_/WEB-INF/classes [bean count=2]: 
+  - class org.jboss.weld.contexts.activator.ActivateRequestContextInterceptor,
+  - class org.jboss.weld.contexts.activator.CdiRequestContextActivatorInterceptor
+2019-12-11 19:45:56.608   DEBUG [Clase:BootstrapTracker Metodo:logEnd linea:108] -   END bootstrap > startInitialization (795 ms)
+2019-12-11 19:45:56.630   INFO  [Clase:servletTomcat Metodo:initialize linea:45] - WELD-ENV-001100: Tomcat 7+ detected, CDI injection will be available in Servlets, Filters and Listeners.
+2019-12-11 19:45:56.643   DEBUG [Clase:BootstrapTracker Metodo:start linea:82] - START bootstrap > deployBeans 
+2019-12-11 19:45:56.984   DEBUG [Clase:Reflection Metodo:check linea:82] - WELD-000620: interface org.omnifaces.cdi.Push is not declared @Target(METHOD, FIELD, PARAMETER, TYPE). Weld will use this annotation, however this may make the application unportable.
+2019-12-11 19:45:56.988   DEBUG [Clase:Reflection Metodo:check linea:82] - WELD-000620: interface org.omnifaces.cdi.Param is not declared @Target(METHOD, FIELD, PARAMETER, TYPE). Weld will use this annotation, however this may make the application unportable.
+2019-12-11 19:45:56.990   DEBUG [Clase:Reflection Metodo:check linea:82] - WELD-000620: interface org.omnifaces.cdi.ContextParam is not declared @Target(METHOD, FIELD, PARAMETER, TYPE). Weld will use this annotation, however this may make the application unportable.
+2019-12-11 19:45:56.991   DEBUG [Clase:Reflection Metodo:check linea:82] - WELD-000620: interface org.omnifaces.cdi.Cookie is not declared @Target(METHOD, FIELD, PARAMETER, TYPE). Weld will use this annotation, however this may make the application unportable.
+2019-12-11 19:45:57.004   DEBUG [Clase:Bootstrap Metodo:deploySpecialized linea:113] - WELD-000107: Interceptor: Interceptor [class org.jboss.weld.contexts.activator.ActivateRequestContextInterceptor intercepts @ActivateRequestContext]
+2019-12-11 19:45:57.005   DEBUG [Clase:Bootstrap Metodo:deploySpecialized linea:113] - WELD-000107: Interceptor: Interceptor [class org.jboss.weld.contexts.activator.CdiRequestContextActivatorInterceptor intercepts @ActivateRequestContext]
+2019-12-11 19:45:57.023   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses%DependentContext
+2019-12-11 19:45:57.024   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.Bean] with qualifiers [@Decorated]
+2019-12-11 19:45:57.024   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses%BoundConversationContext
+2019-12-11 19:45:57.024   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses%HttpSessionDestructionContext
+2019-12-11 19:45:57.024   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses%HttpServletRequest
+2019-12-11 19:45:57.025   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.Bean] with qualifiers [@Intercepted]
+2019-12-11 19:45:57.025   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses%HttpConversationContext
+2019-12-11 19:45:57.026   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses%HttpSession
+2019-12-11 19:45:57.028   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.Bean] with qualifiers [@Default]
+2019-12-11 19:45:57.028   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses%ServletContext
+2019-12-11 19:45:57.028   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses%BoundSessionContext
+2019-12-11 19:45:57.029   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses%ApplicationContext
+2019-12-11 19:45:57.029   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.Decorator] with qualifiers [@Default]
+2019-12-11 19:45:57.029   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses%RequestContext
+2019-12-11 19:45:57.029   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.event.Event] with qualifiers [@Default]
+2019-12-11 19:45:57.029   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.InjectionPoint] with qualifiers [@Default]
+2019-12-11 19:45:57.030   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.InterceptionFactory] with qualifiers [@Default]
+2019-12-11 19:45:57.030   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses%Conversation
+2019-12-11 19:45:57.030   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses%RequestContextController
+2019-12-11 19:45:57.031   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.Interceptor] with qualifiers [@Default]
+2019-12-11 19:45:57.031   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.sun.faces.flow.FlowDiscoveryCDIHelper] with qualifiers [@Default @Any @Named]
+2019-12-11 19:45:57.031   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.Instance] with qualifiers [@Default]
+2019-12-11 19:45:57.032   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses%HttpRequestContext
+2019-12-11 19:45:57.032   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses%HttpSessionContext
+2019-12-11 19:45:57.032   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.EventMetadata] with qualifiers [@Default]
+2019-12-11 19:45:57.032   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses%BoundRequestContext
+2019-12-11 19:45:57.033   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Producer Method [FlowBuilder] with qualifiers [@FlowBuilderParameter @Any] declared as [[UnbackedAnnotatedMethod] @Produces @FlowBuilderParameter com.sun.faces.flow.FlowDiscoveryCDIHelper.createFlowBuilder()]
+2019-12-11 19:45:57.034   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%org.jboss.weld.environment.deployment.WeldDeployment.additionalClasses%SingletonContext
+2019-12-11 19:45:57.049   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Producer Method [ParamValue<V>] with qualifiers [@Any @Param] declared as [[BackedAnnotatedMethod] @Produces @Param public org.omnifaces.cdi.param.ParamProducer.produce(InjectionPoint)]
+2019-12-11 19:45:57.051   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.param.ParamProducer] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.051   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/lib/omnifaces-2.7.jar%ServletContext
+2019-12-11 19:45:57.051   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/lib/omnifaces-2.7.jar%SingletonContext
+2019-12-11 19:45:57.052   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.viewscope.ViewScopeStorageInSession] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.052   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.push.Socket] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.053   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.viewscope.ViewScopeStorageInViewState] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.053   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/lib/omnifaces-2.7.jar%BoundSessionContext
+2019-12-11 19:45:57.053   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.Bean] with qualifiers [@Decorated]
+2019-12-11 19:45:57.053   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.viewscope.ViewScopeStorageInSession$BeanStorageEvictionListener] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.054   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.eager.EagerBeansWebListener] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.054   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.Decorator] with qualifiers [@Default]
+2019-12-11 19:45:57.054   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/lib/omnifaces-2.7.jar%HttpServletRequest
+2019-12-11 19:45:57.054   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.Instance] with qualifiers [@Default]
+2019-12-11 19:45:57.054   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/lib/omnifaces-2.7.jar%HttpRequestContext
+2019-12-11 19:45:57.055   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.ApplicationInitializer] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.055   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.Bean] with qualifiers [@Default]
+2019-12-11 19:45:57.055   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Producer Method [String] with qualifiers [@Cookie @Any] declared as [[BackedAnnotatedMethod] @Produces @Cookie public org.omnifaces.cdi.cookie.RequestCookieProducer.produce(InjectionPoint)]
+2019-12-11 19:45:57.055   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.eager.EagerBeansPhaseListener] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.056   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.push.SocketChannelManager$ViewScope] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.056   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.eager.EagerBeansRepository$EagerBeans] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.056   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.push.SocketEndpoint] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.056   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.InjectionPoint] with qualifiers [@Default]
+2019-12-11 19:45:57.057   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.viewscope.ViewScopeManager] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.057   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/lib/omnifaces-2.7.jar%DependentContext
+2019-12-11 19:45:57.057   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.viewscope.ViewScopeContext] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.057   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.viewscope.ViewScopeEventListener] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.057   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/lib/omnifaces-2.7.jar%Conversation
+2019-12-11 19:45:57.058   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/lib/omnifaces-2.7.jar%HttpSessionDestructionContext
+2019-12-11 19:45:57.058   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.Bean] with qualifiers [@Intercepted]
+2019-12-11 19:45:57.058   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Producer Method [PushContext] with qualifiers [@Any @Push] declared as [[BackedAnnotatedMethod] @Produces @Push public org.omnifaces.cdi.push.SocketPushContextProducer.produce(InjectionPoint)]
+2019-12-11 19:45:57.058   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.push.SocketChannelManager] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.058   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/lib/omnifaces-2.7.jar%BoundConversationContext
+2019-12-11 19:45:57.059   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.contextparam.ContextParamProducer] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.059   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.push.SocketFacesListener] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.059   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.validator.ValidatorManager] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.059   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.converter.ConverterManager] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.060   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.event.Event] with qualifiers [@Default]
+2019-12-11 19:45:57.060   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.cookie.RequestCookieProducer] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.060   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.push.SocketUserManager] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.060   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/lib/omnifaces-2.7.jar%RequestContext
+2019-12-11 19:45:57.061   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.Interceptor] with qualifiers [@Default]
+2019-12-11 19:45:57.061   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.param.DynamicParamValueProducer$DefaultParamAnnotationLiteral] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.061   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.InterceptionFactory] with qualifiers [@Default]
+2019-12-11 19:45:57.061   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.push.SocketSessionManager] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.062   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.eager.EagerBeansRepository] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.062   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.EventMetadata] with qualifiers [@Default]
+2019-12-11 19:45:57.062   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/lib/omnifaces-2.7.jar%ApplicationContext
+2019-12-11 19:45:57.062   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/lib/omnifaces-2.7.jar%HttpSession
+2019-12-11 19:45:57.062   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.ApplicationListener] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.063   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.push.SocketPushContextProducer] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.063   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.eager.EagerBeansFilter] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.063   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/lib/omnifaces-2.7.jar%HttpSessionContext
+2019-12-11 19:45:57.063   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class org.omnifaces.cdi.beans.InjectionPointGenerator] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.063   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/lib/omnifaces-2.7.jar%RequestContextController
+2019-12-11 19:45:57.064   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Producer Method [String] with qualifiers [@ContextParam @Any] declared as [[BackedAnnotatedMethod] @Produces @ContextParam public org.omnifaces.cdi.contextparam.ContextParamProducer.produce(InjectionPoint)]
+2019-12-11 19:45:57.067   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/lib/omnifaces-2.7.jar%BoundRequestContext
+2019-12-11 19:45:57.067   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/lib/omnifaces-2.7.jar%HttpConversationContext
+2019-12-11 19:45:57.096   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.modelo.FormaDePago] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.096   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.administracion.validacion.NroDocumentoValidacion] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.097   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.dao.GestionVisitaDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.097   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.ControladorCobranza] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.097   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/classes%HttpSessionContext
+2019-12-11 19:45:57.097   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.modelo.Motivo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.097   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.ControladorTurnos] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.098   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.util.FechaUtilidad] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.098   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.gps.modelo.EventData] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.099   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.Bean] with qualifiers [@Intercepted]
+2019-12-11 19:45:57.099   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.gps.ControladorEstadosRastreador] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.099   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.modelo.Zona] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.099   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.modelo.TipoTelefono] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.099   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.gps.bean.ManejoPanel] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.100   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.util.Columna] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.100   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.modelo.Logs] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.100   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.bean.ReporteRendicionCobranza] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.100   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.gps.mapeos.EstadosRastreadorGpsMapeo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.101   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.modelo.ContenidoMultimedia] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.101   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.bean.AdministrarPanelVisualizacion] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.101   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.util.Encriptador] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.101   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.db.AdministradorConexion] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.101   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.bean.AdministradorCambioSenha] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.102   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.mapeos.TipoDocumentoMapeo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.102   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.dao.TurnosDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.103   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.mapeos.TurnosMapeo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.103   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.dao.MotivoDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.103   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.mapeos.MotivoMapeo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.103   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.administracion.ControladorCargo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.103   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.gps.dao.EstadosRastreadorGpsDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.104   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.administracion.mapeos.CargoMapeo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.105   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.ControladorPanelVisualizacion] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.105   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/classes%HttpRequestContext
+2019-12-11 19:45:57.105   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.dao.CobranzaDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.105   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.ControladorRuteoCobrador] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.105   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/classes%SingletonContext
+2019-12-11 19:45:57.106   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.administracion.bean.AdministradorCargo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.107   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.ControladorFormaDePago] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.108   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/classes%HttpServletRequest
+2019-12-11 19:45:57.108   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.dao.MenuDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.108   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.util.PdfServlet] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.109   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.db.FabricaDataSource] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.110   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.modelo.Georreferencia] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.110   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/classes%ApplicationContext
+2019-12-11 19:45:57.110   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.InterceptionFactory] with qualifiers [@Default]
+2019-12-11 19:45:57.110   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.ControladorGeorreferencia] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.111   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.administracion.ControladorTelefono] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.111   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.ControladorTipoDocumento] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.112   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.mapeos.TipoGeorreferenciaMapeo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.112   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.dao.SaldoDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.112   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.modelo.GestionVisita] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.113   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.ControladorMapa] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.113   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.conversores.ConversorPckMenu] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.113   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.bean.SesionBean] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.113   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.bean.AdministradorVentanas] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.114   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.administracion.dao.EmpleadoDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.114   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.db.SqlLoggerImp] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.114   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.dao.CuentaPorCobrarDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.114   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.modelo.TipoGeorreferencia] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.114   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/classes%BoundConversationContext
+2019-12-11 19:45:57.115   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.administracion.bean.AdministadorCliente] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.115   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.administracion.bean.AdministradorEmpleado] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.115   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.modelo.Ventana] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.115   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.ControladorSaldo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.115   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.modelo.Saldo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.116   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/classes%BoundSessionContext
+2019-12-11 19:45:57.116   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.Bean] with qualifiers [@Default]
+2019-12-11 19:45:57.116   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.dao.TipoDocumentoDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.116   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.Bean] with qualifiers [@Decorated]
+2019-12-11 19:45:57.117   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.gps.modelo.Cuenta] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.117   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.administracion.modelo.Cliente] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.117   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.gps.modelo.EstadosRastreadorGps] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.117   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.ControladorVentana] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.118   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.administracion.ControladorCliente] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.118   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.bean.AdministradorSaldo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.118   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.gps.bean.ManejoRecorridos] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.118   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.dao.MapaDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.118   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.administracion.dao.TelefonoDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.119   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.Decorator] with qualifiers [@Default]
+2019-12-11 19:45:57.119   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.modelo.Usuario] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.119   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.administracion.dao.ClienteDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.119   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.ControladorCuentaPorCobrar] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.120   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.modelo.RuteoCobrador] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.120   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.mapeos.TipoTelefonoMapeo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.120   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.Instance] with qualifiers [@Default]
+2019-12-11 19:45:57.120   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.dao.RolDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.121   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.bean.ReporteRuteoCobrador] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.121   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.bean.VisualizacionLogs] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.121   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/classes%DependentContext
+2019-12-11 19:45:57.121   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.dao.LogsDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.122   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.ControladorMotivo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.122   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.administracion.modelo.Cargo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.122   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.gps.bean.AdministradorEstadosRastreador] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.122   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.bean.AdministradorFormaDePago] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.123   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.ControladorUsuario] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.123   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/classes%ServletContext
+2019-12-11 19:45:57.123   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.administracion.modelo.Empleado] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.124   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/classes%HttpSessionDestructionContext
+2019-12-11 19:45:57.124   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.modelo.TipoDocumento] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.124   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.dao.FormaDePagoDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.124   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.administracion.modelo.Telefono] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.124   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.bean.AdministradorCuentaPorCobrar] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.125   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.dao.UsuarioDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.125   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.util.GenerarReporte] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.125   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.dao.VentanaDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.126   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.mapeos.FormaDePagoMapeo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.126   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.bean.ManejadorRol] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.126   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.dao.GeorreferenciaDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.126   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.modelo.Rol] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.127   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.modelo.Menu] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.127   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.administracion.dao.CargoDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.127   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.gps.ConsultasOpenGts] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.127   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.modelo.GeneradorJson] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.128   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.gps.bean.AdministrarRastreador] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.128   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/classes%HttpSession
+2019-12-11 19:45:57.128   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.bean.AdministradorGestionVisita] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.128   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.bean.ManejadorDeAccesos] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.129   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.bean.ReporteRendicionCobranzaCob] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.129   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.InjectionPoint] with qualifiers [@Default]
+2019-12-11 19:45:57.129   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.bean.AdministradorTurnos] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.129   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.modelo.Turnos] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.129   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.gps.modelo.Rastreador] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.130   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.mapeos.MenuMapeo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.130   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.bean.AdministradorUsuarios] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.130   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.dao.RuteoCobradorDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.131   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.administracion.ControladorEmpleado] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.131   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.dao.TipoGeorreferenciaDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.132   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.util.QueryMaker] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.132   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.bean.AdministradorTipoDocumento] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.132   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.mapeos.VentanaMapeo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.132   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.modelo.Mapa] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.133   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/classes%Conversation
+2019-12-11 19:45:57.133   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/classes%HttpConversationContext
+2019-12-11 19:45:57.133   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.ControladorRol] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.133   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.bean.ReporteRuteoGeneral] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.133   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.util.UsuarioFiltro] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.134   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.bean.AdministrarGeorreferencia] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.134   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.gps.modelo.DeviceList] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.134   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.modelo.PanelVisualizacion] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.134   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.modelo.Cobranza] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.135   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.ControladorTipoGeorrefencia] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.135   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.gps.ControladorRastreador] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.135   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.dao.PanelVisualizacionDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.135   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.mapeos.SaldoMapeo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.135   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/classes%BoundRequestContext
+2019-12-11 19:45:57.136   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.ControladorTipoTelefono] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.136   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.EventMetadata] with qualifiers [@Default]
+2019-12-11 19:45:57.136   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.event.Event] with qualifiers [@Default]
+2019-12-11 19:45:57.136   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Implicit Bean [javax.enterprise.inject.spi.Interceptor] with qualifiers [@Default]
+2019-12-11 19:45:57.137   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.bean.ReporteListGestionEmp] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.137   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.dao.TipoTelefonoDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.138   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.bean.ProcesoLogeo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.138   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.ControladorGestionVisita] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.138   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/classes%RequestContextController
+2019-12-11 19:45:57.138   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.modelo.CuentaPorCobrar] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.139   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.bean.AdministrarTipoGeorreferencia] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.139   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.bean.AdministradorMenus] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.139   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.bean.AdministradorTipoTelefono] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.139   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: WELD%AbstractBuiltInBean%/geopractic_/WEB-INF/classes%RequestContext
+2019-12-11 19:45:57.139   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.conversores.ConversorPckVentana] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.140   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.ControladorLogs] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.140   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.mapeos.VentanaRolMapeo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.140   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.mapeos.LogsMapeo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.140   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.georrefencia.modelo.Punto] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.140   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.bean.AdministradorMotivo] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.141   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.gps.dao.RastreadorDao] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.141   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.bean.AdministradorCobranza] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.141   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.ControladorMenu] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.141   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.sistema.ControladorAccesos] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.141   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: Managed Bean [class com.geopractic.cobranza.bean.AdministradorRuteoCobrador] with qualifiers [@Any @Default]
+2019-12-11 19:45:57.142   DEBUG [Clase:BootstrapTracker Metodo:start linea:82] - START bootstrap > deployBeans > AfterBeanDiscovery 
+2019-12-11 19:45:57.151   DEBUG [Clase:Reflection Metodo:check linea:74] - WELD-000604: interface javax.faces.flow.FlowScoped is not declared @Target(METHOD, FIELD, TYPE). Weld will use this annotation, however this may make the application unportable.
+2019-12-11 19:45:57.152   DEBUG [Clase:Bootstrap Metodo:addContext linea:126] - WELD-000156: AfterBeanDiscovery.addContext() called by com.sun.faces.flow.FlowCDIExtension@2718c207 for com.sun.faces.flow.FlowCDIContext@3b3e0516
+2019-12-11 19:45:57.167   DEBUG [Clase:Bootstrap Metodo:addBean linea:100] - WELD-000154: AfterBeanDiscovery.addBean() called by com.sun.faces.flow.FlowCDIExtension@2718c207 for com.sun.faces.util.cdi11.CDIUtilImpl$BeanWrapper@363fca1b
+2019-12-11 19:45:57.168   DEBUG [Clase:Bootstrap Metodo:addContext linea:126] - WELD-000156: AfterBeanDiscovery.addContext() called by com.sun.faces.application.view.ViewScopeExtension@652136ff for com.sun.faces.application.view.ViewScopeContext@763b1c82
+2019-12-11 19:45:57.177   DEBUG [Clase:Bootstrap Metodo:addBean linea:100] - WELD-000154: AfterBeanDiscovery.addBean() called by com.sun.faces.application.view.ViewScopeExtension@652136ff for com.sun.faces.util.cdi11.CDIUtilImpl$BeanWrapper@24dbc734
+2019-12-11 19:45:57.179   DEBUG [Clase:Bootstrap Metodo:addContext linea:126] - WELD-000156: AfterBeanDiscovery.addContext() called by org.omnifaces.cdi.viewscope.ViewScopeExtension@6b9cbf89 for org.omnifaces.cdi.viewscope.ViewScopeContext@15cfa4ec
+2019-12-11 19:45:57.180   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: com.sun.faces.util.cdi11.CDIUtilImpl$BeanWrapper@363fca1b
+2019-12-11 19:45:57.184   DEBUG [Clase:Bootstrap Metodo:addBean linea:450] - WELD-000106: Bean: com.sun.faces.util.cdi11.CDIUtilImpl$BeanWrapper@24dbc734
+2019-12-11 19:45:57.185   DEBUG [Clase:BootstrapTracker Metodo:logEnd linea:108] -   END bootstrap > deployBeans > AfterBeanDiscovery (42 ms)
+2019-12-11 19:45:57.196   DEBUG [Clase:Reflection Metodo:check linea:80] - WELD-000601: interface javax.inject.Named is missing @Target. Weld will use this annotation, however this may make the application unportable.
+2019-12-11 19:45:57.325   DEBUG [Clase:BootstrapTracker Metodo:logEnd linea:108] -   END bootstrap > deployBeans (682 ms)
+2019-12-11 19:45:57.326   DEBUG [Clase:Bootstrap Metodo:validateBeans linea:484] - WELD-000100: Weld initialized. Validating beans
+2019-12-11 19:45:57.326   DEBUG [Clase:BootstrapTracker Metodo:start linea:82] - START bootstrap > validateBeans 
+2019-12-11 19:45:57.374   DEBUG [Clase:BootstrapTracker Metodo:start linea:82] - START bootstrap > validateBeans > AfterDeploymentValidation 
+2019-12-11 19:45:57.376   DEBUG [Clase:BootstrapTracker Metodo:logEnd linea:108] -   END bootstrap > validateBeans > AfterDeploymentValidation (2 ms)
+2019-12-11 19:45:57.376   DEBUG [Clase:BootstrapTracker Metodo:logEnd linea:108] -   END bootstrap > validateBeans (50 ms)
+2019-12-11 19:45:57.377   DEBUG [Clase:BootstrapTracker Metodo:start linea:82] - START bootstrap > endInitialization 
+2019-12-11 19:45:57.385   DEBUG [Clase:Bootstrap Metodo:endInitialization linea:550] - EE modules: [BeanDeploymentModule [id=/geopractic, web=true, managers=org.jboss.weld.util.collections.Iterables$$Lambda$34/804287734@69f81af8]]
+2019-12-11 19:45:57.386   DEBUG [Clase:BootstrapTracker Metodo:logEnd linea:108] -   END bootstrap > endInitialization (9 ms)
+2019-12-11 19:45:57.387   DEBUG [Clase:BootstrapTracker Metodo:logEnd linea:108] -   END bootstrap (2000 ms)
+2019-12-11 19:45:57.581   DEBUG [Clase:Reflection Metodo:check linea:82] - WELD-000620: interface javax.enterprise.inject.Decorated is not declared @Target(METHOD, FIELD, PARAMETER, TYPE). Weld will use this annotation, however this may make the application unportable.
+2019-12-11 19:45:57.583   DEBUG [Clase:Reflection Metodo:check linea:82] - WELD-000620: interface javax.enterprise.inject.Intercepted is not declared @Target(METHOD, FIELD, PARAMETER, TYPE). Weld will use this annotation, however this may make the application unportable.
+2019-12-11 19:46:50.296   INFO  [Clase:FabricaDataSource Metodo:generarDatasources linea:55] - --> Generando DataSource de Postgresql.
+2019-12-11 19:46:50.297   DEBUG [Clase:PropiedadesPostgres Metodo:<init> linea:29] - PropiedadesPostgres() - Generando instancia de propiedades Postgres
+2019-12-11 19:46:50.299   DEBUG [Clase:PropiedadesPostgres Metodo:obtenerPropiedades linea:55] - obtenerPropiedades() - Leyendo propiedades de acceso a postgres.
+2019-12-11 19:46:50.305   WARN  [Clase:HikariConfig Metodo:validate linea:851] - HikariPool-1 - using dataSourceClassName and ignoring jdbcUrl.
+2019-12-11 19:46:50.305   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:919] - HikariPool-1 - configuration:
+2019-12-11 19:46:50.316   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - allowPoolSuspension.............false
+2019-12-11 19:46:50.316   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - autoCommit......................false
+2019-12-11 19:46:50.317   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - catalog.........................none
+2019-12-11 19:46:50.317   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - connectionInitSql...............none
+2019-12-11 19:46:50.318   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - connectionTestQuery.............none
+2019-12-11 19:46:50.318   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - connectionTimeout...............30000
+2019-12-11 19:46:50.318   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - dataSource......................none
+2019-12-11 19:46:50.319   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - dataSourceClassName............."org.postgresql.ds.PGSimpleDataSource"
+2019-12-11 19:46:50.320   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - dataSourceJNDI..................none
+2019-12-11 19:46:50.321   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - dataSourceProperties............{password=<masked>}
+2019-12-11 19:46:50.322   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - driverClassName.................none
+2019-12-11 19:46:50.322   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - healthCheckProperties...........{}
+2019-12-11 19:46:50.323   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - healthCheckRegistry.............none
+2019-12-11 19:46:50.324   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - idleTimeout.....................600000
+2019-12-11 19:46:50.324   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - initializationFailFast..........true
+2019-12-11 19:46:50.325   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - initializationFailTimeout.......1
+2019-12-11 19:46:50.325   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - isolateInternalQueries..........false
+2019-12-11 19:46:50.326   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - jdbc4ConnectionTest.............false
+2019-12-11 19:46:50.326   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - jdbcUrl........................."jdbc:postgresql://192.168.100.83:5432/geopractic"
+2019-12-11 19:46:50.327   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - leakDetectionThreshold..........0
+2019-12-11 19:46:50.327   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - maxLifetime.....................1800000
+2019-12-11 19:46:50.327   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - maximumPoolSize.................20
+2019-12-11 19:46:50.328   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - metricRegistry..................none
+2019-12-11 19:46:50.328   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - metricsTrackerFactory...........none
+2019-12-11 19:46:50.328   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - minimumIdle.....................20
+2019-12-11 19:46:50.329   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - password........................<masked>
+2019-12-11 19:46:50.329   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - poolName........................"HikariPool-1"
+2019-12-11 19:46:50.330   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - readOnly........................false
+2019-12-11 19:46:50.330   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - registerMbeans..................false
+2019-12-11 19:46:50.331   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - scheduledExecutor...............none
+2019-12-11 19:46:50.331   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - scheduledExecutorService........internal
+2019-12-11 19:46:50.332   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - threadFactory...................internal
+2019-12-11 19:46:50.332   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - transactionIsolation............default
+2019-12-11 19:46:50.333   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - username........................"geopractic"
+2019-12-11 19:46:50.333   DEBUG [Clase:HikariConfig Metodo:logConfiguration linea:948] - validationTimeout...............5000
+2019-12-11 19:46:50.335   INFO  [Clase:HikariDataSource Metodo:<init> linea:71] - HikariPool-1 - Starting...
+2019-12-11 19:46:50.724   DEBUG [Clase:HikariPool Metodo:checkFailFast linea:519] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@32772e6d
+2019-12-11 19:46:50.729   INFO  [Clase:HikariDataSource Metodo:<init> linea:73] - HikariPool-1 - Start completed.
+2019-12-11 19:46:50.830   DEBUG [Clase:HikariPool Metodo:logPoolState linea:390] - HikariPool-1 - Pool stats (total=1, active=0, idle=1, waiting=0)
+2019-12-11 19:46:50.953   DEBUG [Clase:SqlLoggerImp Metodo:logBeforeExecution linea:16] - Sentencia SQL ejecutada: HikariProxyPreparedStatement@1890830223 wrapping SELECT "Usuario", "Id", "Nombre", "Apellido", "Contrasenha", "Activo", "Rol", "Empleado" FROM "Usuario" WHERE  "Usuario" = 'cdelgado'  
+2019-12-11 19:46:51.000   ERROR [Clase:SqlLoggerImp Metodo:logException linea:21] - Sentencia SQL ejecutada: HikariProxyPreparedStatement@1890830223 wrapping SELECT "Usuario", "Id", "Nombre", "Apellido", "Contrasenha", "Activo", "Rol", "Empleado" FROM "Usuario" WHERE  "Usuario" = 'cdelgado'   Causa: null:ERROR: no se pudo leer el bloque 1 del archivo «base/31025/2604»: se leyeron sólo 0 de 8192 bytes
+  Position: 95
+2019-12-11 19:46:51.001   ERROR [Clase:ProcesoLogeo Metodo:validarUsuario linea:82] - --> validarUsuario() - Error en validando usuario. 
+org.jdbi.v3.core.statement.UnableToExecuteStatementException: org.postgresql.util.PSQLException: ERROR: no se pudo leer el bloque 1 del archivo «base/31025/2604»: se leyeron sólo 0 de 8192 bytes
+  Position: 95 [statement:"SELECT "Usuario", "Id", "Nombre", "Apellido", "Contrasenha", "Activo", "Rol", "Empleado" FROM "Usuario" WHERE  "Usuario" = :usuario  ;", rewritten:"SELECT "Usuario", "Id", "Nombre", "Apellido", "Contrasenha", "Activo", "Rol", "Empleado" FROM "Usuario" WHERE  "Usuario" = :usuario  ;", parsed:"ParsedSql{sql='SELECT "Usuario", "Id", "Nombre", "Apellido", "Contrasenha", "Activo", "Rol", "Empleado" FROM "Usuario" WHERE  "Usuario" = ?  ;', parameters=ParsedParameters{positional=false, parameterNames=[usuario]}}", arguments:{ positional:{}, named:{}, finder:[{lazy bean property arguments "null null"]}]
+	at org.jdbi.v3.core.statement.SqlStatement.internalExecute(SqlStatement.java:1388) ~[jdbi3-core-3.3.0.jar:3.3.0]
+	at org.jdbi.v3.core.result.ResultProducers.lambda$getResultSet$2(ResultProducers.java:68) ~[jdbi3-core-3.3.0.jar:3.3.0]
+	at org.jdbi.v3.core.result.ResultIterable.lambda$of$0(ResultIterable.java:53) ~[jdbi3-core-3.3.0.jar:3.3.0]
+	at org.jdbi.v3.core.result.ResultIterable.findFirst(ResultIterable.java:116) ~[jdbi3-core-3.3.0.jar:3.3.0]
+	at com.geopractic.db.Dao.buscar(Dao.java:92) ~[classes/:?]
+	at com.geopractic.sistema.dao.UsuarioDao.buscar(UsuarioDao.java:55) ~[classes/:?]
+	at com.geopractic.sistema.dao.UsuarioDao.buscar(UsuarioDao.java:19) ~[classes/:?]
+	at com.geopractic.controladores.Controlador.buscar(Controlador.java:75) ~[classes/:?]
+	at com.geopractic.sistema.bean.ProcesoLogeo.validarUsuario(ProcesoLogeo.java:55) [classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_161]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_161]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_161]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_161]
+	at org.apache.el.parser.AstValue.invoke(AstValue.java:279) [jasper-el.jar:7.0.77]
+	at org.apache.el.MethodExpressionImpl.invoke(MethodExpressionImpl.java:273) [jasper-el.jar:7.0.77]
+	at org.jboss.weld.module.web.util.el.ForwardingMethodExpression.invoke(ForwardingMethodExpression.java:40) [weld-servlet-shaded-3.0.5.Final.jar:3.0.5.Final]
+	at org.jboss.weld.module.web.el.WeldMethodExpression.invoke(WeldMethodExpression.java:50) [weld-servlet-shaded-3.0.5.Final.jar:3.0.5.Final]
+	at com.sun.faces.facelets.el.TagMethodExpression.invoke(TagMethodExpression.java:105) [jsf-impl-2.2.18.jar:2.2.18]
+	at javax.faces.component.MethodBindingMethodExpressionAdapter.invoke(MethodBindingMethodExpressionAdapter.java:87) [jsf-api-2.2.18.jar:2.2]
+	at com.sun.faces.application.ActionListenerImpl.processAction(ActionListenerImpl.java:102) [jsf-impl-2.2.18.jar:2.2.18]
+	at javax.faces.component.UICommand.broadcast(UICommand.java:315) [jsf-api-2.2.18.jar:2.2]
+	at javax.faces.component.UIViewRoot.broadcastEvents(UIViewRoot.java:790) [jsf-api-2.2.18.jar:2.2]
+	at javax.faces.component.UIViewRoot.processApplication(UIViewRoot.java:1282) [jsf-api-2.2.18.jar:2.2]
+	at com.sun.faces.lifecycle.InvokeApplicationPhase.execute(InvokeApplicationPhase.java:81) [jsf-impl-2.2.18.jar:2.2.18]
+	at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:101) [jsf-impl-2.2.18.jar:2.2.18]
+	at com.sun.faces.lifecycle.LifecycleImpl.execute(LifecycleImpl.java:198) [jsf-impl-2.2.18.jar:2.2.18]
+	at javax.faces.webapp.FacesServlet.service(FacesServlet.java:658) [jsf-api-2.2.18.jar:2.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:303) [catalina.jar:7.0.77]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208) [catalina.jar:7.0.77]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) [tomcat7-websocket.jar:7.0.77]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241) [catalina.jar:7.0.77]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208) [catalina.jar:7.0.77]
+	at org.apache.logging.log4j.web.Log4jServletFilter.doFilter(Log4jServletFilter.java:71) [log4j-web-2.11.2.jar:2.11.2]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:241) [catalina.jar:7.0.77]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:208) [catalina.jar:7.0.77]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:218) [catalina.jar:7.0.77]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:110) [catalina.jar:7.0.77]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:506) [catalina.jar:7.0.77]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:169) [catalina.jar:7.0.77]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:103) [catalina.jar:7.0.77]
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:962) [catalina.jar:7.0.77]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:116) [catalina.jar:7.0.77]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:445) [catalina.jar:7.0.77]
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1115) [tomcat-coyote.jar:7.0.77]
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:637) [tomcat-coyote.jar:7.0.77]
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:316) [tomcat-coyote.jar:7.0.77]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_161]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_161]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-coyote.jar:7.0.77]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_161]
+Caused by: org.postgresql.util.PSQLException: ERROR: no se pudo leer el bloque 1 del archivo «base/31025/2604»: se leyeron sólo 0 de 8192 bytes
+  Position: 95
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2433) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2178) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:306) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:441) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:365) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:155) ~[postgresql-42.2.2.jar:42.2.2]
+	at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:144) ~[postgresql-42.2.2.jar:42.2.2]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44) ~[HikariCP-2.6.1.jar:?]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java) ~[HikariCP-2.6.1.jar:?]
+	at org.jdbi.v3.core.statement.SqlLoggerUtil.wrap(SqlLoggerUtil.java:29) ~[jdbi3-core-3.3.0.jar:3.3.0]
+	at org.jdbi.v3.core.statement.SqlStatement.internalExecute(SqlStatement.java:1380) ~[jdbi3-core-3.3.0.jar:3.3.0]
+	... 49 more
+2019-12-11 19:46:51.015   DEBUG [Clase:UsuarioDao Metodo:finalizarRecursos linea:63] - Conexion cerrada
+2019-12-11 19:46:51.017   DEBUG [Clase:ProxyConnection Metodo:close linea:235] - HikariPool-1 - Executed rollback on connection org.postgresql.jdbc.PgConnection@32772e6d due to dirty commit state on close().
+2019-12-11 19:46:51.152   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3aa568fa
+2019-12-11 19:46:51.384   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@346281de
+2019-12-11 19:46:51.793   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@305d038a
+2019-12-11 19:46:52.007   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@755f8be5
+2019-12-11 19:46:52.216   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@642cdf0c
+2019-12-11 19:46:52.424   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4460de26
+2019-12-11 19:46:52.630   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1cf9d473
+2019-12-11 19:46:52.848   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@157074aa
+2019-12-11 19:46:53.069   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@17260db7
+2019-12-11 19:46:53.312   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5575709b
+2019-12-11 19:46:53.538   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7fd7c0a
+2019-12-11 19:46:53.750   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@113e8d7b
+2019-12-11 19:46:53.964   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3652715e
+2019-12-11 19:46:54.175   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@48dd2ea7
+2019-12-11 19:46:54.387   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@242c169a
+2019-12-11 19:46:54.600   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@419c0231
+2019-12-11 19:46:54.823   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@64e153dd
+2019-12-11 19:46:55.042   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@45e8f1f0
+2019-12-11 19:46:55.254   DEBUG [Clase:HikariPool Metodo:call linea:634] - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1b4a711
+2019-12-11 19:46:55.254   DEBUG [Clase:HikariPool Metodo:logPoolState linea:390] - HikariPool-1 - After adding stats (total=20, active=0, idle=20, waiting=0)
+2019-12-11 19:47:20.832   DEBUG [Clase:HikariPool Metodo:logPoolState linea:390] - HikariPool-1 - Pool stats (total=20, active=0, idle=20, waiting=0)
+2019-12-11 19:47:50.834   DEBUG [Clase:HikariPool Metodo:logPoolState linea:390] - HikariPool-1 - Pool stats (total=20, active=0, idle=20, waiting=0)
+2019-12-11 19:48:20.835   DEBUG [Clase:HikariPool Metodo:logPoolState linea:390] - HikariPool-1 - Pool stats (total=20, active=0, idle=20, waiting=0)
+2019-12-11 19:48:50.837   DEBUG [Clase:HikariPool Metodo:logPoolState linea:390] - HikariPool-1 - Pool stats (total=20, active=0, idle=20, waiting=0)
+2019-12-11 19:49:20.839   DEBUG [Clase:HikariPool Metodo:logPoolState linea:390] - HikariPool-1 - Pool stats (total=20, active=0, idle=20, waiting=0)
+2019-12-11 19:49:50.840   DEBUG [Clase:HikariPool Metodo:logPoolState linea:390] - HikariPool-1 - Pool stats (total=20, active=0, idle=20, waiting=0)
+2019-12-11 19:50:20.842   DEBUG [Clase:HikariPool Metodo:logPoolState linea:390] - HikariPool-1 - Pool stats (total=20, active=0, idle=20, waiting=0)
+2019-12-11 19:50:50.844   DEBUG [Clase:HikariPool Metodo:logPoolState linea:390] - HikariPool-1 - Pool stats (total=20, active=0, idle=20, waiting=0)
+2019-12-11 19:51:20.845   DEBUG [Clase:HikariPool Metodo:logPoolState linea:390] - HikariPool-1 - Pool stats (total=20, active=0, idle=20, waiting=0)

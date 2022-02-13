@@ -1,0 +1,137 @@
+package com.geopractic.cobranza.modelo;
+
+import java.util.Date;
+
+public class RuteoCobrador {
+
+  private long id;
+  private Date fechaVisita;
+  private boolean visitado;
+  private boolean verificado;
+  private GestionVisita gestion;
+
+  /**
+   * Constructor sin argumentos.
+   */
+  public RuteoCobrador() {
+
+  } //Fin del constructor sin argumentos
+
+  /**
+   * Devuelve el identificador del ruteo.
+   * @return el identificador del ruteo.
+   */
+  public long getId() {
+    return id;
+  } //Fin del metodo getId
+
+  /**
+   * Establece el identificador del ruteo.
+   * @param id el identificador a establecer.
+   */
+  public void setId(long id) {
+    this.id = id;
+  } //Fin del metodo setId
+
+  /**
+   * Devuelve la fecha de visita del ruteo.
+   * @return la fecha de visita del ruteo.
+   */
+  public Date getFechaVisita() {
+    return fechaVisita;
+  } //Fin del metodo getFechaVisita
+
+  /**
+   * Establece la fecha de visita del ruteo.
+   * @param fechaVisita la fecha de visita a establecer.
+   */
+  public void setFechaVisita(Date fechaVisita) {
+    this.fechaVisita = fechaVisita;
+  } //Fin del metodo setFechaVisita
+
+  /**
+   * Devuelve si el ruteo fue visitado o no.
+   * @return si el ruteo fue visitado o no.
+   */
+  public boolean isVisitado() {
+    return visitado;
+  } //Fin del metodo getVisitado
+
+  /**
+   * Establece si el ruteo fue visitado o no.
+   * @param visitado si o no a establecer.
+   */
+  public void setVisitado(boolean visitado) {
+    this.visitado = visitado;
+  } //Fin del metodo setVisitado
+
+  /**
+   * Devuelve si fue verificado el ruteo o no.
+   * @return si fue verificado el ruteo o no.
+   */
+  public boolean isVerificado() {
+    return verificado;
+  } //Fin del metodo isVerificado
+
+  /**
+   * Establece la verificacion del ruteo.
+   * @param verificado si o no a establecer.
+   */
+  public void setVerificado(boolean verificado) {
+    this.verificado = verificado;
+  } //Fin del metodo setVerificado
+
+  /**
+   * Devuelve la gestion asociada al ruteo.
+   * @return la gestion asociada al ruteo.
+   */
+  public GestionVisita getGestion() {
+    return gestion;
+  } //Fin del metodo getGestion
+
+  /**
+   * Establece la gestion asociada al ruteo.
+   * @param gestion la gestion a establecer.
+   */
+  public void setGestion(GestionVisita gestion) {
+    this.gestion = gestion;
+  } //Fin del metodo setGestion
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((gestion == null) ? 0 : gestion.hashCode());
+    return result;
+  } //Fin del metodo hashCode
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    } //Fin de if
+    if (obj == null) {
+      return false;
+    } //Fin de if
+    if (!(obj instanceof RuteoCobrador)) {
+      return false;
+    } //Fin de if
+    RuteoCobrador other = (RuteoCobrador) obj;
+    if (gestion == null) {
+      if (other.gestion != null) {
+        return false;
+      } //Fin de if
+    } else if (!gestion.equals(other.gestion)) {
+      return false;
+    } //Fin de if-else
+    return true;
+  } //Fin del metodo equals
+
+  @Override
+  public String toString() {
+    return id + " Fecha Visita: " + fechaVisita + " Empleado: " 
+          + gestion.getEmpleadoVisita().getNombre() + " " 
+          + gestion.getEmpleadoVisita().getApellido() + " Saldo: " + gestion.getSaldo().getId();
+  } //Fin de toString
+
+} //Fin de la clase RuteoCobrador

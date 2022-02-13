@@ -1,0 +1,62 @@
+@startuml
+class com.geopractic.georrefencia.ControladorGeorreferencia
+class com.geopractic.georrefencia.ControladorMapa
+class com.geopractic.georrefencia.ControladorPanelVisualizacion
+class com.geopractic.georrefencia.ControladorTipoGeorrefencia
+class com.geopractic.georrefencia.bean.AdministrarGeorreferencia
+class com.geopractic.georrefencia.bean.AdministrarPanelVisualizacion
+class com.geopractic.georrefencia.bean.AdministrarTipoGeorreferencia
+class com.geopractic.georrefencia.dao.GeorreferenciaDao
+class com.geopractic.georrefencia.dao.MapaDao
+class com.geopractic.georrefencia.dao.PanelVisualizacionDao
+class com.geopractic.georrefencia.dao.TipoGeorreferenciaDao
+class com.geopractic.georrefencia.mapeos.GeorreferenciaMapeo
+class com.geopractic.georrefencia.mapeos.MapaMapeo
+class com.geopractic.georrefencia.mapeos.PanelVisualizacionMapeo
+class com.geopractic.georrefencia.mapeos.TipoGeorreferenciaMapeo
+class com.geopractic.georrefencia.modelo.GeneradorJson
+class com.geopractic.georrefencia.modelo.Georreferencia
+class com.geopractic.georrefencia.modelo.Mapa
+class com.geopractic.georrefencia.modelo.PanelVisualizacion
+class com.geopractic.georrefencia.modelo.Punto
+class com.geopractic.georrefencia.modelo.TipoGeorreferencia
+class com.geopractic.georrefencia.modelo.Zona
+com.geopractic.georrefencia.ControladorGeorreferencia ..> com.geopractic.georrefencia.dao.GeorreferenciaDao
+com.geopractic.georrefencia.ControladorGeorreferencia ..> com.geopractic.georrefencia.modelo.Georreferencia
+com.geopractic.georrefencia.ControladorMapa ..> com.geopractic.georrefencia.dao.MapaDao
+com.geopractic.georrefencia.ControladorMapa ..> com.geopractic.georrefencia.modelo.Mapa
+com.geopractic.georrefencia.ControladorMapa ..> com.geopractic.georrefencia.modelo.PanelVisualizacion
+com.geopractic.georrefencia.ControladorPanelVisualizacion ..> com.geopractic.georrefencia.dao.MapaDao
+com.geopractic.georrefencia.ControladorPanelVisualizacion ..> com.geopractic.georrefencia.dao.PanelVisualizacionDao
+com.geopractic.georrefencia.ControladorPanelVisualizacion ..> com.geopractic.georrefencia.modelo.PanelVisualizacion
+com.geopractic.georrefencia.ControladorTipoGeorrefencia ..> com.geopractic.georrefencia.dao.TipoGeorreferenciaDao
+com.geopractic.georrefencia.ControladorTipoGeorrefencia ..> com.geopractic.georrefencia.modelo.TipoGeorreferencia
+com.geopractic.georrefencia.bean.AdministrarGeorreferencia ..> com.geopractic.georrefencia.ControladorGeorreferencia
+com.geopractic.georrefencia.bean.AdministrarGeorreferencia ..> com.geopractic.georrefencia.modelo.GeneradorJson
+com.geopractic.georrefencia.bean.AdministrarGeorreferencia ..> com.geopractic.georrefencia.modelo.Georreferencia
+com.geopractic.georrefencia.bean.AdministrarGeorreferencia ..> com.geopractic.georrefencia.modelo.Punto
+com.geopractic.georrefencia.bean.AdministrarGeorreferencia ..> com.geopractic.georrefencia.modelo.Zona
+com.geopractic.georrefencia.bean.AdministrarPanelVisualizacion ..> com.geopractic.georrefencia.ControladorMapa
+com.geopractic.georrefencia.bean.AdministrarPanelVisualizacion ..> com.geopractic.georrefencia.ControladorPanelVisualizacion
+com.geopractic.georrefencia.bean.AdministrarPanelVisualizacion ..> com.geopractic.georrefencia.modelo.Mapa
+com.geopractic.georrefencia.bean.AdministrarPanelVisualizacion ..> com.geopractic.georrefencia.modelo.PanelVisualizacion
+com.geopractic.georrefencia.bean.AdministrarTipoGeorreferencia ..> com.geopractic.georrefencia.ControladorTipoGeorrefencia
+com.geopractic.georrefencia.bean.AdministrarTipoGeorreferencia ..> com.geopractic.georrefencia.modelo.TipoGeorreferencia
+com.geopractic.georrefencia.dao.GeorreferenciaDao ..> com.geopractic.georrefencia.mapeos.GeorreferenciaMapeo
+com.geopractic.georrefencia.dao.GeorreferenciaDao ..> com.geopractic.georrefencia.modelo.Georreferencia
+com.geopractic.georrefencia.dao.MapaDao ..> com.geopractic.georrefencia.mapeos.MapaMapeo
+com.geopractic.georrefencia.dao.MapaDao ..> com.geopractic.georrefencia.modelo.Mapa
+com.geopractic.georrefencia.dao.MapaDao ..> com.geopractic.georrefencia.modelo.PanelVisualizacion
+com.geopractic.georrefencia.dao.PanelVisualizacionDao ..> com.geopractic.georrefencia.mapeos.PanelVisualizacionMapeo
+com.geopractic.georrefencia.dao.PanelVisualizacionDao ..> com.geopractic.georrefencia.modelo.PanelVisualizacion
+com.geopractic.georrefencia.dao.TipoGeorreferenciaDao ..> com.geopractic.georrefencia.mapeos.TipoGeorreferenciaMapeo
+com.geopractic.georrefencia.dao.TipoGeorreferenciaDao ..> com.geopractic.georrefencia.modelo.TipoGeorreferencia
+com.geopractic.georrefencia.mapeos.GeorreferenciaMapeo ..> com.geopractic.georrefencia.dao.TipoGeorreferenciaDao
+com.geopractic.georrefencia.mapeos.GeorreferenciaMapeo ..> com.geopractic.georrefencia.modelo.Georreferencia
+com.geopractic.georrefencia.mapeos.GeorreferenciaMapeo ..> com.geopractic.georrefencia.modelo.Punto
+com.geopractic.georrefencia.mapeos.GeorreferenciaMapeo ..> com.geopractic.georrefencia.modelo.Zona
+com.geopractic.georrefencia.mapeos.MapaMapeo ..> com.geopractic.georrefencia.modelo.Mapa
+com.geopractic.georrefencia.mapeos.PanelVisualizacionMapeo ..> com.geopractic.georrefencia.dao.MapaDao
+com.geopractic.georrefencia.mapeos.PanelVisualizacionMapeo ..> com.geopractic.georrefencia.modelo.PanelVisualizacion
+com.geopractic.georrefencia.mapeos.TipoGeorreferenciaMapeo ..> com.geopractic.georrefencia.modelo.TipoGeorreferencia
+@enduml

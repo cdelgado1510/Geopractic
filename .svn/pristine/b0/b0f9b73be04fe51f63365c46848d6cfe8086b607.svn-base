@@ -1,0 +1,73 @@
+package com.geopractic.cobranza.bean;
+
+import com.geopractic.bean.BeanReportes;
+import com.geopractic.sistema.modelo.ContenidoMultimedia;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.HashMap;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+/**
+ * Bean de generacion de reporte de ruteos generales.
+ * @author Cristhian
+ */
+@ManagedBean (name = "rptRuteoGeneral")
+@ViewScoped
+public class ReporteRuteoGeneral extends BeanReportes implements Serializable {
+
+  private static final long serialVersionUID = -5140104946769367180L;
+  private Date fechaBusqueda;
+
+  /**
+   * Constructor sin argumentos.
+   */
+  public ReporteRuteoGeneral() {
+
+  } //Fin de constructor
+
+  /**
+   * Devuelve al fecha de busqueda a utilizar.
+   * @return la fecha de busqueda utilizada.
+   */
+  public Date getFechaBusqueda() {
+    return fechaBusqueda;
+  } //Fin del metodo getFechaBusqueda
+
+  /**
+   * Establece la fecha de busqueda a utilizar.
+   * @param fechaBusqueda la fecha a establecer.
+   */
+  public void setFechaBusqueda(Date fechaBusqueda) {
+    this.fechaBusqueda = fechaBusqueda;
+  } //Fin del metodo setFechaBusqueda
+
+  @Override
+  public void generarParametros() {
+    parametros = new HashMap<String, Object>();
+    parametros.put("Fecha", fechaBusqueda);
+  } //Fin de metodo generarParametros
+
+  /**
+   * Genera un reporte con el ruteo de una fecha dada
+   * de un cobrador.
+   */
+  public void generarReporteRuteosGenerales() {
+    ContenidoMultimedia contenido = generateReporte("ruteosGenerales",
+          "ruteosGenerales.pdf");
+    setMultimedia(contenido.getStreamContent());
+
+    prepararVariables();
+    //Verifica si el reporte fue cargado
+    if (multimedia != null) {
+      contexto.getExternalContext().getSessionMap().put("reporteBytesArray",
+           contenido.getByteArrayStream().toByteArray());
+    } else {
+      agregarMensaje(FacesMessage.SEVERITY_FATAL,
+           "Error de reporte", "No se puede mostrar el reporte.",null);
+    } //Fin de if
+  } //Fin del generarReporteRuteoCobrador
+} //Fin de la clase ReporteRuteoCobrador

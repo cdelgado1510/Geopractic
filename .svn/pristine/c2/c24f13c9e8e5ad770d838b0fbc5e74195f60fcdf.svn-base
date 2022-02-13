@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+	<h:head>
+
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Reporte de rendicion por cobrador
+            </ui:define>
+            <ui:define name="contenido">
+                <h:outputScript name="js/spanishLocales.js" />
+		        <h:form id="formReporte">
+		            <p:panel header="Rendicion diaria de cobranza por cobrador">
+                        <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+
+                        <p:message for="txtFecha" display="tooltip" />
+                        <p:message for="txtCobrador" display="tooltip" />
+
+                        <p:panelGrid columns="8" styleClass="ui-panelgrid-blank" >
+
+                             <p:outputLabel id="lblFecha" for="txtFecha" value="Fecha:" />
+                             <p:calendar id="txtFecha" value="#{rptRendicionCobranzaCob.fechaBusqueda}"
+                             required="true" locale="es" pattern="dd-MM-yyyy" navigator="true"
+                             requiredMessage="Debe seleccionar la fecha y hora de inicio de busqueda."/>
+
+                             <p:outputLabel id="lblCobrador" for="txtCobrador" value="Cobrador:" style="text-align:right;" />
+                             <p:selectOneMenu id="txtCobrador" value="#{rptRendicionCobranzaCob.empleado}" converter="omnifaces.SelectItemsConverter"
+                             filter="true" filterMatchMode="contains" dynamic="true" title="Seleccione el empleado que realizo el cobro"
+                             required="true" requiredMessage="Debe seleccionar el empleado que realizo el cobro." >
+                                 <f:selectItems value="#{manejarEmpleado.lista}" var="empleado" itemValue="#{empleado}"
+                                 itemLabel="#{empleado.nombre} #{empleado.apellido}" itemDisabled="#{empleado.estado == 'Inactivo'}" />
+                             </p:selectOneMenu>
+
+                             <p:commandButton id="btnVer" icon="fa fa-fw fa-search" value="Ver"
+                             actionListener="#{rptRendicionCobranzaCob.generarReporteRendicionCobranzaCob()}"
+                             update="formReporte" />
+
+                        </p:panelGrid>
+
+                        <p:panel rendered="#{rptRendicionCobranzaCob.multimedia != null}">
+	                        <p:media value="/reporte.pdf" player="pdf" cache="false" style="width:100% !important; height:650px !important;">
+	                        Su navegador no puede vizualizar el PDF, presione el boton para descargarlo en su lugar.
+	                            <p:commandButton value="Descarga" ajax="false" icon="fa fa-fw fa-download">
+	                                <p:fileDownload value="#{rptRendicionCobranzaCob.multimedia}" />
+	                            </p:commandButton>    
+	                        </p:media>
+	                     </p:panel>
+		            </p:panel>
+
+                    <p:blockUI block="formReporte" trigger="btnVer">
+                        <p>Generando reporte... </p>
+                        <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                    </p:blockUI>
+		        </h:form>
+
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

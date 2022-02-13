@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+	<h:head>
+
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Reporte de Ruteos Generales
+            </ui:define>
+            <ui:define name="codigo">
+                <h:outputStylesheet name="css/leaflet.css" />
+                <h:outputScript name="js/leaflet.js" />
+                <h:outputScript name="js/scripts-mapas.js" />
+                <h:outputScript name="js/easyprint.js" />
+            </ui:define>
+            <ui:define name="contenido">
+                <h:outputScript name="js/spanishLocales.js" />
+		        <h:form id="formReporte">
+		            <p:panel header="Ruteos de Generales">
+                        <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+
+                        <p:message for="txtFecha" display="tooltip" />
+
+                        <p:panelGrid columns="8" styleClass="ui-panelgrid-blank" >
+
+                             <p:outputLabel id="lblFecha" for="txtFecha" value="Fecha:" />
+                             <p:calendar id="txtFecha" value="#{rptRuteoGeneral.fechaBusqueda}"
+                             required="true" locale="es" pattern="dd-MM-yyyy" navigator="true"
+                             requiredMessage="Debe seleccionar la fecha y hora de inicio de busqueda."/>
+
+                             <p:commandButton id="btnVer" icon="fa fa-fw fa-search" value="Ver"
+                             actionListener="#{rptRuteoGeneral.generarReporteRuteosGenerales()}"
+                             update="formReporte" />
+
+                             <p:commandButton id="btnVisualizar" icon="fa fa-fw fa-search" title="Ver mapa" label="Ver mapa" 
+                             update="ventanaMapa" oncomplete="PF('ventanaMapa').show();" />
+
+                        </p:panelGrid>
+
+                        <p:panel rendered="#{rptRuteoGeneral.multimedia != null}">
+	                        <p:media value="/reporte.pdf" player="pdf" cache="false" style="width:100% !important; height:650px !important;">
+	                        Su navegador no puede vizualizar el PDF, presione el boton para descargarlo en su lugar.
+	                            <p:commandButton value="Descarga" ajax="false" icon="fa fa-fw fa-download">
+	                                <p:fileDownload value="#{rptRuteoGeneral.multimedia}" />
+	                            </p:commandButton>    
+	                        </p:media>
+	                     </p:panel>
+		            </p:panel>
+
+                    <p:blockUI block="formReporte" trigger="btnVer">
+                        <p>Generando reporte... </p>
+                        <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                    </p:blockUI>
+		        </h:form>
+
+                <!-- Ventana de visualizacion de mapa -->
+                <p:dialog id="ventanaMapa" widgetVar="ventanaMapa" modal="true" closable="true"
+                draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true" onShow="cargarVisitas('visorMapa',#{rptRuteoGeneral.geoJson})">
+                    <div id="visorMapa" style="width: 600px; height: 400px;">
+                    </div>
+                </p:dialog>
+
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

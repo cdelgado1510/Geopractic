@@ -1,0 +1,10 @@
+@startuml
+abstract class com.geopractic.bean.Bean
+abstract class com.geopractic.bean.BeanReportes
+interface com.geopractic.bean.IBean
+interface com.geopractic.bean.IBeanCrud
+interface com.geopractic.bean.IReporteable
+com.geopractic.bean.Bean --|> com.geopractic.bean.IBean
+com.geopractic.bean.Bean --|> com.geopractic.bean.IBeanCrud
+com.geopractic.bean.BeanReportes --|> com.geopractic.bean.IReporteable
+@enduml

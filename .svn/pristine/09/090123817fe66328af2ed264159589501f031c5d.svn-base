@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"> 
+    <script type="text/javascript">
+        var today = new Date();
+        var yyyy = today.getFullYear();
+    </script>
+    <h:body>
+        <footer class="footer fixed-bottom  bg-dark text-center text-white d-none d-sm-block">
+            <p> Geopractic &copy; Copyright <script>document.write(yyyy);</script> </p>
+        </footer>
+	</h:body> 
+</html>

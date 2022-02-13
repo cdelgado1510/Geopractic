@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+	<h:head>
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Administracion de Cuenta de Cliente
+            </ui:define>
+
+            <ui:define name="contenido">
+                <h:outputScript name="js/spanishLocales.js" />
+		        <h:form id="formLista" rendered="#{accesos.esValido('leer')}">
+		            <p:panel header="Administracion de Cuentas de Clientes">
+
+                        <f:facet name="actions">
+                            <p:commandButton icon="fa fa-fw fa-plus" value="Cargar cuenta" rendered="#{accesos.esValido('crear')}"
+                            actionListener="#{manejarCuentaPorCobrar.setFuncion('agregar')}" update=":formAbm :diaCabecera"
+                            onclick="PF('diaAbm').show();" styleClass="boton-verde"/>            
+                        </f:facet>
+
+		                <p:dataTable id="lista" widgetVar="tablalista" var="cuenta" value="#{manejarCuentaPorCobrar.lista}" rows="10" paginator="true" reflow="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} Cuentas de clientes."
+                         rowsPerPageTemplate="10,50,100" emptyMessage="No hay resultados a mostrar."
+                         rowStyleClass="text-center" filteredValue="#{manejarCuentaPorCobrar.listaFiltro}">
+						    <p:column headerText="Código" sortBy="#{cuenta.id}" filterBy="#{cuenta.id}" filterMatchMode="contains">
+						        <h:outputText value="#{cuenta.id}" />
+						    </p:column>
+
+						    <p:column headerText="Cliente" sortBy="#{cuenta.cliente.primerNombre} #{cuenta.cliente.primerApellido}" filterBy="#{cuenta.cliente.primerNombre} #{cuenta.cliente.primerApellido}" filterMatchMode="contains">
+						        <div align="left">
+						          <h:outputText value="#{cuenta.cliente.primerNombre} #{cuenta.cliente.primerApellido}" />
+						        </div>
+						    </p:column>
+
+                            <p:column headerText="Monto Total" sortBy="#{cuenta.montoTotal}" filterBy="#{cuenta.montoTotal}" filterMatchMode="equals">
+                                <p:inputNumber value="#{cuenta.montoTotal}" readonly="true" 
+                                thousandSeparator="." decimalSeparator="," decimalPlaces="0" converter="javax.faces.Integer"  />
+                            </p:column>
+
+                            <p:column headerText="Cant. Cuotas" sortBy="#{cuenta.cuotas}" filterBy="#{cuenta.cuotas}" filterMatchMode="equals">
+                                <p:inputNumber value="#{cuenta.cuotas}" readonly="true" 
+                                thousandSeparator="." decimalSeparator="," decimalPlaces="0" converter="javax.faces.Integer"  />
+                            </p:column>
+
+                            <p:column headerText="Vencimiento" sortBy="#{cuenta.vencimiento}" filterBy="#{cuenta.vencimiento}" filterMatchMode="equals">
+                                <h:outputText value="#{cuenta.vencimiento}">
+	                                <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Empleado Asignado" sortBy="#{cuenta.empleadoAsignado.nombre}#{cuenta.empleadoAsignado.apellido}" filterBy="#{cuenta.empleadoAsignado.nombre}#{cuenta.empleadoAsignado.apellido}" filterMatchMode="contains">
+                                <h:outputText value="#{cuenta.empleadoAsignado.nombre} - #{cuenta.empleadoAsignado.apellido}" />
+                            </p:column>
+                            
+                            <p:column headerText="Factura" sortBy="#{cuenta.factura}" filterBy="#{cuenta.factura}" filterMatchMode="contains">
+                                <h:outputText value="#{cuenta.factura}" />
+                            </p:column>
+
+                            <p:column headerText="Fecha de venta" sortBy="#{cuenta.fecha}" >
+                                <h:outputText value="#{cuenta.fecha}" >
+                                    <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Acciones" style="width: 120px">
+                                <p:commandButton id="btnSaldos" icon="fa fa-fw fa-search" title="Ver saldos" 
+                                actionListener="#{manejarCuentaPorCobrar.seleccionar(cuenta)}" update="detalles" oncomplete="PF('detalles').show();" />
+
+                                <p:commandButton id="btnEditar" icon="ui-icon-pencil" title="Editar" rendered="#{accesos.esValido('actualizar')}"
+                                actionListener="#{manejarCuentaPorCobrar.seleccionar(cuenta)}" update="diaAbm" styleClass="boton-amarillo" oncomplete="PF('diaAbm').show();" />
+
+                                <p:commandButton id="btnEliminar" icon="ui-icon-trash" title="Eliminar" rendered="#{accesos.esValido('borrar')}" 
+                                actionListener="#{manejarCuentaPorCobrar.eliminar(cuenta)}" update="@form" styleClass="boton-rojo">
+                                    <p:confirm header="Confirmación" message="Está seguro de eliminar esta cuenta?" icon="fa fa-fw fa-exclamation-triangle" />
+                                </p:commandButton>
+                            </p:column>
+                            <p:blockUI block="lista" trigger="btnEliminar">
+                                <p>Eliminando... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+						</p:dataTable>
+		            </p:panel>
+		        </h:form>
+
+                <!-- Ventana de detalles -->
+                <p:dialog id="detalles" widgetVar="detalles" modal="true" responsive="true"
+                resizable="false" draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true">
+                   <f:facet name="header">
+                        <p:outputLabel value="Saldos de la cuenta." /> 
+                   </f:facet>
+
+                   <div class="ui-fluid">
+                     <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-8,ui-grid-col-8">
+    
+                        <h:outputLabel value="Total de cuenta:" />
+                        <p:inputNumber value="#{manejarCuentaPorCobrar.entidad.montoTotal}" readonly="true" 
+                        thousandSeparator="." decimalPlaces="0" converter="javax.faces.Integer" />
+
+                        <h:outputLabel value="Total de cuotas:" />
+                        <p:inputNumber value="#{manejarCuentaPorCobrar.entidad.cuotas}" readonly="true" 
+                        thousandSeparator="." decimalPlaces="0" converter="javax.faces.Integer" />
+
+                        <h:outputLabel value="Primer vencimiento:" />
+                        <h:outputText value="#{manejarCuentaPorCobrar.entidad.vencimiento}">
+                            <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                        </h:outputText>
+
+                      </p:panelGrid>
+
+                      <p:dataTable value="#{manejarCuentaPorCobrar.entidad.saldos}" var="saldo" rows="6" emptyMessage="No hay saldos asignados." 
+                      rowStyleClass="text-center" reflow="true" paginator="true" rowsPerPageTemplate="10,50,100"
+                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+                        <f:facet name="header">
+                           Listado de saldos
+                        </f:facet>
+
+                        <p:column headerText="Id de saldo">
+                           <h:outputText value="#{saldo.id}" />
+                        </p:column>
+
+                         <p:column headerText="Monto">
+                           <p:inputNumber value="#{saldo.saldo}" readonly="true" 
+                            thousandSeparator="." decimalPlaces="0" converter="javax.faces.Integer"  />
+                         </p:column>
+
+                         <p:column headerText="Cuota" >
+                            <h:outputText value="#{saldo.cuota}" />
+                         </p:column>
+
+                         <p:column headerText="Total Cuota">
+                            <h:outputText value="#{saldo.totalCuota}" />
+                         </p:column>
+
+                         <p:column headerText="Vencimiento">
+                            <h:outputText value="#{saldo.vencimiento}" >
+                              <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                            </h:outputText>
+                         </p:column>
+
+                         <p:column headerText="Fecha de Gestion">
+                            <h:outputText value="#{saldo.fechaGestion}" >
+                              <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                            </h:outputText>
+                         </p:column>
+
+                         <p:column headerText="Emp. Asign">
+	                         <p:selectOneMenu id="txtEmpAsign" value="#{saldo.empleadoAsignado}" converter="omnifaces.SelectItemsConverter"
+	                          dynamic="true" style="opacity:1.00 !important;filter:Alpha(Opacity=100);" disabled="true">
+	                            <f:selectItem noSelectionOption="true" itemLabel="Sin cliente" />
+	                            <f:selectItems value="#{manejarEmpleado.lista}" var="empleado" itemValue="#{empleado.id}"
+	                            itemLabel="#{empleado.nombre} #{empleado.apellido}" />
+	                         </p:selectOneMenu>
+                         </p:column>
+                       </p:dataTable>
+                    </div>
+                </p:dialog>
+
+		        <!-- Ventana de administracion -->
+                <p:dialog id="diaAbm" widgetVar="diaAbm" modal="true" responsive="true"
+                resizable="false" draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true">
+                        <f:facet name="header">
+                            <h:outputText id="diaCabecera" value="#{manejarCuentaPorCobrar.funcion == 'modificar' ? 'Modificar Cuenta' : 'Cargar nuevo Cuenta'}"/>
+                        </f:facet>
+                        <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+                        <h:form id="formAbm">
+
+                            <p:message for="txtCliente" display="tooltip" />
+                            <p:message for="txtMonto" display="tooltip" />
+                            <p:message for="txtCuota" display="tooltip" />
+                            <p:message for="txtVencimiento" display="tooltip" />
+                            <p:message for="txtEmpAsignado" display="tooltip" />
+                            <p:message for="txtFactura" display="tooltip" />
+                            <p:message for="txtFecha" display="tooltip" />
+
+                            <div class="ui-fluid">
+	                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-8,ui-grid-col-8">
+	                                <p:outputLabel id="lblCliente" for="txtCliente" value="Cliente:" />
+                                    <p:selectOneMenu id="txtCliente" value="#{manejarCuentaPorCobrar.entidad.cliente}" converter="omnifaces.SelectItemsConverter"
+                                    filter="true" filterMatchMode="contains" dynamic="true" title="Seleccione el cliente al cual pertenece la cuenta"
+                                    disabled="#{manejarCuentaPorCobrar.funcion == 'modificar'}">
+                                        <f:selectItems value="#{manejarCliente.lista}" var="cliente" itemValue="#{cliente}"
+                                        itemLabel="#{cliente.primerNombre} #{cliente.primerApellido}" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel id="lblMonto" for="txtMonto" value="Monto Total:" />
+									<p:inputNumber id="txtMonto" value="#{manejarCuentaPorCobrar.entidad.montoTotal}" thousandSeparator="." decimalPlaces="0" converter="javax.faces.Integer"
+									required="true" requiredMessage="Debe ingresar el monto de la cuenta." disabled="#{manejarCuentaPorCobrar.funcion == 'modificar'}"/>
+
+                                    <p:outputLabel id="lblCuota" for="txtCuota" value="Cant. Cuotas:" />
+									<p:inputNumber id="txtCuota"  value="#{manejarCuentaPorCobrar.entidad.cuotas}" thousandSeparator="." decimalPlaces="0" converter="javax.faces.Integer"
+									required="true" requiredMessage="Debe ingresar la cantidad de cuotas a generar." disabled="#{manejarCuentaPorCobrar.funcion == 'modificar'}"/>
+
+                                    <p:outputLabel id="lblVencimiento" for="txtVencimiento" value="Vencimiento:" />
+									<p:calendar id="txtVencimiento" value="#{manejarCuentaPorCobrar.entidad.vencimiento}"  pattern="dd-MM-yyyy" locale="es"
+									required="true" requiredMessage="Debe ingresar la fecha de vencimiento." disabled="#{manejarCuentaPorCobrar.funcion == 'modificar'}"/>
+
+                                    <p:outputLabel id="lblEmpAsignado" for="txtEmpAsignado" value="Empleado asignado:" />
+									<p:selectOneMenu id="txtEmpAsignado" value="#{manejarCuentaPorCobrar.entidad.empleadoAsignado}" converter="omnifaces.SelectItemsConverter"
+                                    filter="true" filterMatchMode="contains" dynamic="true" title="Seleccione el empleado asignado a la cuenta"
+                                    required="true" requiredMessage="Debe seleccionar un empleado al cual asignar la cuenta."
+                                    valueChangeListener="#{manejarCuentaPorCobrar.cambioEmpAsig}">
+                                        <f:selectItems value="#{manejarEmpleado.lista}" var="empleado" itemValue="#{empleado}"
+                                        itemLabel="#{empleado.nombre} #{empleado.apellido}" itemDisabled="#{empleado.estado == 'Inactivo'}" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel id="lblFactura" for="txtFactura" value="Nro. Factura:" />
+									<p:inputMask id="txtFactura" value="#{manejarCuentaPorCobrar.entidad.factura}" mask="999-999-9999999"
+									required="true" requiredMessage="Debe ingresar un numero de factura." />
+
+                                    <p:outputLabel id="lblFecha" for="txtFecha" value="Fecha de venta:" />
+									<p:calendar id="txtFecha" value="#{manejarCuentaPorCobrar.entidad.fecha}"  pattern="dd-MM-yyyy" locale="es"
+									required="true" requiredMessage="Debe ingresar la fecha de venta" disabled="#{manejarCuentaPorCobrar.funcion == 'modificar'}"/>
+
+	                                <p:commandButton id="btnCrear"  value="Crear" actionListener="#{manejarCuentaPorCobrar.guardar}" rendered="#{manejarCuentaPorCobrar.funcion == 'agregar'}"
+	                                icon="ui-icon-check" update=":formLista @form" styleClass="boton-verde" />
+	                                <p:commandButton id="btnModificar"  value="Modificar" update=":formLista @form" actionListener="#{manejarCuentaPorCobrar.modificar}" rendered="#{manejarCuentaPorCobrar.funcion == 'modificar'}"
+	                                icon="ui-icon-check" styleClass="boton-amarillo" />
+	                                <p:commandButton id="btnCancelar" value="Cancelar" styleClass="boton-rojo"
+	                                icon="ui-icon-cancel" immediate="true" onclick="PF('diaAbm').hide();"/>
+	                            </p:panelGrid>
+                            </div>
+
+                            <p:contextMenu for="txtCliente" >
+                              <p:menuitem value="Actualizar listado" action="#{manejarCliente.generarLista()}" icon="fa fa-fw fa-refresh"
+                              iconPos="left" update="txtCliente" /> 
+                            </p:contextMenu>
+
+                            <p:contextMenu for="txtEmpAsignado" >
+                              <p:menuitem value="Actualizar listado" action="#{manejarEmpleado.generarLista()}" icon="fa fa-fw fa-refresh"
+                              iconPos="left" update="txtEmpAsignado" /> 
+                            </p:contextMenu>
+
+                            <p:blockUI block="formAbm" trigger="btnCrear,btnModificar,btnCancelar">
+                                <p>Procesando cambio... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+                        </h:form>
+                </p:dialog>
+
+                <!-- Ventana de confirmacion -->
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes boton-verde" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no boton-rojo" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

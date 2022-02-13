@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+	<h:head>
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Administracion de Gestion de Visitas
+            </ui:define>
+
+            <ui:define name="contenido">
+                <h:outputScript name="js/spanishLocales.js" />
+                <p:panel header="Generacion de Visitas" rendered="#{accesos.esValido('leer')}" >
+                        <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+                        <h:form id="formAbm">
+                            <div class="ui-fluid">
+                                <p:panelGrid columns="4" layout="grid" style="margin-top:0px;margin-bottom:0px;" styleClass="ui-panelgrid-blank"
+                                columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4">
+
+                                    <p:outputLabel id="lblSaldo" for="txtSaldo" value="Id. Saldo:" style="text-align:right;" />
+                                    <h:outputText id="txtSaldo" value="#{manejarGestionVisita.entidad.saldo.id}" />
+
+                                    <p:outputLabel id="lblCliente" for="txtCliente" value="Cliente:" style="text-align:right;" />
+                                    <p:selectOneMenu id="txtCliente" value="#{manejarGestionVisita.entidad.saldo.cliente}" converter="omnifaces.SelectItemsConverter"
+                                    filter="true" filterMatchMode="contains" dynamic="true" title="Seleccione el cliente asignado a la cuenta."
+                                    required="true" requiredMessage="Debe seleccionar el cliente asignado a la cuenta." disabled="true"
+                                    style="opacity:1.00 !important;filter:Alpha(Opacity=100);">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Sin cliente" />
+                                        <f:selectItems value="#{manejarCliente.lista}" var="cliente" itemValue="#{cliente.id}"
+                                        itemLabel="#{cliente.primerNombre} #{cliente.segundoNombre} #{cliente.primerApellido} #{cliente.segundoApellido}" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel id="lblFecha" for="txtFecha" value="Fecha:" style="text-align:right;" />
+                                    <h:outputText id="txtFecha" value="#{manejarGestionVisita.entidad.fecha}">
+                                        <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                                    </h:outputText>
+
+                                    <p:outputLabel id="lblEmpCarga" for="txtEmpCarga" value="Empleado Carga:" style="text-align:right;" />
+                                    <h:outputText id="txtEmpCarga" value="#{manejarGestionVisita.entidad.empleadoCarga.nombre} #{manejarGestionVisita.entidad.empleadoCarga.apellido}" />
+
+                                    <p:outputLabel id="lblMotivo" for="txtMotivo" value="Motivo:" style="text-align:right;" />
+                                    <p:selectOneMenu id="txtMotivo" value="#{manejarGestionVisita.entidad.motivo}" converter="omnifaces.SelectItemsConverter"
+                                    filter="true" filterMatchMode="contains" dynamic="true" title="Seleccione el motivo de la visita"
+                                    required="true" requiredMessage="Debe seleccionar un motivo de visita.">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Asignar motivo de visita" />
+                                        <f:selectItems value="#{manejarMotivo.lista}" var="motivo" itemValue="#{motivo}"
+                                        itemLabel="#{motivo.descripcion}" />
+                                        <p:ajax event="change" update="lblGeorreferencia txtGeorreferencia"/>
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel id="lblMonto" for="txtMonto" value="Monto a cobrar:" style="text-align:right;" />
+                                    <p:inputNumber id="txtMonto" value="#{manejarGestionVisita.entidad.monto}"
+                                    thousandSeparator="." decimalSeparator="," decimalPlaces="0" converter="javax.faces.Integer"
+                                    required="true" requiredMessage="Debe ingresar el monto a cobrar."/>
+
+                                    <p:outputLabel id="lblEmpVisita" for="txtEmpVisita" value="Empleado visita:" style="text-align:right;" />
+                                    <p:selectOneMenu id="txtEmpVisita" value="#{manejarGestionVisita.entidad.empleadoVisita}" converter="omnifaces.SelectItemsConverter"
+                                    filter="true" filterMatchMode="contains" dynamic="true" title="Seleccione el empleado asignado a la visita"
+                                    required="true" requiredMessage="Debe seleccionar un empleado al cual asignar la visita." >
+                                        <f:selectItem itemLabel="Seleccione un empleado" noSelectionOption="true" />
+                                        <f:selectItems value="#{manejarEmpleado.lista}" var="empleado" itemValue="#{empleado}"
+                                        itemLabel="#{empleado.nombre} #{empleado.apellido}" itemDisabled="#{empleado.estado ? false || (empleado.cargo.descripcion ne 'Cajero' &amp;&amp; empleado.cargo.descripcion ne 'Cobrador' &amp;&amp; empleado.cargo.descripcion ne 'Operativo Cobranza' &amp;&amp; empleado.cargo.descripcion ne 'Jefe de Cobranza' ) : true}" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel id="lblFormaPago" for="txtFormaPago" value="Forma de pago:" style="text-align:right;" />
+                                    <p:selectOneMenu id="txtFormaPago" value="#{manejarGestionVisita.entidad.formaDePago}" converter="omnifaces.SelectItemsConverter"
+                                    filter="true" filterMatchMode="contains" dynamic="true" title="Seleccione la forma de pago"
+                                    required="true" requiredMessage="Debe seleccionar la forma de pago.">
+                                        <f:selectItems value="#{manejarFormaDePago.lista}" var="formaDePago"
+                                        itemValue="#{formaDePago}" itemLabel="#{formaDePago.descripcion}" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel id="lblGeorreferencia" for="txtGeorreferencia" value="Lugar de visita:" style="text-align:right;" />
+                                    <p:selectOneMenu id="txtGeorreferencia" value="#{manejarGestionVisita.entidad.lugarVisita}" converter="omnifaces.SelectItemsConverter"
+                                    filter="true" filterMatchMode="contains" dynamic="true" title="Seleccione el lugar de visita"
+                                    required="#{manejarGestionVisita.entidad.motivo.ruteo}" requiredMessage="Debe seleccionar el lugar de visita.">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Lugar de visita no seleccionado" />
+                                        <f:selectItems value="#{manejarGestionVisita.listaGeorreferenciaCliente}" var="lugar" itemValue="#{lugar}"
+                                        itemLabel="#{lugar.descripcion}" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel id="lblFechaVisita" for="txtFechaVisita" value="Fecha de visita:" style="text-align:right;" />
+                                    <p:calendar id="txtFechaVisita" value="#{manejarGestionVisita.entidad.fechaVisita}"
+                                    pattern="dd-MM-yyyy" mask="true" required="true" locale="es" navigator="true"
+                                    requiredMessage="Debe ingresar la fecha de visita."/>
+
+                                    <p:outputLabel id="lblComentario" for="txtComentario" value="Comentario:" style="text-align:right;" />
+                                    <p:inputTextarea id="txtComentario" rows="6" cols="33" value="#{manejarGestionVisita.entidad.comentario}" />
+
+                                    <p:column />
+                                    <p:column />
+                                    <p:column />
+                                    <p:commandButton id="btnCrear"  value="Crear" actionListener="#{manejarGestionVisita.guardar}"
+                                    icon="ui-icon-check" update="formAbm listaSaldos" styleClass="boton-verde" />
+                                    <p:commandButton id="btnCancelar" value="Cancelar" styleClass="boton-rojo"
+                                    icon="ui-icon-cancel" update="formAbm" />
+                                    <p:column />
+                                </p:panelGrid>
+                            </div>
+
+                            <p:message for="txtMonto" display="tooltip" />
+							<p:message for="txtEmpVisita" display="tooltip" />
+							<p:message for="txtEmpCarga" display="tooltip" />
+							<p:message for="txtMotivo" display="tooltip" />
+							<p:message for="txtGeorreferencia" display="tooltip" />
+							<p:message for="txtFechaVisita" display="tooltip" />
+
+                            <p:contextMenu for="txtEmpCarga" >
+                              <p:menuitem value="Actualizar listado" action="#{manejarEmpleado.generarLista()}" icon="fa fa-fw fa-refresh"
+                              iconPos="left" update="txtEmpCarga" /> 
+                            </p:contextMenu>
+
+                            <p:contextMenu for="txtFormaPago" >
+                              <p:menuitem value="Actualizar listado" action="#{manejarFormaDePago.generarLista()}" icon="fa fa-fw fa-refresh"
+                              iconPos="left" update="txtFormaPago" /> 
+                            </p:contextMenu>
+
+                            <p:contextMenu for="txtMotivo" >
+                              <p:menuitem value="Actualizar listado" action="#{manejarGestionVisita.generarLista()}" icon="fa fa-fw fa-refresh"
+                              iconPos="left" update="txtMotivo" /> 
+                            </p:contextMenu>
+
+                            <p:contextMenu for="txtGeorreferencia" >
+                              <p:menuitem value="Actualizar listado" action="#{manejarGeorreferencia.generarLista()}" icon="fa fa-fw fa-refresh"
+                              iconPos="left" update="txtGeorreferencia" /> 
+                            </p:contextMenu>
+
+
+                            <p:blockUI block="formAbm" trigger="btnCrear,btnCancelar">
+                                <p>Procesando cambio... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+                        </h:form>
+                </p:panel >
+
+                <!-- Lista de saldos -->
+               <p:dataTable id="listaSaldos" widgetVar="listaSaldos" rows="10" paginator="true" reflow="true"
+               var="saldos" value="#{manejarGestionVisita.listaSaldos}" filteredValue="#{manejarGestionVisita.listaSaldosFiltro}"
+               paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+               currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} Saldos."
+               rowsPerPageTemplate="10,50,100" emptyMessage="No hay resultados a mostrar." rowStyleClass="text-center" 
+               selectionMode="single" rowKey="#{saldos.id}">
+                    <f:facet name="header">
+                        Saldos de clientes
+                    </f:facet>
+
+                    <p:ajax event="rowSelect" listener="#{manejarGestionVisita.seleccionarSaldo}" update="formAbm" />
+
+                    <p:column headerText="Código" sortBy="#{saldos.id}" filterBy="#{saldos.id}" filterMatchMode="contains">
+                        <h:outputText value="#{saldos.id}" />
+                    </p:column>
+
+                    <p:column headerText="Saldo" sortBy="#{saldos.saldo}" filterBy="#{saldos.saldo}" filterMatchMode="contains">
+                         <h:outputText value="#{saldos.saldo}" />
+                    </p:column>
+
+                    <p:column headerText="Cuota" sortBy="#{saldos.cuota}" filterBy="#{saldos.cuota}" filterMatchMode="equals">
+                         <h:outputText value="#{saldos.cuota}" />
+                    </p:column>
+
+                    <p:column headerText="De" sortBy="#{saldos.totalCuota}" filterBy="#{saldos.totalCuota}" filterMatchMode="equals">
+                         <h:outputText value="#{saldos.totalCuota}" />
+                    </p:column>
+
+                    <p:column headerText="Vencimiento" sortBy="#{saldos.vencimiento}" filterBy="#{saldos.vencimiento}" filterMatchMode="equals">
+                         <h:outputText value="#{saldos.vencimiento}" >
+                            <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                         </h:outputText>
+                    </p:column>
+
+               </p:dataTable>
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

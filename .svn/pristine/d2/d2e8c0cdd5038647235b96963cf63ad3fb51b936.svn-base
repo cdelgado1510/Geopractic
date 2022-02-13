@@ -1,0 +1,6 @@
+servidor=localhost
+puerto=5432
+basededatos=geopractic
+userAdmin=geopractic
+senhaAdmin=geopractic
+ssl=true

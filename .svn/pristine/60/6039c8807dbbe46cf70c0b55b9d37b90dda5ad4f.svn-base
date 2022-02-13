@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+	<h:head>
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Administracion de Forma de pago
+            </ui:define>
+
+            <ui:define name="contenido">
+		        <h:form id="formLista" rendered="#{accesos.esValido('leer')}">
+		            <p:panel header="Administracion de Rastreadores GPS">
+
+                        <f:facet name="actions">
+                            <p:commandButton icon="fa fa-fw fa-plus" value="Agregar Forma de pago" rendered="#{accesos.esValido('crear')}"
+                            actionListener="#{manejarRastreador.setFuncion('agregar')}" update=":formAbm :diaCabecera"
+                            onclick="PF('diaAbm').show();" styleClass="boton-verde"/>            
+                        </f:facet>
+
+		                <p:dataTable id="lista" widgetVar="tablalista" var="rastreador" value="#{manejarRastreador.lista}" rows="10" paginator="true" reflow="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} Rastreadores."
+                         rowsPerPageTemplate="10,50,100" emptyMessage="No hay resultados a mostrar."
+                         rowStyleClass="text-center" filteredValue="#{manejarRastreador.listaFiltro}">
+						    <p:column headerText="Código" sortBy="#{rastreador.id}" filterBy="#{rastreador.id}" filterMatchMode="contains">
+						        <h:outputText value="#{rastreador.id}" />
+						    </p:column>
+						 
+						    <p:column headerText="Descripcion" sortBy="#{rastreador.descripcion}" filterBy="#{rastreador.descripcion}" filterMatchMode="contains">
+						        <div align="left">
+						          <h:outputText value="#{rastreador.descripcion}" />
+						        </div>
+						    </p:column>
+						 
+						    <p:column headerText="IMEI" sortBy="#{rastreador.imei}" filterBy="#{rastreador.imei}" filterMatchMode="contains">
+                              <h:outputText value="#{rastreador.imei}" />
+                            </p:column>
+                            
+                            <p:column headerText="Estado" sortBy="#{rastreador.estado.descripcion}" filterBy="#{rastreador.estado.descripcion}" filterMatchMode="contains">
+                              <h:outputText value="#{rastreador.estado.descripcion}" />
+                            </p:column>
+
+                            <p:column headerText="Empleado" sortBy="#{rastreador.empleadoAsignado.nombre} #{rastreador.empleadoAsignado.apellido}" filterBy="#{rastreador.empleadoAsignado.nombre} #{rastreador.empleadoAsignado.apellido}" filterMatchMode="contains">
+                              <h:outputText value="#{rastreador.empleadoAsignado.nombre} #{rastreador.empleadoAsignado.apellido}" />
+                            </p:column>
+
+                            <p:column headerText="Acciones" style="width: 120px">
+                                <p:commandButton id="btnEditar" icon="ui-icon-pencil" title="Editar" rendered="#{accesos.esValido('actualizar')}"
+                                actionListener="#{manejarRastreador.seleccionar(rastreador)}" update="diaAbm" styleClass="boton-amarillo" oncomplete="PF('diaAbm').show();" />
+
+                                <p:commandButton id="btnEliminar" icon="ui-icon-trash" title="Eliminar" rendered="#{accesos.esValido('borrar')}" 
+                                actionListener="#{manejarRastreador.eliminar(rastreador)}" update="@form" styleClass="boton-rojo">
+                                    <p:confirm header="Confirmación" message="Está seguro de eliminar este rastreador?" icon="fa fa-fw fa-exclamation-triangle" />
+                                </p:commandButton>
+                            </p:column>
+                            <p:blockUI block="lista" trigger="btnEliminar">
+                                <p>Eliminando... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+						</p:dataTable>
+		            </p:panel>
+		        </h:form>
+		        
+		        <!-- Ventana de administracion -->
+                <p:dialog id="diaAbm" widgetVar="diaAbm" modal="true" responsive="true"
+                resizable="false" draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true">
+                        <f:facet name="header">
+                            <h:outputText id="diaCabecera" value="#{manejarRastreador.funcion == 'modificar' ? 'Modificar Rastreador' : 'Agregar nuevo Rastreador'}"/>
+                        </f:facet>
+                        <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+                        <h:form id="formAbm">
+
+                            <p:message for="txtDescripcion" display="tooltip" />
+                            <p:message for="txtImei" display="tooltip" />
+                            <p:message for="txtEstado" display="tooltip" />
+                            <p:message for="txtEmpleado" display="tooltip" />
+
+                            <p:contextMenu for="txtEstado" >
+                                 <p:menuitem value="Actualizar listado" action="#{manejarEstadosRastreador.generarLista}" icon="fa fa-fw fa-refresh"
+                                 iconPos="left" update="txtEstado" /> 
+                            </p:contextMenu>
+
+                            <p:contextMenu for="txtEmpleado" >
+                                 <p:menuitem value="Actualizar listado" action="#{manejarEmpleado.generarLista}" icon="fa fa-fw fa-refresh"
+                                 iconPos="left" update="txtEmpleado" /> 
+                            </p:contextMenu>
+
+                            <div class="ui-fluid">
+	                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-8,ui-grid-col-8">
+	                                <p:outputLabel id="lblDescripcion" for="txtDescripcion" value="Descripcion:" />
+	                                <p:inputText id="txtDescripcion" value="#{manejarRastreador.entidad.descripcion}" required="true"
+	                                requiredMessage="Debe ingresar una descripcion.">
+	                                    <f:validateLength minimum = "5"/>
+	                                </p:inputText>
+
+                                    <p:outputLabel id="lblImei" for="txtImei" value="IMEI:" />
+                                    <p:inputText id="txtImei" value="#{manejarRastreador.entidad.imei}" required="true"
+                                    requiredMessage="Debe ingresar un numero de IMEI.">
+                                        <f:validateLength minimum = "10"/>
+                                    </p:inputText>
+                                    
+                                     <p:outputLabel id="lblEstado" for="txtEstado" value="Estado:" />
+                                    <p:selectOneMenu id="txtEstado" value="#{manejarRastreador.entidad.estado}" converter="omnifaces.SelectItemsConverter"
+                                    filter="true" filterMatchMode="contains" required="true" 
+                                    requiredMessage="Debe seleccionar un estado de rastreador GPS.">
+                                        <f:selectItems value="#{manejarEstadosRastreador.lista}" var="estado" itemValue="#{estado}"
+                                        itemLabel="#{estado.descripcion}" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel id="lblEmpleado" for="txtEmpleado" value="Empleado:" />
+                                    <p:selectOneMenu id="txtEmpleado" value="#{manejarRastreador.entidad.empleadoAsignado}" converter="omnifaces.SelectItemsConverter"
+                                    filter="true" filterMatchMode="contains" required="true" 
+                                    requiredMessage="Debe asignar un empleado al rastreador.">
+                                        <f:selectItems value="#{manejarEmpleado.lista}" var="empleado" itemValue="#{empleado}"
+                                        itemLabel="#{empleado.nombre} #{empleado.apellido}" />
+                                    </p:selectOneMenu>
+
+	                                <p:commandButton id="btnCrear"  value="Crear" actionListener="#{manejarRastreador.guardar}" rendered="#{manejarRastreador.funcion == 'agregar'}"
+	                                icon="ui-icon-check" update=":formLista @form" styleClass="boton-verde" />
+	                                <p:commandButton id="btnModificar"  value="Modificar" update=":formLista @form" actionListener="#{manejarRastreador.modificar}" rendered="#{manejarRastreador.funcion == 'modificar'}"
+	                                icon="ui-icon-check" styleClass="boton-amarillo" />
+	                                <p:commandButton id="btnCancelar" value="Cancelar" styleClass="boton-rojo"
+	                                icon="ui-icon-cancel" immediate="true" onclick="PF('diaAbm').hide();"/>
+	                            </p:panelGrid>
+                            </div>
+                            <p:blockUI block="formAbm" trigger="btnCrear,btnModificar,btnCancelar">
+                                <p>Procesando cambio... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+                        </h:form>
+                </p:dialog>
+
+                <!-- Ventana de confirmacion -->
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes boton-verde" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no boton-rojo" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

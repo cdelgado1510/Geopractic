@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">
+
+	<h:head>
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Administracion de Clientes
+            </ui:define>
+        
+            <ui:define name="contenido">
+                <h:outputScript name="js/spanishLocales.js" />
+		        <h:form id="formLista" rendered="#{accesos.esValido('leer')}">
+		            <p:panel header="Listado de clientes">
+
+                        <f:facet name="actions">
+                            <p:commandButton icon="fa fa-fw fa-plus" value="Agregar Nuevo Cliente" rendered="#{accesos.esValido('crear')}"
+                            actionListener="#{manejarCliente.setFuncion('agregar')}" update=":formAbm :diaCabecera"
+                            onclick="PF('diaAbm').show();" styleClass="boton-verde"/>
+                        </f:facet>
+
+		                <p:dataTable id="lista" widgetVar="tablalista" var="cliente" value="#{manejarCliente.lista}" rows="10" paginator="true" reflow="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} Clientes."
+                         rowsPerPageTemplate="10,50,100" emptyMessage="No hay resultados a mostrar."
+                         rowStyleClass="text-center" filteredValue="#{manejarCliente.listaFiltro}">
+
+						    <p:column headerText="Código" sortBy="#{cliente.id}" filterBy="#{cliente.id}" filterMatchMode="contains">
+						        <h:outputText value="#{cliente.id}" />
+						    </p:column>
+
+							<p:column headerText="Nombre" sortBy="#{cliente.primerNombre}" filterBy="#{cliente.primerNombre}" filterMatchMode="contains">
+							    <h:outputText value="#{cliente.primerNombre} #{cliente.segundoNombre}" />
+							</p:column>
+							                         
+							<p:column headerText="Apellido" sortBy="#{cliente.primerApellido}" filterBy="#{cliente.primerApellido}" filterMatchMode="contains">
+							    <h:outputText value="#{cliente.primerApellido} #{cliente.segundoApellido} #{cliente.apellidoCasada}" />
+							</p:column>
+
+                            <p:column headerText="Nro. de Documento" sortBy="#{cliente.nroDocumento}" filterBy="#{cliente.nroDocumento}" filterMatchMode="contains">
+                                <h:outputText value="#{cliente.nroDocumento}" />
+                            </p:column>
+
+                            <p:column headerText="RUC" sortBy="#{cliente.ruc}" filterBy="#{cliente.ruc}" filterMatchMode="contains">
+                                <h:outputText value="#{cliente.ruc}" />
+                            </p:column>
+                                                        
+                            <p:column headerText="Acciones" style="width: 160px">
+                                <p:commandButton id="btnDetalle" icon="fa fa-fw fa-search" title="Detalles" 
+                                actionListener="#{manejarCliente.seleccionar(cliente)}" update="detalles" oncomplete="PF('detalles').show();" />
+
+                                <p:commandButton id="btnTelef" icon="fa fa-fw fa-tty" title="Agregar Telefono" rendered="#{accesos.esValido('actualizar')}"
+                                actionListener="#{manejarCliente.seleccionar(cliente)}" update="diaTelf" oncomplete="PF('diaTelf').show();" />
+
+                                <p:commandButton id="btnEditar" icon="ui-icon-pencil" title="Editar" rendered="#{accesos.esValido('actualizar')}"
+                                actionListener="#{manejarCliente.seleccionar(cliente)}" update="diaAbm" styleClass="boton-amarillo" oncomplete="PF('diaAbm').show();" />
+
+                                <p:commandButton id="btnEliminar" icon="ui-icon-trash" title="Eliminar" rendered="#{accesos.esValido('borrar')}" 
+                                actionListener="#{manejarCliente.eliminar(cliente)}" update="@form" styleClass="boton-rojo">
+                                    <p:confirm header="Confirmación" message="Está seguro de eliminar esta cliente?" icon="ui-icon-alert" />
+                                </p:commandButton>
+
+                                <p:blockUI block="lista" trigger="btnEliminar">
+                                    <p>Eliminando... </p>
+                                    <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                                </p:blockUI>
+                            </p:column>
+						</p:dataTable>
+		            </p:panel>
+		        </h:form>
+
+                <!-- Ventana de detalles -->
+                <p:dialog id="detalles" widgetVar="detalles" modal="true" responsive="true"
+                resizable="false" draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true">
+                    <p:tabView id="detallesCliente">
+                        <p:tab title="Datos Personales">
+		                    <div class="ui-fluid">
+		                      <p:panelGrid columns="4" layout="grid" columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4">
+                                    <f:facet name="header">
+                                        <p:outputLabel value="Datos del Cliente" /> 
+                                    </f:facet>
+
+                                    <p:outputLabel value="Primer Nombre:" />
+                                    <p:outputLabel value="#{manejarCliente.entidad.primerNombre}" />
+                                    <p:outputLabel value="Segundo Nombre:" />
+                                    <p:outputLabel value="#{manejarCliente.entidad.segundoNombre}" />
+
+                                    <p:outputLabel value="Primer Apellido:" />
+                                    <p:outputLabel value="#{manejarCliente.entidad.primerApellido}" />
+                                    <p:outputLabel value="Segundo Apellido:" />
+                                    <p:outputLabel value="#{manejarCliente.entidad.segundoApellido}" />
+
+                                    <p:outputLabel value="Apellido de Casada:" />
+                                    <p:outputLabel value="#{manejarCliente.entidad.apellidoCasada}" />
+                                    <p:outputLabel value="Nro. Documento:" />
+                                    <p:outputLabel value="#{manejarCliente.entidad.nroDocumento}" />
+
+                                    <p:outputLabel value="R.U.C.:" />
+                                    <p:outputLabel value="#{manejarCliente.entidad.ruc}" />
+                                    <p:outputLabel value="Tipo de Documento:" />
+                                    <p:outputLabel value="#{manejarCliente.entidad.tipoDocumento.descripcion}" />
+
+                                    <p:outputLabel value="Fecha Nacimiento:" />
+                                    <h:outputText value="#{manejarCliente.entidad.fechaNacimiento}" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                    <p:outputLabel value="Vencimiento Documento:" />
+                                    <h:outputText value="#{manejarCliente.entidad.vencimientoDocumento}" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+
+                                    <p:outputLabel value="Fecha Creación:" />
+                                    <h:outputText value="#{manejarCliente.entidad.fechaCreacion}" >
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </h:outputText>
+                                    <p:outputLabel value="Estado:" />
+                                    <h:outputText value="#{manejarCliente.entidad.bloqueado ? 'Bloqueado': 'Desbloqueado'}" />    
+		                      </p:panelGrid>
+		                    </div>
+	                    </p:tab>
+	                    
+	                    <p:tab title="Teléfonos">
+                          <!-- Listado de telefonos -->
+                          <p:dataTable  value="#{manejarCliente.entidad.numerosTelefonicos}" var="numero" rows="10" paginator="true" reflow="true"
+                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                          currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} Teléfonos."
+                          rowsPerPageTemplate="10,50,100" emptyMessage="No se encontraron numeros de telefono." style="text-align: center;">
+                            <f:facet name="header">
+                              Números de telefono
+                            </f:facet>
+                            <p:column>
+                              <p:commandButton id="btnEliminarTelf" icon="ui-icon-trash" title="Eliminar" rendered="#{accesos.esValido('borrar')}" 
+                              actionListener="#{manejarCliente.eliminarTelf(numero)}"
+                              update="detallesCliente">
+                                <p:confirm header="Confirmación" message="Está seguro de eliminar este telefono?" icon="ui-icon-alert" />
+                               </p:commandButton>
+                            </p:column>
+                            <p:column>
+                              <h:outputText value="#{numero.tipoTelefono.nombre}" />
+                            </p:column>
+                            <p:column>
+                              <h:outputText value="#{numero.numero}" />
+                            </p:column>
+                           </p:dataTable>
+                        </p:tab>
+                    </p:tabView>
+                </p:dialog>
+
+		        <!-- Ventana de administracion -->
+		        <p:dialog id="diaAbm" widgetVar="diaAbm"  modal="true" responsive="true"
+                resizable="false" draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true">
+                        <f:facet name="header">
+                            <h:outputText id="diaCabecera" value="#{manejarRol.funcion == 'modificar' ? 'Modificar Cliente' : 'Agregar nuevo Cliente'}"/>
+                        </f:facet>
+                        <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+                        <h:form id="formAbm">
+                            <p:message for="txtPrimerNombre" display="tooltip" />
+                            <p:message for="txtPrimerApellido" display="tooltip" />
+                            <p:message for="txtNroDocumento" display="tooltip" />
+                            <p:message for="txtTipoDocumento" display="tooltip" />
+                            <p:message for="txtFechaNacimiento" display="tooltip" />
+                            <p:message for="txtVencimiento" display="tooltip" />
+
+                            <p:contextMenu for="txtTipoDocumento" >
+                                 <p:menuitem value="Actualizar listado" action="#{manejarTipoDoc.generarLista}" icon="fa fa-fw fa-refresh"
+                                 iconPos="left" update="txtTipoDocumento" /> 
+                            </p:contextMenu>
+
+                            <p:tooltip id="toolBloqueado" for="chkBloqueado" value="Bloquea o desbloquea la modificacion de los datos del cliente."
+                            trackMouse="true" rendered="#{manejarCliente.funcion == 'modificar'}" />
+
+                            <div class="ui-fluid">
+                                <p:panelGrid columns="4" layout="grid" columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4">
+								    <p:outputLabel id="lblPrimerNombre" for="txtPrimerNombre" value="Primer Nombre:" />
+								    <p:inputText id="txtPrimerNombre" value="#{manejarCliente.entidad.primerNombre}" required="true"
+								    requiredMessage="Debe ingresar el primer nombre.">
+                                       <f:validateLength minimum = "4"/>
+                                    </p:inputText>
+
+                                    <p:outputLabel id="lblSegundoNombre" for="txtSegundoNombre" value="Segundo Nombre:" />
+                                    <p:inputText id="txtSegundoNombre" value="#{manejarCliente.entidad.segundoNombre}" >
+                                        <f:validateLength minimum = "4"/>
+                                    </p:inputText>
+
+								    <p:outputLabel id="lblPrimerApellido" for="txtPrimerApellido" value="Primer Apellido:" />
+								    <p:inputText id="txtPrimerApellido" value="#{manejarCliente.entidad.primerApellido}" required="true"
+								    requiredMessage="Debe ingresar el primer apellido.">
+								        <f:validateLength minimum = "4"/>
+								    </p:inputText>
+
+                                    <p:outputLabel id="lblSegundoApellido" for="txtSegundoApellido" value="Segundo Apellido:" />
+                                    <p:inputText id="txtSegundoApellido" value="#{manejarCliente.entidad.segundoApellido}">
+                                        <f:validateLength minimum = "4"/>
+                                    </p:inputText>
+
+                                    <p:outputLabel id="lblApellidoCasada" for="txtApellidoCasada" value="Apellido de Casada:" />
+                                    <p:inputText id="txtApellidoCasada" value="#{manejarCliente.entidad.apellidoCasada}">
+                                        <f:validateLength minimum = "4"/>
+                                    </p:inputText>
+
+                                    <p:outputLabel id="lblNroDocumento" for="txtNroDocumento" value="Nro. Documento:" />
+                                    <p:inputText id="txtNroDocumento" value="#{manejarCliente.entidad.nroDocumento}" required="true" 
+                                    requiredMessage="Debe ingresar un número de documento.">
+                                        <f:validateLength minimum = "6"/>
+                                        <f:validator validatorId="com.geopractic.administracion.validacion.NroDocumentoValidacion" disabled="#{manejarCliente.funcion == 'modificar'}" />
+                                    </p:inputText>
+
+                                    <p:outputLabel id="lblRuc" for="txtRuc" value="R.U.C.:" />
+                                    <p:inputText id="txtRuc" value="#{manejarCliente.entidad.ruc}" >
+                                        <f:validateLength minimum = "6"/>
+                                        <f:validator validatorId="com.geopractic.administracion.validacion.NroDocumentoValidacion" disabled="#{manejarCliente.funcion == 'modificar'}" />
+                                    </p:inputText>
+
+                                    <p:outputLabel id="lblTipoDocumento" for="txtTipoDocumento" value="Tipo de Documento:" />
+                                    <p:selectOneMenu id="txtTipoDocumento" value="#{manejarCliente.entidad.tipoDocumento}" converter="omnifaces.SelectItemsConverter"
+                                    filter="true" filterMatchMode="contains" required="true" 
+                                    requiredMessage="Debe seleccionar el tipo de documento.">
+                                        <f:selectItems value="#{manejarTipoDoc.lista}" var="tipo" itemValue="#{tipo}"
+                                        itemLabel="#{tipo.descripcion}" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel id="lblFechaNacimiento" for="txtFechaNacimiento" value="Fecha Nacimiento:" />
+                                    <p:calendar id="txtFechaNacimiento" value="#{manejarCliente.entidad.fechaNacimiento}"
+                                    pattern="dd-MM-yyyy" mask="true" required="true" locale="es" navigator="true"
+                                    requiredMessage="Debe ingresar la fecha de nacimiento."/>
+
+                                    <p:outputLabel id="lblVencimiento" for="txtVencimiento" value="Vencimiento Documento:" />
+                                    <p:calendar id="txtVencimiento" value="#{manejarCliente.entidad.vencimientoDocumento}" 
+                                    pattern="dd-MM-yyyy" mask="true" required="true" locale="es" navigator="true"
+                                    requiredMessage="Debe ingresar la fecha de vencimiento del documento."/>
+
+                                    <p:outputLabel id="lblFechaCreacion" for="txtFechaCreacion" value="Fecha Creación:" rendered="#{manejarCliente.funcion == 'modificar'}" />
+                                    <p:outputLabel id="txtFechaCreacion" value="#{manejarCliente.entidad.fechaCreacion}" rendered="#{manejarCliente.funcion == 'modificar'}">
+                                        <f:convertDateTime pattern="dd-MM-yyyy" />
+                                    </p:outputLabel>
+
+                                    <p:outputLabel id="lblBloqueado" for="chkBloqueado" value="Bloqueado:" rendered="#{manejarCliente.funcion == 'modificar'}" />
+                                    <p:selectBooleanButton id="chkBloqueado" value="#{manejarCliente.entidad.bloqueado}" rendered="#{manejarCliente.funcion == 'modificar'}"
+                                    onLabel="Bloqueado" offLabel="Desbloqueado" style="width:110px" valueChangeListener="#{manejarCliente.cambioBloqueo}" />
+
+                                    <p:column />
+                                    <p:commandButton id="btnCrear"  value="Crear" actionListener="#{manejarCliente.guardar}" rendered="#{manejarCliente.funcion == 'agregar'}"
+                                    icon="ui-icon-check" update=":formLista @form" styleClass="boton-verde" />
+                                    <p:commandButton id="btnModificar"  value="Modificar" update=":formLista @form" actionListener="#{manejarCliente.modificar}" rendered="#{manejarCliente.funcion == 'modificar'}"
+                                    icon="ui-icon-check" styleClass="boton-amarillo" />                
+                                    <p:commandButton id="btnCancelar" value="Cancelar" styleClass="boton-rojo"
+                                    icon="ui-icon-cancel" immediate="true" onclick="PF('diaAbm').hide();"/>
+                                    <p:column />
+                                </p:panelGrid>
+                            </div>
+                            <p:blockUI block="formAbm" trigger="btnCrear,btnModificar,btnCancelar">
+                                <p>Procesando ... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+                        </h:form>
+                        <p:spotlight target="diaAbm" widgetVar="spot"/>
+                </p:dialog>
+
+                <!-- Ventana de agregado de telefono -->
+                <p:dialog id="diaTelf" widgetVar="diaTelf"  modal="true" responsive="true"
+                resizable="false" draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true"
+                header="Carga de Teléfono">
+                        <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+                        <h:form id="formAbmTelf">
+                            <p:message for="txtNumero" display="tooltip" />
+                            
+                            <p:contextMenu for="txtTipoTelefono" >
+                                 <p:menuitem value="Actualizar listado" action="#{manejarTipoTelf.generarLista()}" icon="fa fa-fw fa-refresh"
+                                 iconPos="left" update="txtTipoTelefono txtNumero" /> 
+                            </p:contextMenu>
+
+                            <div class="ui-fluid">
+                                <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-8,ui-grid-col-8">
+
+                                    <p:outputLabel id="lblTipoTelefono" for="txtTipoTelefono" value="Tipo de Teléfono:" />
+                                    <p:selectOneMenu id="txtTipoTelefono" value="#{manejarCliente.telefono.tipoTelefono}" converter="omnifaces.SelectItemsConverter"
+                                    filter="true" filterMatchMode="contains" required="true" 
+                                    requiredMessage="Debe seleccionar el tipo de telefono.">
+                                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione un tipo" />
+                                        <f:selectItems value="#{manejarTipoTelf.lista}" var="tipo" itemValue="#{tipo}"
+                                        itemLabel="#{tipo.nombre}" />
+                                        <p:ajax event="itemSelect" update="txtNumero" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel id="lblNumero" for="txtNumero" value="Telefono:" />
+                                    <p:inputMask id="txtNumero" value="#{manejarCliente.telefono.numero}" required="true"
+                                    mask="#{manejarCliente.telefono.tipoTelefono.patron}"
+                                    requiredMessage="Debe ingresar el número." />
+
+
+                                    <p:commandButton id="btnCrearTelf"  value="Crear" actionListener="#{manejarCliente.guardarTelf}"
+                                    icon="ui-icon-check" update=":formLista @form" styleClass="boton-verde" />
+                                    <p:commandButton id="btnCancelarTelf" value="Cancelar"  styleClass="boton-rojo"
+                                    icon="ui-icon-cancel" immediate="true" onclick="PF('diaTelf').hide();"/>
+                                </p:panelGrid>
+                            </div>
+                            <p:blockUI block="formAbmTelf" trigger="btnCrearTelf,btnCancelarTelf">
+                                <p>Agregando telefono...</p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+                        </h:form>
+                </p:dialog>
+
+                <!-- Ventana de confirmacion -->
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes boton-verde" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no boton-rojo" icon="ui-icon-close" />
+                </p:confirmDialog> 
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

@@ -1,0 +1,8 @@
+@startuml
+abstract class com.geopractic.controladores.Controlador
+class com.geopractic.controladores.ExcepcionControlador
+interface com.geopractic.controladores.IControlador
+interface com.geopractic.controladores.IControladorCrud
+com.geopractic.controladores.Controlador --|> com.geopractic.controladores.IControlador
+com.geopractic.controladores.IControlador --|> com.geopractic.controladores.IControladorCrud
+@enduml

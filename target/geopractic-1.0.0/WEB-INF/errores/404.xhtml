@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+    <h:head>
+        <title>Página no encontrada</title>
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <h:outputStylesheet library="css" name="bootstrap.min.css" />
+        <h:outputScript library="js" name="bootstrap.min.js" />
+        <h:outputStylesheet library="css" name="main.css" />
+    </h:head> 
+    <h:body>
+        <div class="contenedor-simple col-sm-12 col-md-12 col-lg-8 col-xl-4">
+            <h:form>
+                <h1 class="distorcion">Oops...</h1>
+                <h2>Error 404</h2>
+                <h3>El recurso o página no esta disponible o no existe.</h3>
+                <input class="btn btn-primary btn-lg" type="button" value="Volver atrás" onclick="history.back()" />
+                <a class="btn btn-primary btn-lg" role="button" href="#{request.contextPath}/index.xhtml">Página de Login</a>
+            </h:form>
+        </div>
+    </h:body> 
+</html>

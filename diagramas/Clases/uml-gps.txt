@@ -1,0 +1,42 @@
+@startuml
+class com.geopractic.gps.ConsultasOpenGts
+class com.geopractic.gps.ControladorEstadosRastreador
+class com.geopractic.gps.ControladorRastreador
+class com.geopractic.gps.bean.AdministradorEstadosRastreador
+class com.geopractic.gps.bean.AdministrarRastreador
+class com.geopractic.gps.bean.ManejoPanel
+class com.geopractic.gps.bean.ManejoRecorridos
+class com.geopractic.gps.dao.EstadosRastreadorGpsDao
+class com.geopractic.gps.dao.RastreadorDao
+class com.geopractic.gps.mapeos.EstadosRastreadorGpsMapeo
+class com.geopractic.gps.mapeos.RastreadorMapeo
+class com.geopractic.gps.modelo.Cuenta
+class com.geopractic.gps.modelo.DeviceList
+class com.geopractic.gps.modelo.EstadosRastreadorGps
+class com.geopractic.gps.modelo.EventData
+class com.geopractic.gps.modelo.Rastreador
+com.geopractic.gps.ConsultasOpenGts ..> com.geopractic.gps.modelo.Cuenta
+com.geopractic.gps.ConsultasOpenGts ..> com.geopractic.gps.modelo.Rastreador
+com.geopractic.gps.ControladorEstadosRastreador ..> com.geopractic.gps.dao.EstadosRastreadorGpsDao
+com.geopractic.gps.ControladorEstadosRastreador ..> com.geopractic.gps.modelo.EstadosRastreadorGps
+com.geopractic.gps.ControladorRastreador ..> com.geopractic.gps.dao.RastreadorDao
+com.geopractic.gps.ControladorRastreador ..> com.geopractic.gps.modelo.Rastreador
+com.geopractic.gps.bean.AdministradorEstadosRastreador ..> com.geopractic.gps.ControladorEstadosRastreador
+com.geopractic.gps.bean.AdministradorEstadosRastreador ..> com.geopractic.gps.modelo.EstadosRastreadorGps
+com.geopractic.gps.bean.AdministrarRastreador ..> com.geopractic.gps.ControladorRastreador
+com.geopractic.gps.bean.AdministrarRastreador ..> com.geopractic.gps.modelo.Rastreador
+com.geopractic.gps.bean.ManejoPanel ..> com.geopractic.gps.ConsultasOpenGts
+com.geopractic.gps.bean.ManejoPanel ..> com.geopractic.gps.modelo.Cuenta
+com.geopractic.gps.bean.ManejoPanel ..> com.geopractic.gps.modelo.DeviceList
+com.geopractic.gps.bean.ManejoPanel ..> com.geopractic.gps.modelo.EventData
+com.geopractic.gps.bean.ManejoRecorridos ..> com.geopractic.gps.ConsultasOpenGts
+com.geopractic.gps.bean.ManejoRecorridos ..> com.geopractic.gps.modelo.Cuenta
+com.geopractic.gps.bean.ManejoRecorridos ..> com.geopractic.gps.modelo.Rastreador
+com.geopractic.gps.dao.EstadosRastreadorGpsDao ..> com.geopractic.gps.mapeos.EstadosRastreadorGpsMapeo
+com.geopractic.gps.dao.EstadosRastreadorGpsDao ..> com.geopractic.gps.modelo.EstadosRastreadorGps
+com.geopractic.gps.dao.RastreadorDao ..> com.geopractic.gps.mapeos.RastreadorMapeo
+com.geopractic.gps.dao.RastreadorDao ..> com.geopractic.gps.modelo.Rastreador
+com.geopractic.gps.mapeos.EstadosRastreadorGpsMapeo ..> com.geopractic.gps.modelo.EstadosRastreadorGps
+com.geopractic.gps.mapeos.RastreadorMapeo ..> com.geopractic.gps.dao.EstadosRastreadorGpsDao
+com.geopractic.gps.mapeos.RastreadorMapeo ..> com.geopractic.gps.modelo.Rastreador
+@enduml

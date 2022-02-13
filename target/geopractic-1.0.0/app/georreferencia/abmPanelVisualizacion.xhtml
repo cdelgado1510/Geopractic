@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+	<h:head>
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Administracion de Panel de Visualizacion
+            </ui:define>
+
+            <ui:define name="contenido">
+		        <h:form id="formLista" rendered="#{accesos.esValido('leer')}">
+		            <p:panel header="Administracion de Paneles de Visualizacion">
+
+                        <f:facet name="actions">
+                            <p:commandButton icon="fa fa-fw fa-plus" value="Agregar Panel Visualizacion" rendered="#{accesos.esValido('crear')}"
+                            actionListener="#{manejarPanelVisualizacion.setFuncion('agregar')}" update=":formAbm :diaCabecera"
+                            onclick="PF('diaAbm').show();" styleClass="boton-verde"/>            
+                        </f:facet>
+
+		                <p:dataTable id="lista" widgetVar="tablalista" var="panel" value="#{manejarPanelVisualizacion.lista}" rows="10" paginator="true" reflow="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} Paneles de Visualizacion."
+                         rowsPerPageTemplate="10,50,100" emptyMessage="No hay resultados a mostrar."
+                         rowStyleClass="text-center" filteredValue="#{manejarPanelVisualizacion.listaFiltro}">
+
+						    <p:column headerText="Código" sortBy="#{panel.id}" filterBy="#{panel.id}" filterMatchMode="contains">
+						        <h:outputText value="#{panel.id}" />
+						    </p:column>
+						 
+						    <p:column headerText="Descripcion" sortBy="#{panel.descripcion}" filterBy="#{panel.descripcion}" filterMatchMode="contains">
+						        <div align="left">
+						          <h:outputText value="#{panel.descripcion}" />
+						        </div>
+						    </p:column>
+						 
+						    <p:column headerText="Intervalo Refresco" sortBy="#{panel.intervaloRefresco}" filterBy="#{panel.intervaloRefresco}">
+                              <h:outputText value="#{panel.intervaloRefresco}" />
+                            </p:column>
+
+                            <p:column headerText="Emp. Creadir" sortBy="#{panel.empleadoCreador}" filterBy="#{panel.empleadoCreador}" filterMatchMode="contains">
+                                <h:outputText value="#{panel.empleadoCreador.id} - #{panel.empleadoCreador.nombre} #{panel.empleadoCreador.apellido}" />
+                            </p:column>
+
+                            <p:column headerText="Acciones" style="width: 160px">
+                                <p:commandButton id="btnUrl" icon="fa fa-fw fa-share" title="Ver URL" 
+                                actionListener="#{manejarPanelVisualizacion.seleccionar(panel)}" update="urlPanel" oncomplete="PF('urlPanel').show();" />
+
+                                <p:commandButton id="btnDetalle" icon="fa fa-fw fa-search" title="Detalles" 
+                                actionListener="#{manejarPanelVisualizacion.seleccionar(panel)}" update="detalles" oncomplete="PF('detalles').show();" />
+
+                                <p:commandButton id="btnEditar" icon="ui-icon-pencil" title="Editar" rendered="#{accesos.esValido('actualizar')}"
+                                actionListener="#{manejarPanelVisualizacion.seleccionar(panel)}" update="diaAbm" styleClass="boton-amarillo" oncomplete="PF('diaAbm').show();" />
+
+                                <p:commandButton id="btnEliminar" icon="ui-icon-trash" title="Eliminar" rendered="#{accesos.esValido('borrar')}" 
+                                actionListener="#{manejarPanelVisualizacion.eliminar(panel)}" update="@form" styleClass="boton-rojo">
+                                    <p:confirm header="Confirmación" message="Está seguro de eliminar este panel?" icon="fa fa-fw fa-exclamation-triangle" />
+                                </p:commandButton>
+                            </p:column>
+                            <p:blockUI block="lista" trigger="btnEliminar">
+                                <p>Eliminando... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+						</p:dataTable>
+		            </p:panel>
+		        </h:form>
+
+                <!-- Ventana de detalles -->
+                <p:dialog id="detalles" widgetVar="detalles" modal="true" responsive="true"
+                resizable="false" draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true">
+                   <f:facet name="header">
+                        <p:outputLabel value="Datos Panel de Visualizacion" /> 
+                   </f:facet>
+
+                   <div class="ui-fluid">
+                     <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-8,ui-grid-col-8">
+    
+                        <h:outputLabel value="Descripcion:" />
+                        <h:outputLabel value="#{manejarPanelVisualizacion.entidad.descripcion}" />
+
+                        <h:outputLabel value="Tiempo de refresco:" />
+                        <h:outputLabel value="#{manejarPanelVisualizacion.entidad.intervaloRefresco}"  />
+
+                        <h:outputLabel value="Emp. Creador:" />
+                        <h:outputText value="#{manejarPanelVisualizacion.entidad.empleadoCreador.id} - #{manejarPanelVisualizacion.entidad.empleadoCreador.nombre} #{manejarPanelVisualizacion.entidad.empleadoCreador.apellido}"/>
+
+                      </p:panelGrid>
+                      
+                      <p:dataTable var="mapas" value="#{manejarPanelVisualizacion.listaMapas}" rows="6" emptyMessage="No hay mapas asignados." 
+                      rowStyleClass="text-center" reflow="true">
+
+                        <f:facet name="header">
+                           Listado de Mapas
+                        </f:facet>
+
+                        <p:column headerText="Descripcion">
+                           <h:outputText value="#{mapas.rastreadorGps.descripcion}" />
+                        </p:column>
+
+                         <p:column headerText="IMEI">
+                           <h:outputText value="#{mapas.rastreadorGps.imei}" />
+                         </p:column>
+
+                         <p:column headerText="Emp. Asig." >
+                            <h:outputText value="#{mapas.rastreadorGps.empleadoAsignado.nombre} #{mapas.rastreadorGps.empleadoAsignado.apellido}" />
+                         </p:column>
+
+                         <p:column headerText="Ver Zonas">
+                            <h:outputText value="#{mapas.verZonas ? 'Si': 'No'}" />
+                         </p:column>
+                       </p:dataTable>
+                    </div>
+                </p:dialog>
+
+		        <!-- Ventana de administracion -->
+                <p:dialog id="diaAbm" widgetVar="diaAbm" modal="true" responsive="true"
+                resizable="false" draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true">
+                        <f:facet name="header">
+                            <h:outputText id="diaCabecera" value="#{manejarPanelVisualizacion.funcion == 'modificar' ? 'Modificar Panel Visualizacion' : 'Agregar nuevo Panel Visualizacion'}"/>
+                        </f:facet>
+                        <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+                        <h:form id="formAbm" >
+                            <div class="ui-fluid">
+	                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-8,ui-grid-col-8">
+	                                <p:outputLabel id="lblDescripcion" for="txtDescripcion" value="Descripcion:" />
+	                                <p:inputText id="txtDescripcion" value="#{manejarPanelVisualizacion.entidad.descripcion}" required="true"
+	                                requiredMessage="Debe ingresar una descripcion.">
+	                                    <f:validateLength minimum = "5"/>
+	                                </p:inputText>
+
+                                    <p:outputLabel id="lblIntervalo" for="txtIntervalo" value="Tiempo de refresco:" />
+                                    <p:inputNumber id="txtIntervalo" value="#{manejarPanelVisualizacion.entidad.intervaloRefresco}" minValue="0" maxValue="20" 
+                                    required="true" requiredMessage="Debe ingresar una descripcion." title="Tiempo en segundos. Min: 5 Max:20" />
+
+                                    <p:outputLabel id="lblEmpCreador" value="Emp. Creador:" rendered="#{manejarPanelVisualizacion.funcion == 'modificar'}" />
+                                    <h:outputText value="#{manejarPanelVisualizacion.entidad.empleadoCreador.id} - #{manejarPanelVisualizacion.entidad.empleadoCreador.nombre} #{manejarPanelVisualizacion.entidad.empleadoCreador.apellido}"
+                                    rendered="#{manejarPanelVisualizacion.funcion == 'modificar'}" />
+
+                                    <p:outputLabel id="lblTurno" for="txtTurno" value="Turno:" />
+                                    <p:selectOneMenu id="txtTurno" value="#{manejarPanelVisualizacion.entidad.turno}" converter="omnifaces.SelectItemsConverter"
+                                    filter="true" filterMatchMode="contains" dynamic="true" title="Seleccione el turno a verificar"
+                                    required="true" requiredMessage="Debe seleccionar un turno">
+                                        <f:selectItems value="#{manejarTurno.lista}" var="turno" itemValue="#{turno}"
+                                        itemLabel="#{turno.descripcion} - #{turno.horaInicio} - #{turno.horaFin}" />
+                                    </p:selectOneMenu>
+
+                                    <p:selectOneMenu id="txtRastreador" value="#{manejarPanelVisualizacion.mapa.rastreadorGps}" converter="omnifaces.SelectItemsConverter"
+                                    filter="true" filterMatchMode="contains" dynamic="true" title="Seleccione el dispositivo a agregar">
+                                        <f:selectItems value="#{manejarRastreador.lista}" var="rastreador" itemValue="#{rastreador}"
+                                        itemLabel="#{rastreador.descripcion} #{rastreador.empleadoAsignado.nombre} #{rastreador.empleadoAsignado.apellido}" />
+                                    </p:selectOneMenu>
+                                    <p:commandButton id="agregarGps" widgetVar="agregarGps" value="Agregar GPS"
+                                    actionListener="#{manejarPanelVisualizacion.agregarMapa}" process="@this txtRastreador" update="listaMapas" />
+                                </p:panelGrid>
+
+                                
+                                <p:dataTable id="listaMapas" widgetVar="tablalistaMapas" var="mapas" value="#{manejarPanelVisualizacion.listaMapas}" rows="6"
+		                        currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords}." emptyMessage="No hay mapas asignados." 
+		                        editable="true" rowStyleClass="text-center" reflow="true">
+
+										<f:facet name="header">
+	                                       Listado de Mapas
+										</f:facet>
+
+                                        <p:ajax event="rowEdit" listener="#{manejarPanelVisualizacion.editarMapa}" update="listaMapas" />
+
+                                        <p:column>
+                                            <p:commandButton id="btnEliminarMapa" icon="ui-icon-trash" title="Eliminar mapa"  
+                                            actionListener="#{manejarPanelVisualizacion.eliminarMapa(mapas)}" update="listaMapas" styleClass="boton-rojo" />
+                                        </p:column>
+
+                                        <p:column headerText="Descripcion" sortBy="#{mapas.rastreadorGps.descripcion}" filterBy="#{mapas.rastreadorGps.descripcion}" filterMatchMode="contains">
+                                            <h:outputText value="#{mapas.rastreadorGps.descripcion}" />
+                                        </p:column>
+
+                                        <p:column headerText="IMEI" sortBy="#{mapas.rastreadorGps.imei}" filterBy="#{mapas.rastreadorGps.imei}" filterMatchMode="contains">
+                                            <h:outputText value="#{mapas.rastreadorGps.imei}" />
+                                        </p:column>
+
+                                        <p:column headerText="Emp. Asig." >
+                                            <h:outputText value="#{mapas.rastreadorGps.empleadoAsignado.nombre} #{mapas.rastreadorGps.empleadoAsignado.apellido}" />
+                                        </p:column>
+
+                                        <p:column headerText="Ver Zonas" rendered="#{manejarPanelVisualizacion.funcion == 'modificar'}">
+                                            <p:cellEditor>
+	                                            <f:facet name="output"><h:outputText value="#{mapas.verZonas ? 'Si': 'No'}" /></f:facet>
+	                                            <f:facet name="input">
+	                                                <p:selectBooleanButton value="#{mapas.verZonas}" onLabel="Si" offLabel="No" style="width:50px"
+	                                                title="Habilita si se pueden ver zonas asignadas al cliente y el empleado." />
+	                                            </f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+
+                                        <p:column rendered="#{manejarPanelVisualizacion.funcion == 'modificar'}">
+		                                      <p:rowEditor editTitle="Modificar" saveTitle="Guardar" cancelTitle="Cancelar" />
+		                                </p:column>
+                                </p:dataTable>
+
+                                <p:message for="txtDescripcion" display="tooltip" />
+                                <p:message for="txtIntervalo" display="tooltip" />
+                                <p:message for="txtRastreador" display="tooltip" />
+                                <p:message for="txtTurno" display="tooltip" />
+                            
+                                <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-8,ui-grid-col-8">
+		                            <p:commandButton id="btnCrear"  value="Crear" actionListener="#{manejarPanelVisualizacion.guardar}" rendered="#{manejarPanelVisualizacion.funcion == 'agregar'}"
+		                            icon="ui-icon-check" update=":formLista @form" styleClass="boton-verde" />
+		                            <p:commandButton id="btnModificar"  value="Modificar" update=":formLista @form" actionListener="#{manejarPanelVisualizacion.modificar}" rendered="#{manejarPanelVisualizacion.funcion == 'modificar'}"
+		                            icon="ui-icon-check" styleClass="boton-amarillo" />
+		                            <p:commandButton id="btnCancelar" value="Cancelar" styleClass="boton-rojo"
+		                            icon="ui-icon-cancel" immediate="true" onclick="PF('diaAbm').hide();"/>
+		                        </p:panelGrid>
+                            </div>
+                            <p:contextMenu for="txtRastreador" >
+                              <p:menuitem value="Actualizar listado" action="#{manejarRastreador.generarLista()}" icon="fa fa-fw fa-refresh"
+                              iconPos="left" update="txtRastreador" /> 
+                            </p:contextMenu>
+                            <p:contextMenu for="txtTurno" >
+                              <p:menuitem value="Actualizar listado" action="#{manejarTurno.generarLista()}" icon="fa fa-fw fa-refresh"
+                              iconPos="left" update="txtTurno" /> 
+                            </p:contextMenu>
+
+                            <p:blockUI block="formAbm" trigger="btnCrear,btnModificar,btnCancelar">
+                                <p>Procesando cambio... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+                        </h:form>
+                </p:dialog>
+
+                <p:dialog header="URL a Panel" id="urlPanel" widgetVar="urlPanel"
+                resizable="false" responsive="true" modal="true" closeOnEscape="true">
+                   <h:outputText value="#{manejarPanelVisualizacion.url}" />
+                   <p:separator />
+	               <p:button  value="Abrir panel" href="#{manejarPanelVisualizacion.url}"
+	               target="_blank" icon="fa fa-fw fa-share" style="display: block;margin: 0 auto;" />
+                </p:dialog>
+
+                <!-- Ventana de confirmacion -->
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes boton-verde" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no boton-rojo" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

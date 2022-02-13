@@ -1,0 +1,7 @@
+servidor=localhost
+inicio=http
+puerto=8080
+direccion=/events/data.json
+cuenta=jettrade
+usuario=admin
+contrasenha=jettradecomercial

@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+	<h:head>
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Visor de Log.
+            </ui:define>
+        
+            <ui:define name="contenido">
+	            <style type="text/css">
+				    .warn {
+                        background-color: #f0ed46 !important;
+                        background-image: none !important;
+                        color: #000000 !important;
+                    }
+				    .error {
+                        background-color: #f59c16 !important;
+                        background-image: none !important;
+                        color: #000000 !important;
+                    }
+                    .fatal {
+                        background-color: #de1b1b !important;
+                        background-image: none !important;
+                        color: #000000 !important;
+                    }
+				</style>
+		        <h:form id="formLista" rendered="#{accesos.esValido('leer')}" >
+		            <p:panel header="LOGs">
+		                <p:dataTable id="lista" widgetVar="tablalista" var="logs" value="#{visorLogs.lista}" rows="10" paginator="true" reflow="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} Eventos." filteredValue="#{visorLogs.listaFiltro}"
+                         rowsPerPageTemplate="10,50,100" emptyMessage="No hay resultados a mostrar."
+                         rowStyleClass="#{logs.nivel eq 'WARN' ? 'warn' : logs.nivel eq 'ERROR' ? 'error' : logs.nivel eq 'FATAL' ? 'fatal' : null}">
+						    <p:column headerText="Código" sortBy="#{logs.id}" >
+						        <h:outputText value="#{logs.id}" />
+						    </p:column>
+						 
+						    <p:column headerText="Fecha" sortBy="#{logs.fecha}" >
+						        <h:outputText value="#{logs.fecha}" />
+						    </p:column>
+						 
+						    <p:column headerText="Logger" sortBy="#{logs.logger}" >
+						        <h:outputText value="#{logs.logger}" />
+						    </p:column>
+						 
+						    <p:column headerText="Nivel" sortBy="#{logs.nivel}" >
+						        <h:outputText value="#{logs.nivel}" />
+						    </p:column>
+						    
+						    <p:column headerText="Mensaje" sortBy="#{logs.mensaje}">
+                                <h:outputText value="#{logs.mensaje}" />
+                            </p:column>
+
+                            <p:column headerText="Excepcion" sortBy="#{logs.excepcion}">
+                                <h:outputText value="#{logs.excepcion}" />
+                            </p:column>
+
+						</p:dataTable>
+
+		            </p:panel>
+		        </h:form>
+
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

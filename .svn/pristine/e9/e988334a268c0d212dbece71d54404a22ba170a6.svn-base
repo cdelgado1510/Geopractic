@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">
+
+	<h:head>
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Administracion de Turnos
+            </ui:define>
+        
+            <ui:define name="contenido">
+                <h:outputScript name="js/spanishLocales.js" />
+		        <h:form id="formLista" rendered="#{accesos.esValido('leer')}">
+		            <p:panel header="Listado de Turnos">
+
+                        <f:facet name="actions">
+                            <p:commandButton icon="fa fa-fw fa-plus" value="Agregar Turno" rendered="#{accesos.esValido('crear')}"
+                            actionListener="#{manejarTurno.setFuncion('agregar')}" update=":formAbm :diaCabecera"
+                            onclick="PF('diaAbm').show();" styleClass="boton-verde"/>            
+                        </f:facet>
+
+		                <p:dataTable id="lista" widgetVar="tablalista" var="turno" value="#{manejarTurno.lista}" rows="10" paginator="true" reflow="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} Turnos."
+                         rowsPerPageTemplate="10,50,100" emptyMessage="No hay resultados a mostrar."
+                         rowStyleClass="text-center"  filteredValue="#{manejarTurno.listaFiltro}">
+						    <p:column headerText="Código" sortBy="#{turno.id}" filterBy="#{turno.id}" filterMatchMode="contains">
+						        <h:outputText value="#{turno.id}" />
+						    </p:column>
+
+							<p:column headerText="Descripcion" sortBy="#{turno.descripcion}" filterBy="#{turno.descripcion}" filterMatchMode="contains">
+							    <h:outputText value="#{turno.descripcion}" />
+							</p:column>
+							
+							<p:column headerText="Hora Inicio" sortBy="#{turno.horaInicio}">
+							     <p:calendar value="#{turno.horaInicio}"  pattern="HH:mm" readonlyInput="true" />
+							</p:column>
+
+							<p:column headerText="Hora Fin" sortBy="#{turno.horaFin}">
+							    <p:calendar value="#{turno.horaFin}" pattern="HH:mm" readonlyInput="true" />
+							</p:column>
+
+							<p:column headerText="Domingo" sortBy="#{turno.domingo}">
+							    <h:outputText value="#{turno.domingo  ? 'Si': 'No'}" />
+							</p:column>
+
+							<p:column headerText="Lunes" sortBy="#{turno.lunes}">
+							    <h:outputText value="#{turno.lunes  ? 'Si': 'No'}" />
+							</p:column>
+							
+							<p:column headerText="Martes" sortBy="#{turno.martes}">
+							    <h:outputText value="#{turno.martes  ? 'Si': 'No'}" />
+							</p:column>
+							
+							<p:column headerText="Miercoles" sortBy="#{turno.miercoles}">
+							    <h:outputText value="#{turno.miercoles  ? 'Si': 'No'}" />
+							</p:column>
+
+							<p:column headerText="Jueves" sortBy="#{turno.jueves}">
+							    <h:outputText value="#{turno.jueves  ? 'Si': 'No'}" />
+							</p:column>
+							
+							<p:column headerText="Viernes" sortBy="#{turno.viernes}">
+							    <h:outputText value="#{turno.viernes  ? 'Si': 'No'}" />
+							</p:column>
+
+							<p:column headerText="Sabado" sortBy="#{turno.sabado}">
+							    <h:outputText value="#{turno.sabado  ? 'Si': 'No'}" />
+							</p:column>
+
+                            <p:column headerText="Acciones" style="width: 120px">
+                                <p:commandButton id="btnEditar" icon="ui-icon-pencil" title="Editar" rendered="#{accesos.esValido('actualizar')}"
+                                actionListener="#{manejarTurno.seleccionar(turno)}" update="diaAbm" oncomplete="PF('diaAbm').show();" styleClass="boton-amarillo"/>
+                                <p:commandButton id="btnEliminar" icon="ui-icon-trash" title="Eliminar" rendered="#{accesos.esValido('borrar')}" 
+                                actionListener="#{manejarTurno.eliminar(turno)}" update="@form" styleClass="boton-rojo">
+                                    <p:confirm header="Confirmación" message="Está seguro de eliminar este turno?" icon="fa fa-fw fa-exclamation-triangle" />
+                                </p:commandButton>
+                            </p:column>
+                            <p:blockUI block="lista" trigger="btnEliminar">
+                                <p>Eliminando... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+						</p:dataTable>
+		            </p:panel>
+		        </h:form>
+
+		        <!-- Ventana de administracion -->
+		        <p:dialog id="diaAbm" widgetVar="diaAbm"  modal="true" responsive="true"
+                resizable="false" draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true">
+                        <f:facet name="header">
+                            <h:outputText id="diaCabecera" value="#{manejarTurno.funcion == 'modificar' ? 'Modificar Tipo Télefono' : 'Agregar nueva Tipo'}"/>
+                        </f:facet>
+                        <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+                        <h:form id="formAbm">
+                            <div class="ui-fluid">
+	                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank ui-fluid" columnClasses="ui-grid-col-6,ui-grid-col-6">
+									<p:outputLabel id="lblDescripcion" for="txtDescripcion" value="Descripcion:" />
+									<p:inputText id="txtDescripcion" value="#{manejarTurno.entidad.descripcion}" required="true"
+									requiredMessage="Debe ingresar una descripcion al turno.">
+									   <f:validateLength minimum = "5"/>
+									</p:inputText>
+
+									<p:outputLabel id="lblHoraInicio" for="txtHoraInicio" value="Hora Inicio:" />
+									<p:calendar id="txtHoraInicio" value="#{manejarTurno.entidad.horaInicio}" pattern="HH:mm" timeOnly="true"
+									required="true" requiredMessage="Debe ingresar una hora de inicio." timeInput="true" title="Seleccionar hora"
+									timeControlType="select" locale="es" />
+
+									<p:outputLabel id="lblHoraFin" for="txtHoraFin" value="Hora Fin:" />
+									<p:calendar id="txtHoraFin" value="#{manejarTurno.entidad.horaFin}" pattern="HH:mm" timeOnly="true" 
+									required="true" requiredMessage="Debe ingresar una hora de fin" timeInput="true" title="Seleccionar hora"
+									timeControlType="select" locale="es" />
+
+									<p:outputLabel id="lblDomingo" for="chkDomingo" value="Domingo:" />
+									<p:selectBooleanButton id="chkDomingo" value="#{manejarTurno.entidad.domingo}"  onLabel="Si" offLabel="No" />
+									
+									<p:outputLabel id="lblLunes" for="chkLunes" value="Lunes:" />
+									<p:selectBooleanButton id="chkLunes" value="#{manejarTurno.entidad.lunes}"  onLabel="Si" offLabel="No" />
+									
+									<p:outputLabel id="lblMartes" for="chkMartes" value="Martes:" />
+									<p:selectBooleanButton id="chkMartes" value="#{manejarTurno.entidad.martes}"  onLabel="Si" offLabel="No" />
+									
+									<p:outputLabel id="lblMiercoles" for="chkMiercoles" value="Miercoles:" />
+									<p:selectBooleanButton id="chkMiercoles" value="#{manejarTurno.entidad.miercoles}"  onLabel="Si" offLabel="No" />
+									
+									<p:outputLabel id="lblJueves" for="chkJueves" value="Jueves:" />
+									<p:selectBooleanButton id="chkJueves" value="#{manejarTurno.entidad.jueves}"  onLabel="Si" offLabel="No" />
+
+									<p:outputLabel id="lblViernes" for="chkViernes" value="Viernes:" />
+									<p:selectBooleanButton id="chkViernes" value="#{manejarTurno.entidad.viernes}"  onLabel="Si" offLabel="No" />
+									
+									<p:outputLabel id="lblSabado" for="chkSabado" value="Sabado:" />
+									<p:selectBooleanButton id="chkSabado" value="#{manejarTurno.entidad.sabado}" onLabel="Si" offLabel="No" />									                               
+
+		                            <p:commandButton id="btnCrear"  value="Crear" actionListener="#{manejarTurno.guardar}" rendered="#{manejarTurno.funcion == 'agregar'}"
+		                            icon="ui-icon-check" update=":formLista @form" styleClass="boton-verde" />
+		                            <p:commandButton id="btnModificar"  value="Modificar" update=":formLista @form" actionListener="#{manejarTurno.modificar}" rendered="#{manejarTurno.funcion == 'modificar'}"
+		                            icon="ui-icon-check" styleClass="boton-amarillo" />                
+                                    <p:commandButton id="btnCancelar" value="Cancelar"  styleClass="boton-rojo"
+	                                icon="ui-icon-cancel" immediate="true" onclick="PF('diaAbm').hide();"/>
+	                            </p:panelGrid>
+                            </div>
+							<p:message for="txtDescripcion" display="tooltip" />
+							<p:message for="txtHoraInicio" display="tooltip" />
+							<p:message for="txtHoraFin" display="tooltip" />
+							
+                            <p:blockUI block="formAbm" trigger="btnCrear,btnModificar,btnCancelar">
+                                <p>Procesando cambio... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+                        </h:form>
+                </p:dialog>
+                
+                <!-- Ventana de confirmacion -->
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes boton-verde" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no boton-rojo" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"> 
+
+	<h:head>
+		<meta charset="utf-8" />
+		<link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<h:outputStylesheet library="css" name="leaflet.css" />
+		<h:outputScript library="js" name="leaflet.js" />
+		<h:outputScript name="js/leaflet-ant-path.js" />
+		<style type="text/css">
+            .mapa {
+                height:400px;
+                width: 100%;
+            }
+         </style>
+         
+         <h:outputScript name="js/scripts-mapas-panel.js" />
+	</h:head>
+	<h:body>
+
+        <h:form>
+            <p:progressBar id="carga" widgetVar="carga" style="height:6px" mode="indeterminate"  />
+            <div id="paneles" class="ui-g">
+
+            </div>
+
+	        <p:poll id="pollRecorrido" widgetVar="pollRecorrido"
+	        interval="#{controlPanel.panel.intervaloRefresco}" listener="#{controlPanel.obtenerRecorridosPanel}"
+	        autoStart="false" />
+
+            <p:outputPanel deferred="true" rendered="#{controlPanel.descripcion != null}">
+				<div class="ui-message ui-message-error ui-widget ui-corner-all"
+				aria-live="polite"
+				style="margin:5px;">
+					<h3>
+					   <span class="ui-messages-error-icon" style="height:32px; width:32px;
+					   margin-top:0; background-position:0 -96px;"/>
+					   <span class="ui-message-error-detail">#{controlPanel.descripcion}</span>
+					</h3>
+				</div>
+            </p:outputPanel>
+
+	    </h:form>
+
+        <script type="text/javascript">
+          agregarVisor(#{controlPanel.panel.listaMapas.size()});
+          iniciarMapas(#{controlPanel.panel.listaMapas.size()});
+          iniciarOSM();
+		</script>
+
+	</h:body> 
+</html>

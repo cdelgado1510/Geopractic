@@ -1,0 +1,64 @@
+@startuml
+class com.geopractic.administracion.ControladorCargo
+class com.geopractic.administracion.ControladorCliente
+class com.geopractic.administracion.ControladorEmpleado
+class com.geopractic.administracion.ControladorTelefono
+class com.geopractic.administracion.bean.AdministadorCliente
+class com.geopractic.administracion.bean.AdministradorCargo
+class com.geopractic.administracion.bean.AdministradorEmpleado
+class com.geopractic.administracion.dao.CargoDao
+class com.geopractic.administracion.dao.ClienteDao
+class com.geopractic.administracion.dao.EmpleadoDao
+class com.geopractic.administracion.dao.TelefonoDao
+class com.geopractic.administracion.mapeos.CargoMapeo
+class com.geopractic.administracion.mapeos.ClienteMapeo
+class com.geopractic.administracion.mapeos.EmpleadoMapeo
+class com.geopractic.administracion.mapeos.TelefonoMapeo
+class com.geopractic.administracion.modelo.Cargo
+class com.geopractic.administracion.modelo.Cliente
+class com.geopractic.administracion.modelo.Empleado
+class com.geopractic.administracion.modelo.Telefono
+class com.geopractic.administracion.validacion.NroDocumentoValidacion
+com.geopractic.administracion.ControladorCargo ..> com.geopractic.administracion.dao.CargoDao
+com.geopractic.administracion.ControladorCargo ..> com.geopractic.administracion.modelo.Cargo
+com.geopractic.administracion.ControladorCliente ..> com.geopractic.administracion.dao.ClienteDao
+com.geopractic.administracion.ControladorCliente ..> com.geopractic.administracion.modelo.Cliente
+com.geopractic.administracion.ControladorEmpleado ..> com.geopractic.administracion.dao.EmpleadoDao
+com.geopractic.administracion.ControladorEmpleado ..> com.geopractic.administracion.modelo.Cargo
+com.geopractic.administracion.ControladorEmpleado ..> com.geopractic.administracion.modelo.Empleado
+com.geopractic.administracion.ControladorTelefono ..> com.geopractic.administracion.dao.TelefonoDao
+com.geopractic.administracion.ControladorTelefono ..> com.geopractic.administracion.modelo.Cliente
+com.geopractic.administracion.ControladorTelefono ..> com.geopractic.administracion.modelo.Empleado
+com.geopractic.administracion.ControladorTelefono ..> com.geopractic.administracion.modelo.Telefono
+com.geopractic.administracion.bean.AdministadorCliente ..> com.geopractic.administracion.ControladorCliente
+com.geopractic.administracion.bean.AdministadorCliente ..> com.geopractic.administracion.ControladorTelefono
+com.geopractic.administracion.bean.AdministadorCliente ..> com.geopractic.administracion.modelo.Cliente
+com.geopractic.administracion.bean.AdministadorCliente ..> com.geopractic.administracion.modelo.Telefono
+com.geopractic.administracion.bean.AdministradorCargo ..> com.geopractic.administracion.ControladorCargo
+com.geopractic.administracion.bean.AdministradorCargo ..> com.geopractic.administracion.modelo.Cargo
+com.geopractic.administracion.bean.AdministradorEmpleado ..> com.geopractic.administracion.ControladorEmpleado
+com.geopractic.administracion.bean.AdministradorEmpleado ..> com.geopractic.administracion.ControladorTelefono
+com.geopractic.administracion.bean.AdministradorEmpleado ..> com.geopractic.administracion.modelo.Cargo
+com.geopractic.administracion.bean.AdministradorEmpleado ..> com.geopractic.administracion.modelo.Empleado
+com.geopractic.administracion.bean.AdministradorEmpleado ..> com.geopractic.administracion.modelo.Telefono
+com.geopractic.administracion.dao.CargoDao ..> com.geopractic.administracion.mapeos.CargoMapeo
+com.geopractic.administracion.dao.CargoDao ..> com.geopractic.administracion.modelo.Cargo
+com.geopractic.administracion.dao.ClienteDao ..> com.geopractic.administracion.mapeos.ClienteMapeo
+com.geopractic.administracion.dao.ClienteDao ..> com.geopractic.administracion.modelo.Cliente
+com.geopractic.administracion.dao.EmpleadoDao ..> com.geopractic.administracion.mapeos.EmpleadoMapeo
+com.geopractic.administracion.dao.EmpleadoDao ..> com.geopractic.administracion.modelo.Cargo
+com.geopractic.administracion.dao.EmpleadoDao ..> com.geopractic.administracion.modelo.Empleado
+com.geopractic.administracion.dao.TelefonoDao ..> com.geopractic.administracion.mapeos.TelefonoMapeo
+com.geopractic.administracion.dao.TelefonoDao ..> com.geopractic.administracion.modelo.Cliente
+com.geopractic.administracion.dao.TelefonoDao ..> com.geopractic.administracion.modelo.Empleado
+com.geopractic.administracion.dao.TelefonoDao ..> com.geopractic.administracion.modelo.Telefono
+com.geopractic.administracion.mapeos.CargoMapeo ..> com.geopractic.administracion.modelo.Cargo
+com.geopractic.administracion.mapeos.ClienteMapeo ..> com.geopractic.administracion.dao.TelefonoDao
+com.geopractic.administracion.mapeos.ClienteMapeo ..> com.geopractic.administracion.modelo.Cliente
+com.geopractic.administracion.mapeos.EmpleadoMapeo ..> com.geopractic.administracion.dao.CargoDao
+com.geopractic.administracion.mapeos.EmpleadoMapeo ..> com.geopractic.administracion.dao.TelefonoDao
+com.geopractic.administracion.mapeos.EmpleadoMapeo ..> com.geopractic.administracion.modelo.Empleado
+com.geopractic.administracion.mapeos.TelefonoMapeo ..> com.geopractic.administracion.modelo.Telefono
+com.geopractic.administracion.validacion.NroDocumentoValidacion ..> com.geopractic.administracion.ControladorCliente
+com.geopractic.administracion.validacion.NroDocumentoValidacion ..> com.geopractic.administracion.modelo.Cliente
+@enduml

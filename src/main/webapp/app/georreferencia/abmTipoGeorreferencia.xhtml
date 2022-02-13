@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+	<h:head>
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Administracion de Tipos de Georreferencia
+            </ui:define>
+
+            <ui:define name="contenido">
+		        <h:form id="formLista" rendered="#{accesos.esValido('leer')}">
+		            <p:panel header="Administracion de Tipos Georreferencia">
+
+                        <f:facet name="actions">
+                            <p:commandButton icon="fa fa-fw fa-plus" value="Agregar Tipo Georreferencia" rendered="#{accesos.esValido('crear')}"
+                            actionListener="#{manejarTipoGeo.setFuncion('agregar')}" update=":formAbm :diaCabecera"
+                            onclick="PF('diaAbm').show();" styleClass="boton-verde"/>            
+                        </f:facet>
+
+		                <p:dataTable id="lista" widgetVar="tablalista" var="tipo" value="#{manejarTipoGeo.lista}" rows="10" paginator="true" reflow="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} Tipo de Georreferencia."
+                         rowsPerPageTemplate="10,50,100" emptyMessage="No hay resultados a mostrar."
+                         rowStyleClass="text-center" filteredValue="#{manejarTipoGeo.listaFiltro}">
+						    <p:column headerText="Código" sortBy="#{tipo.id}" filterBy="#{tipo.id}" filterMatchMode="contains">
+						        <h:outputText value="#{tipo.id}" />
+						    </p:column>
+						 
+						    <p:column headerText="Descripcion" sortBy="#{tipo.descripcion}" filterBy="#{tipo.descripcion}" filterMatchMode="contains">
+						        <div align="left">
+						          <h:outputText value="#{tipo.descripcion}" />
+						        </div>
+						    </p:column>
+						 
+						    <p:column headerText="Clase" sortBy="#{tipo.clase}" filterBy="#{tipo.clase}" filterMatchMode="contains">
+                              <h:outputText value="#{tipo.clase}" />
+                            </p:column>
+
+                            <p:column headerText="Icono" style="width:10%">
+                              <p:graphicImage name="css/images/#{tipo.icono}" />
+                            </p:column>
+
+                            <p:column headerText="Color Relleno">
+                              <div id="popupCP2" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
+					            <span class="ui-button-text">
+					               <span id="previewRelleno" style="overflow:hidden;width:1em;height:1em;display:block;border:solid 1px #000;text-indent:1em;white-space:nowrap;background-color:##{tipo.colorRelleno}">Relleno</span>
+					            </span>
+					          </div>
+                            </p:column>
+                            
+                            <p:column headerText="Color Contorno">
+                              <div id="popupCP2" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
+                                <span class="ui-button-text">
+                                   <span id="previewRelleno" style="overflow:hidden;width:1em;height:1em;display:block;border:solid 1px #000;text-indent:1em;white-space:nowrap;background-color:##{tipo.colorContorno}">Contorno</span>
+                                </span>
+                              </div>
+                            </p:column>
+
+                            <p:column headerText="Activo" sortBy="#{tipo.activo}" filterBy="#{tipo.activo}" filterMatchMode="equals">
+                                <f:facet name="filter">
+                                    <p:selectOneButton onchange="PF('tablalista').filter()">
+                                        <f:converter converterId="javax.faces.Boolean" />
+                                        <f:selectItem itemLabel="Todos" itemValue="" />
+                                        <f:selectItem itemLabel="Activos" itemValue="true" />
+                                        <f:selectItem itemLabel="Inactivos" itemValue="false" />
+                                    </p:selectOneButton>
+                                </f:facet>
+                                 <h:outputText value="#{usuario.activo ? 'Activo': 'Inactivo'}" />
+                            </p:column>
+
+                            <p:column headerText="Acciones" style="width: 120px">
+                                <p:commandButton id="btnEditar" icon="ui-icon-pencil" title="Editar" rendered="#{accesos.esValido('actualizar')}"
+                                actionListener="#{manejarTipoGeo.seleccionar(tipo)}" update="diaAbm" styleClass="boton-amarillo" oncomplete="PF('diaAbm').show();" />
+
+                                <p:commandButton id="btnEliminar" icon="ui-icon-trash" title="Eliminar" rendered="#{accesos.esValido('borrar')}" 
+                                actionListener="#{manejarTipoGeo.eliminar(tipo)}" update="@form" styleClass="boton-rojo">
+                                    <p:confirm header="Confirmación" message="Está seguro de eliminar este tipo de georreferencia?" icon="fa fa-fw fa-exclamation-triangle" />
+                                </p:commandButton>
+                            </p:column>
+                            <p:blockUI block="lista" trigger="btnEliminar">
+                                <p>Eliminando... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+						</p:dataTable>
+		            </p:panel>
+		        </h:form>
+
+		        <!-- Ventana de administracion -->
+                <p:dialog id="diaAbm" widgetVar="diaAbm" modal="true" responsive="true"
+                resizable="false" draggable="false" showEffect="fade" hideEffect="fade" closeOnEscape="true">
+                        <f:facet name="header">
+                            <h:outputText id="diaCabecera" value="#{manejarTipoGeo.funcion == 'modificar' ? 'Modificar Tipo de georreferencia' : 'Agregar nuevo Tipo de georreferencia'}"/>
+                        </f:facet>
+                        <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+                        <h:form id="formAbm" enctype="multipart/form-data">
+                            <p:message for="txtDescripcion" display="tooltip" />
+                            <p:message for="txtClase" display="tooltip" />
+                            <p:message for="txtIcono" display="tooltip" />
+                            <p:message for="pckRelleno" display="tooltip" />
+                            <p:message for="pckContorno" display="tooltip" />
+                            <div class="ui-fluid">
+	                            <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank" columnClasses="ui-grid-col-4,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4">
+	                                <p:outputLabel id="lblDescripcion" for="txtDescripcion" value="Descripcion:" />
+	                                <p:inputText id="txtDescripcion" value="#{manejarTipoGeo.entidad.descripcion}" required="true"
+	                                requiredMessage="Debe ingresar una descripcion.">
+	                                    <f:validateLength minimum = "5"/>
+	                                </p:inputText>
+
+                                    <p:outputLabel id="lblClase" for="txtClase" value="Clase:" />
+                                    <p:selectOneMenu  id="txtClase" value="#{manejarTipoGeo.entidad.clase}" required="true"
+                                    requiredMessage="Debe seleccionar la clase." disabled="#{manejarTipoGeo.funcion == 'modificar'}">
+                                        <f:selectItem itemLabel="Punto" itemValue="Punto" />
+                                        <f:selectItem itemLabel="Zona" itemValue="Zona" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel id="lblIcono" for="txtIcono" value="Icono:" />
+                                    <p:selectOneMenu id="txtIcono" value="#{manejarTipoGeo.entidad.icono}" var="icono" converter="omnifaces.SelectItemsConverter" style="width: 120px;"
+                                    required="#{manejarTipoGeo.entidad.clase == 'Punto'}">
+                                        <f:selectItems value="#{manejarTipoGeo.marcadores}" var="iconos" itemValue="#{iconos}" itemLabel="#{iconos}" />
+                                        <p:column style="width:10%">
+                                            <p:graphicImage name="css/images/#{icono}"/>
+                                        </p:column>
+                                    </p:selectOneMenu>
+
+                                    <p:column />
+                                    <p:column />
+
+                                    <p:outputLabel id="lblRelleno" for="pckRelleno" value="Color Relleno:" />
+                                    <p:colorPicker id="pckRelleno" value="#{manejarTipoGeo.entidad.colorRelleno}" required="#{manejarTipoGeo.entidad.clase == 'Zona'}" 
+                                    requiredMessage="Debe seleccionar el color del relleno."/>
+
+                                    <p:column />
+                                    <p:column />
+
+                                    <p:outputLabel id="lblContorno" for="pckContorno" value="Color contorno:" />
+                                    <p:colorPicker id="pckContorno" value="#{manejarTipoGeo.entidad.colorContorno}" required="#{manejarTipoGeo.entidad.clase == 'Zona'}"
+                                    requiredMessage="Debe seleccionar el color de contorno."/>
+
+                                    <p:outputLabel id="lblActivo" for="chkActivo" value="Estado:" />
+                                    <p:selectBooleanButton id="chkActivo" value="#{manejarTipoGeo.entidad.activo}"
+                                    onLabel="Activo" offLabel="Inactivo" />
+
+                                    <p:column />
+	                                <p:commandButton id="btnCrear"  value="Crear" actionListener="#{manejarTipoGeo.guardar}" rendered="#{manejarTipoGeo.funcion == 'agregar'}"
+	                                icon="ui-icon-check" update=":formLista @form" styleClass="boton-verde" />
+	                                <p:commandButton id="btnModificar"  value="Modificar" update=":formLista @form" actionListener="#{manejarTipoGeo.modificar}" rendered="#{manejarTipoGeo.funcion == 'modificar'}"
+	                                icon="ui-icon-check" styleClass="boton-amarillo" />
+	                                <p:commandButton id="btnCancelar" value="Cancelar" styleClass="boton-rojo"
+	                                icon="ui-icon-cancel" immediate="true" onclick="PF('diaAbm').hide();"/>
+                                    <p:column />
+	                            </p:panelGrid>
+                            </div>
+                            <p:blockUI block="formAbm" trigger="btnCrear,btnModificar,btnCancelar">
+                                <p>Procesando cambio... </p>
+                                <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                            </p:blockUI>
+                        </h:form>
+                </p:dialog>
+
+                <!-- Ventana de confirmacion -->
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes boton-verde" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no boton-rojo" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

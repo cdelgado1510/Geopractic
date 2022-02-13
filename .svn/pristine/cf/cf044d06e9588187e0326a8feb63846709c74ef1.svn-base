@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.geo</groupId>
+  <artifactId>geopractic</artifactId>
+  <version>1.0.0</version>
+  <packaging>war</packaging>
+  <name>GeoPractic</name>
+  <url>www.geopractic.com</url>
+  <description>Sistema de Georeferencia Practico</description>
+  <organization>
+    <name>GeoPractic</name>
+  </organization>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <log4j2Version>2.11.2</log4j2Version>
+    <jsfApiVersion>2.2.18</jsfApiVersion>
+  </properties>
+  
+  <repositories>
+    <repository>
+        <id>prime-repo</id>
+        <name>PrimeFaces Maven Repository</name>
+        <url>http://repository.primefaces.org</url>
+        <layout>default</layout>
+    </repository>
+    
+    <repository>
+	   <id>javaxt.com</id>
+	   <url>http://www.javaxt.com/maven</url>
+    </repository>
+  </repositories>
+  
+  <dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.jdbi</groupId>
+            <artifactId>jdbi3-bom</artifactId>
+            <type>pom</type>
+            <version>3.3.0</version>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+  </dependencyManagement>
+  
+  <dependencies>
+  
+    <!-- Dependencias de librerias de JSF Mojarra -->
+    <dependency>
+        <groupId>com.sun.faces</groupId>
+        <artifactId>jsf-api</artifactId>
+        <version>${jsfApiVersion}</version>
+    </dependency> 
+    <dependency>
+        <groupId>com.sun.faces</groupId>
+        <artifactId>jsf-impl</artifactId>
+        <version>${jsfApiVersion}</version>
+    </dependency>
+    
+    <!-- Dependencias de librerias de Servlet -->
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.1.0</version>
+        <scope>provided</scope>
+    </dependency>
+    
+    <!-- Dependencias de librerias Weld de implementacion de CDI) -->
+    <dependency>
+        <groupId>org.jboss.weld.servlet</groupId>
+        <artifactId>weld-servlet-shaded</artifactId>
+        <version>3.0.5.Final</version>
+    </dependency>
+    <dependency>
+        <groupId>javax.enterprise</groupId>
+        <artifactId>cdi-api</artifactId>
+        <version>2.0.SP1</version>
+        <scope>provided</scope>
+    </dependency>
+  
+    <!-- Dependencias de librerias de Primefaces -->
+    <dependency>
+        <groupId>org.primefaces</groupId>
+        <artifactId>primefaces</artifactId>
+        <version>6.2</version>
+    </dependency>
+
+    <!-- Dependencias de librerias de utilidad JSF) -->
+    <dependency>
+        <groupId>org.omnifaces</groupId>
+        <artifactId>omnifaces</artifactId>
+        <version>2.7</version>
+    </dependency>
+	
+	<!-- Dependencias de librerias de JavaXT) -->
+	<dependency>
+	    <groupId>javaxt</groupId>
+	    <artifactId>javaxt-core</artifactId>
+	    <version>1.7.8</version>
+	</dependency>
+
+    <!-- Dependencias de librerias de Apache Commons-->
+    <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>1.11</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-collections4</artifactId>
+        <version>4.1</version>
+    </dependency>
+
+    <!-- Dependencias de librerias para Pool de conexiones-->
+    <dependency>
+	    <groupId>com.zaxxer</groupId>
+	    <artifactId>HikariCP</artifactId>
+	    <version>2.6.1</version>
+	</dependency>
+
+    <!-- Dependencias de librerias de JDBC -->
+    <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.jdbi</groupId>
+        <artifactId>jdbi3-core</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.jdbi</groupId>
+        <artifactId>jdbi3-postgres</artifactId>
+    </dependency>
+
+    <!-- Dependencias de librerias de Testing -->
+    <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>6.8</version>
+        <scope>test</scope>
+    </dependency>
+  	
+  	<!-- Dependencias de librerias SLF4J -->
+    <dependency>
+       <groupId>org.slf4j</groupId>
+       <artifactId>slf4j-api</artifactId>
+    </dependency>
+
+    <!-- Dependencias de librerias Log4j2 -->
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>${log4j2Version}</version>
+     </dependency>
+     <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>${log4j2Version}</version>
+     </dependency>
+     <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-web</artifactId>
+        <version>${log4j2Version}</version>
+     </dependency>
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-slf4j-impl</artifactId>
+        <version>${log4j2Version}</version>
+    </dependency>
+    
+     <!-- Dependencias de librerias JSON -->
+     <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.9.8</version>
+     </dependency>
+
+    <!-- Dependencias de librerias JasperReports -->
+    <dependency>
+        <groupId>net.sf.jasperreports</groupId>
+        <artifactId>jasperreports</artifactId>
+        <version>6.9.0</version>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>3.1.0</version>
+            <configuration>
+                <encoding>UTF-8</encoding>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <dependencies>
+                <dependency>
+                    <groupId>net.sourceforge.plantuml-depend</groupId>
+                    <artifactId>plantuml-dependency-cli</artifactId>
+                    <version>1.4.0</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <version>42.2.4</version>
+                </dependency>
+            </dependencies>
+            <executions>
+                <execution>
+                    <!-- <phase>clean</phase> -->
+                    <phase>none</phase>
+                    <configuration>
+                        <tasks>
+                            <!-- Generando archivo de texto con las relaciones de las clases -->
+
+                            <echo message="Creando texto para UML de Clases generales de bean"/>
+                            <taskdef name="plantuml-dependency" classname="net.sourceforge.plantumldependency.cli.main.ant.PlantUMLDependencyProgramTask" classpath="plantuml-dependency-cli-1.4.0.jar" />        
+                            <plantuml-dependency output="diagramas/Clases/uml-bean.txt" baseDir="${basedir}/src/main/java"
+                                displayPackageName="com.geopractic.bean.*"
+                                />
+                            <echo message="Archivo de texto UML de Clases generales de bean completo"/>
+
+                            <echo message="Creando texto para UML de Clases generales de controladores"/>
+                            <taskdef name="plantuml-dependency" classname="net.sourceforge.plantumldependency.cli.main.ant.PlantUMLDependencyProgramTask" classpath="plantuml-dependency-cli-1.4.0.jar" />        
+                            <plantuml-dependency output="diagramas/Clases/uml-controladores.txt" baseDir="${basedir}/src/main/java"
+                                displayPackageName="com.geopractic.controladores.*"
+                                />
+                            <echo message="Archivo de texto UML de Clases generales de controladores completo"/>
+
+                            <echo message="Creando texto para UML de Clases generales de conversores"/>
+                            <taskdef name="plantuml-dependency" classname="net.sourceforge.plantumldependency.cli.main.ant.PlantUMLDependencyProgramTask" classpath="plantuml-dependency-cli-1.4.0.jar" />        
+                            <plantuml-dependency output="diagramas/Clases/uml-conversores.txt" baseDir="${basedir}/src/main/java"
+                                displayPackageName="com.geopractic.conversores.*"
+                                />
+                            <echo message="Archivo de texto UML de Clases generales de conversores completo"/>
+
+                            <echo message="Creando texto para UML de Clases generales de base de datos"/>
+                            <taskdef name="plantuml-dependency" classname="net.sourceforge.plantumldependency.cli.main.ant.PlantUMLDependencyProgramTask" classpath="plantuml-dependency-cli-1.4.0.jar" />        
+                            <plantuml-dependency output="diagramas/Clases/uml-db.txt" baseDir="${basedir}/src/main/java"
+                                displayPackageName="com.geopractic.db.*"
+                                />
+                            <echo message="Archivo de texto UML de Clases generales de base de datos completo"/>
+
+                            <echo message="Creando texto para UML de Clases generales de propiedades"/>
+                            <taskdef name="plantuml-dependency" classname="net.sourceforge.plantumldependency.cli.main.ant.PlantUMLDependencyProgramTask" classpath="plantuml-dependency-cli-1.4.0.jar" />        
+                            <plantuml-dependency output="diagramas/Clases/uml-propiedades.txt" baseDir="${basedir}/src/main/java"
+                                displayPackageName="com.geopractic.propiedades.*"
+                                />
+                            <echo message="Archivo de texto UML de Clases generales de propiedades completo"/>
+
+                            <echo message="Creando texto para UML de Clases generales de utilidades"/>
+                            <taskdef name="plantuml-dependency" classname="net.sourceforge.plantumldependency.cli.main.ant.PlantUMLDependencyProgramTask" classpath="plantuml-dependency-cli-1.4.0.jar" />        
+                            <plantuml-dependency output="diagramas/Clases/uml-util.txt" baseDir="${basedir}/src/main/java"
+                                displayPackageName="com.geopractic.util.*"
+                                />
+                            <echo message="Archivo de texto UML de Clases generales de utilidades completo"/>
+
+                            <echo message="Creando texto para UML de modulo de Sistema"/>
+                            <taskdef name="plantuml-dependency" classname="net.sourceforge.plantumldependency.cli.main.ant.PlantUMLDependencyProgramTask" classpath="plantuml-dependency-cli-1.4.0.jar" />        
+                            <plantuml-dependency output="diagramas/Clases/uml-sistema.txt" baseDir="${basedir}/src/main/java"
+                                displayPackageName="com.geopractic.sistema.*"
+                                />
+                            <echo message="Archivo de texto UML de modulo de Sistema completo"/>
+
+                            <echo message="Creando texto para UML de modulo de Administracion"/>
+                            <taskdef name="plantuml-dependency" classname="net.sourceforge.plantumldependency.cli.main.ant.PlantUMLDependencyProgramTask" classpath="plantuml-dependency-cli-1.4.0.jar" />        
+                            <plantuml-dependency output="diagramas/Clases/uml-administracion.txt" baseDir="${basedir}/src/main/java"
+                                displayPackageName="com.geopractic.administracion.*"
+                                />
+                            <echo message="Archivo de texto UML de modulo de Cobranza completo"/>
+
+                            <echo message="Creando texto para UML de modulo de Cobranza"/>
+                            <taskdef name="plantuml-dependency" classname="net.sourceforge.plantumldependency.cli.main.ant.PlantUMLDependencyProgramTask" classpath="plantuml-dependency-cli-1.4.0.jar" />        
+                            <plantuml-dependency output="diagramas/Clases/uml-cobranza.txt" baseDir="${basedir}/src/main/java"
+                                displayPackageName="com.geopractic.cobranza.*"
+                                />
+                            <echo message="Archivo de texto UML de modulo de Cobranza completo"/>
+
+                            <echo message="Creando texto para UML de modulo de GPS"/>
+                            <taskdef name="plantuml-dependency" classname="net.sourceforge.plantumldependency.cli.main.ant.PlantUMLDependencyProgramTask" classpath="plantuml-dependency-cli-1.4.0.jar" />        
+                            <plantuml-dependency output="diagramas/Clases/uml-gps.txt" baseDir="${basedir}/src/main/java"
+                                displayPackageName="com.geopractic.gps.*"
+                                />
+                            <echo message="Archivo de texto UML de modulo de GPS completo"/>
+
+                            <echo message="Creando texto para UML de modulo de Georrefencia"/>
+                            <taskdef name="plantuml-dependency" classname="net.sourceforge.plantumldependency.cli.main.ant.PlantUMLDependencyProgramTask" classpath="plantuml-dependency-cli-1.4.0.jar" />        
+                            <plantuml-dependency output="diagramas/Clases/uml-georrefencia.txt" baseDir="${basedir}/src/main/java"
+                                displayPackageName="com.geopractic.georrefencia.*"
+                                />
+                            <echo message="Archivo de texto UML de modulo de Georrefencia completo"/>
+
+                            <!-- Generando diagrama de archivo de texto -->
+                            <echo message="Dibujando diagramas UML "/>
+                            <taskdef name="plantuml" classname="net.sourceforge.plantuml.ant.PlantUmlTask" classpath="${basedir}/src/main/resources/plantuml.jar" />
+                            <plantuml dir="${basedir}/diagramas/Clases" output="${basedir}/diagramas/Clases" />
+                            <echo message="Diagramas UML completo"/>
+                
+                            <!-- Generando diagrama E-R con schemaspy -->           
+                            <echo message="Generando diagrama Entidad-Relacion de esquema"/>
+                                <java jar="${basedir}/src/main/resources/schemaSpy.jar" fork='true'>
+                                    <arg line="-dp"/>
+                                    <arg line="${org.postgresql:postgresql:jar}"/>
+                                    <arg line="-t pgsql"/>
+                                    <arg line="-db geopractic"/>
+                                    <arg line="-s public"/>
+                                    <arg line="-host localhost"/>
+                                    <arg line="-port 5432"/>
+                                    <arg line="-u postgres"/>
+                                    <arg line="-p postgres"/>
+                                    <arg line="-o diagramas/ER"/>
+                                    <arg line="-hq"/>
+                                </java>
+                            <echo message="Diagrama Entidad-Relacion completo"/>
+                        </tasks>
+                    </configuration>
+                    <goals>
+                        <goal>run</goal>
+                    </goals>
+                </execution>     
+            </executions>
+        </plugin>
+        <plugin>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.0.0</version>
+        </plugin>
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.7.0</version>
+            <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+            </configuration>
+        </plugin>
+    </plugins>
+  </build>
+</project>

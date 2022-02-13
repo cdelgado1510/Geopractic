@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">  
+
+	<h:head>
+
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Reporte de Listado de Gestions por empleado 
+            </ui:define>
+            <ui:define name="contenido">
+                <h:outputScript name="js/spanishLocales.js" />
+		        <h:form id="formReporte">
+		            <p:panel header="Listado de Gestiones por Empleado">
+                        <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+
+                        <p:message for="txtFecha" display="tooltip" />
+                        <p:message for="txtEmpleado" display="tooltip" />
+
+                        <p:panelGrid columns="8" styleClass="ui-panelgrid-blank" >
+
+                             <p:outputLabel id="lblFecha" for="txtFecha" value="Fecha:" />
+                             <p:calendar id="txtFecha" value="#{rptListGestionEmp.fechaBusqueda}"
+                             required="true" locale="es" pattern="dd-MM-yyyy" navigator="true"
+                             requiredMessage="Debe seleccionar la fecha y hora de inicio de busqueda."/>
+
+                             <p:outputLabel id="lblEmpleado" for="txtEmpleado" value="Empleado:" style="text-align:right;" />
+                             <p:selectOneMenu id="txtEmpleado" value="#{rptListGestionEmp.empleado}" converter="omnifaces.SelectItemsConverter"
+                             filter="true" filterMatchMode="contains" dynamic="true" title="Seleccione el empleado que realizo el cobro"
+                             required="true" requiredMessage="Debe seleccionar el empleado que realizo el cobro."
+                             rendered="#{sesion.usuario.empleado.cargo.descripcion != 'Operativo Cobranza'}">
+                                 <f:selectItem itemLabel="Seleccione un empleado" noSelectionOption="true" />
+                                 <f:selectItems value="#{manejarEmpleado.lista}" var="empleado" itemValue="#{empleado}"
+                                 itemLabel="#{empleado.nombre} #{empleado.apellido}" itemDisabled="#{empleado.estado ? false || (empleado.cargo.descripcion ne 'Operativo Cobranza' &amp;&amp; empleado.cargo.descripcion ne 'Jefe de Cobranza' ) : true}" />
+                             </p:selectOneMenu>
+
+                             <p:selectOneMenu id="txtEmpleadoOpt" value="#{rptListGestionEmp.empleado}" converter="omnifaces.SelectItemsConverter"
+                             filter="true" filterMatchMode="contains" dynamic="true" title="Seleccione el empleado que realizo el cobro"
+                             required="true" requiredMessage="Debe seleccionar el empleado que realizo el cobro."
+                             rendered="#{sesion.usuario.empleado.cargo.descripcion == 'Operativo Cobranza'}">
+                                 <f:selectItem itemLabel="Seleccione un empleado" noSelectionOption="true" />
+                                 <f:selectItems value="#{manejarEmpleado.lista}" var="empleado" itemValue="#{empleado}"
+                                 itemLabel="#{empleado.nombre} #{empleado.apellido}" itemDisabled="#{empleado.id ne sesion.usuario.empleado.id}" />
+                             </p:selectOneMenu>
+
+                             <p:commandButton id="btnVer" icon="fa fa-fw fa-search" value="Ver"
+                             actionListener="#{rptListGestionEmp.generarReporteGestionEmpleado()}"
+                             update="formReporte" />
+
+                        </p:panelGrid>
+
+                        <p:panel rendered="#{rptListGestionEmp.multimedia != null}">
+	                        <p:media value="/reporte.pdf" player="pdf" cache="false" style="width:100% !important; height:650px !important;">
+	                        Su navegador no puede vizualizar el PDF, presione el boton para descargarlo en su lugar.
+	                            <p:commandButton value="Descarga" ajax="false" icon="fa fa-fw fa-download">
+	                                <p:fileDownload value="#{rptListGestionEmp.multimedia}" />
+	                            </p:commandButton>    
+	                        </p:media>
+	                     </p:panel>
+		            </p:panel>
+
+                    <p:blockUI block="formReporte" trigger="btnVer">
+                        <p>Generando reporte... </p>
+                        <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                    </p:blockUI>
+		        </h:form>
+
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

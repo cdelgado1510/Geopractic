@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug">
+    <Properties>
+        <Property name="produccion">${log4j:configParentLocation}/../..</Property>
+        <Property name="desarrollo">M:/My Developments/Java/workspace/Geopractic</Property>
+        <Property name="basePath">${desarrollo}/logs</Property>
+    </Properties>
+ 
+    <Appenders>
+        <RollingFile name="fileLogger" fileName="${basePath}/${web:contextPath}.log" filePattern="${basePath}/${web:contextPath}-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %X{usuario} %X{uuid} %-5level [Clase:%c{1} Metodo:%M linea:%L] - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+ 
+        <JDBC name="baseDeDatos" tableName="Logs">
+         <DriverManager connectionString="jdbc:postgresql://localhost:5432/geopractic" driverClassName="org.postgresql.Driver" username="geopractic" password="geopractic" />
+         <Column name="fecha" isEventTimestamp="true" />
+         <Column name="logger" pattern="%logger" isUnicode="false" />
+         <Column name="nivel" pattern="%level" isUnicode="false" />
+         <Column name="mensaje" pattern="%m" isUnicode="false" />
+         <Column name="excepcion" pattern="%throwable" isUnicode="false" />
+        </JDBC>
+
+
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout   pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %X{usuario} %X{uuid} %-5level [Clase:%c{1} Metodo:%M linea:%L] - %msg%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <appender-ref ref="fileLogger" />
+            <appender-ref ref="baseDeDatos" level="info" />
+            <appender-ref ref="console" />
+        </Root>
+    </Loggers>
+</Configuration>

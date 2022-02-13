@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">  
+
+	<h:head>
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Cambio de contraseña
+            </ui:define>
+
+            <ui:define name="contenido">
+                <div class="ui-g ui-fluid">
+                    <h:form id="formCambioSenha" styleClass="contenedor-simple">
+	                    <p:tooltip position="top" showEffect="clip" hideEffect="clip"/>
+	                    <p:message for="pswContrasenhaNueva" display="tooltip" />
+	                    <p:message for="pswRepetirContrasenha" display="tooltip" />
+
+                        <div class="ui-xs-12 ui-sm-12 ui-md-12 ui-lg-12">
+		                    <p:panelGrid columns="2" header="Cambio de contraseña" styleClass="ui-panelgrid-blank ui-fluid"
+		                    style="text-align:center;margin: 0 auto" layout="grid" >
+		                        <f:facet name="header">
+		                            <p:outputLabel value="Cambio de contraseña" />
+		                            <p:separator />
+		                        </f:facet>
+	
+		                        <p:outputLabel for="pswContrasenhaNueva" value="Contraseña nueva:" />
+		                        <p:password id="pswContrasenhaNueva" inline="true" feedback="true" value="#{cambioSenha.usuario.contrasenha}"
+		                        match="repetirContrasenha" required="true" requiredMessage="Debe ingresar una contraseña." 
+		                        promptLabel="Por favor ingrese la contraseña nueva"
+		                        strongLabel="Fuerte" goodLabel="Bueno" weakLabel="Debil">
+		                            <f:validateLength minimum = "5"/>
+		                        </p:password>
+	
+		                        <p:outputLabel for="pswRepetirContrasenha" value="Repetir Contraseña:" />
+		                        <p:password id="pswRepetirContrasenha" value="#{cambioSenha.usuario.contrasenha}"
+		                        requiredMessage="Debe ingresar de nuevo la contraseña." required="true"
+		                        promptLabel="Vuelva a ingresar la contraseña." />
+	
+		                        <p:commandButton id="guardarBtn" action="#{cambioSenha.cambiarSenha}" value="Guardar"
+		                            icon="ui-icon-check" update="@form" />
+		                        <p:commandButton id="cancelarBtn" value="Cancelar" type="reset" immediate="true"
+		                        icon="ui-icon-arrowreturnthick-1-w" />
+	                       </p:panelGrid>
+	
+		                    <p:blockUI block="formCambioSenha" trigger="guardarBtn">
+		                        <p>Procesando cambio... </p>
+		                        <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+		                    </p:blockUI>
+                        </div>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>

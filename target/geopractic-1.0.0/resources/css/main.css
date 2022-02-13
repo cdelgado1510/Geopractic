@@ -1,0 +1,90 @@
+body {
+	background-color: #e8e8e8;
+	font-family: 'Source Sans Pro','Helvetica Neue',sans-serif;
+    font-size: 13px;
+    color: #777777;
+    -webkit-font-smoothing: antialiased;
+    height: 100%;
+}
+
+#formularioLogin {
+  top: 15px;
+  margin: 0 auto;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background-color: #fff;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.contenedor-simple {
+  top: 15px;
+  margin: 0 auto;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background-color: #fff;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+@media screen and (min-width : 1000px) {
+    .menuvertical {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width : 1000px) {
+    .menuhorizontal {
+        display: none !important;
+    }
+}
+
+h1.distorcion{
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    font-weight: 900;
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+    background-size: 120% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    -ms-background-clip: text;
+    -ms-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    background-image: linear-gradient(45deg, 
+            #7794ff, 
+            #bbbabc,
+            #13cbff,
+            #ffffff);
+    animation: .8s shake infinite alternate;
+}
+
+@keyframes shake {
+    0% { transform: skewX(-15deg); }
+    5% { transform: skewX(15deg); }
+    10% { transform: skewX(-15deg); }
+    15% { transform: skewX(15deg); }
+    20% { transform: skewX(0deg); }
+    100% { transform: skewX(0deg); }  
+}

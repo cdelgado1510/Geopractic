@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">
+
+	<h:head>
+	</h:head>
+	<h:body>
+	   <ui:composition template="/WEB-INF/templates/templatePrincipal.xhtml">
+            <ui:define name="titulo">
+                Administracion de Ruteos
+            </ui:define>
+        
+            <ui:define name="contenido">
+                <h:outputScript name="js/spanishLocales.js" />
+		        <h:form id="formLista" rendered="#{accesos.esValido('leer')}">
+		            <p:panel header="Listado de ruteos">
+
+		                <p:dataTable id="lista" widgetVar="tablalista" var="ruteo" value="#{manejarRuteoCobrador.lista}" rows="10" paginator="true" reflow="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         currentPageReportTemplate="( {startRecord} - {endRecord}) de {totalRecords} Ruteos."
+                         rowsPerPageTemplate="10,50,100" emptyMessage="No hay resultados a mostrar."
+                         rowStyleClass="text-center" filteredValue="#{manejarRuteoCobrador.listaFiltro}">
+
+						    <p:column headerText="Código" sortBy="#{ruteo.id}" filterBy="#{ruteo.id}" filterMatchMode="contains">
+						        <h:outputText value="#{ruteo.id}" />
+						    </p:column>
+
+							<p:column headerText="Fecha Visita" sortBy="#{ruteo.fechaVisita}" filterBy="#{ruteo.fechaVisita}" filterMatchMode="equals">
+							    <h:outputText value="#{ruteo.fechaVisita}">
+							         <f:convertDateTime pattern="dd/MM/yyyy" />
+							    </h:outputText>
+							</p:column>
+							                         
+							<p:column headerText="Fecha Agendada" sortBy="#{ruteo.gestion.fecha}" filterBy="#{ruteo.gestion.fecha}" filterMatchMode="equals">
+							    <h:outputText value="#{ruteo.gestion.fecha}">
+							         <f:convertDateTime pattern="dd/MM/yyyy" />
+							    </h:outputText>
+							</p:column>
+
+                            <p:column headerText="Motivo" sortBy="#{ruteo.gestion.motivo.descripcion}" filterBy="#{ruteo.gestion.motivo.descripcion}" filterMatchMode="contains">
+                                <h:outputText value="#{ruteo.gestion.motivo.descripcion}" />
+                            </p:column>
+
+                            <p:column headerText="Emp. Agenda" sortBy="#{ruteo.ruc}" filterBy="#{ruteo.gestion.empleadoCarga.nombre} #{ruteo.gestion.empleadoCarga.apellido}" filterMatchMode="contains">
+                                <h:outputText value="#{ruteo.gestion.empleadoCarga.nombre} #{ruteo.gestion.empleadoCarga.apellido}" />
+                            </p:column>
+
+                            <p:column headerText="Monto" sortBy="#{ruteo.gestion.monto}">
+                                <h:outputText value="#{ruteo.gestion.monto}" />
+                            </p:column>
+
+                            <p:column headerText="Lugar de visita" sortBy="#{ruteo.gestion.lugarVisita.descripcion}" >
+                                <h:outputText value="#{ruteo.gestion.lugarVisita.descripcion}" />
+                            </p:column>
+
+                            <p:column headerText="Acciones" style="width: 60px">
+
+                                <p:commandButton id="btnEliminar" icon="ui-icon-trash" title="Eliminar" rendered="#{accesos.esValido('borrar')}" 
+                                actionListener="#{manejarRuteoCobrador.eliminar(ruteo)}" update="@form" styleClass="boton-rojo">
+                                    <p:confirm header="Confirmación" message="Está seguro de eliminar este ruteo?" icon="ui-icon-alert" />
+                                </p:commandButton>
+
+                                <p:blockUI block="lista" trigger="btnEliminar">
+                                    <p>Eliminando... </p>
+                                    <i class="fa fa-fw fa-spinner fa-spin" style="font-size: 3em"> </i>
+                                </p:blockUI>
+                            </p:column>
+						</p:dataTable>
+		            </p:panel>
+		        </h:form>
+
+
+                <!-- Ventana de confirmacion -->
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true">
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes boton-verde" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no boton-rojo" icon="ui-icon-close" />
+                </p:confirmDialog> 
+            </ui:define>
+        </ui:composition>
+	</h:body> 
+</html>
